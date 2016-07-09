@@ -1,0 +1,14 @@
+R="\[\033[0;31m\]" # red
+G="\[\033[0;32m\]" # green
+B="\[\033[0;34m\]" # blue
+M="\[\033[0;35m\]"
+CYAN="\[\033[0;96m\]"
+C="\[\033[0;39m\]" # clear
+
+LAMBDA='λ'
+
+# Get current Git branch in Simple English
+__git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
+
+# Custom PS1 (with Git branch in Simple English)
+export PS1="$CYAN\u$C in $R\w$C $G$__git_branch\n$CYAN$LAMBDA$C "
