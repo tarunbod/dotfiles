@@ -46,8 +46,12 @@ shopt -s cdspell
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export LSCOLORS="gxfxcxdxbxegedabagacad"
 
-for file in `find ~/dotfiles -type f -name ".[^.]*"`; do
-  source $file
+ignored=(".gitignore" ".DS_Store")
+
+for file in `find ~/dotfiles -type f -name ".[^.]*" -maxdepth 1`; do
+  if [[ ! $file =~ "gitignore" ]]; then
+      source $file
+  fi
 done
 
 # fortune -s
