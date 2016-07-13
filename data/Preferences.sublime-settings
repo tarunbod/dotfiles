@@ -1,0 +1,30 @@
+// Settings in here override those in "Default/Preferences.sublime-settings",
+// and are overridden in turn by file type specific settings.
+{
+	"translate_tabs_to_spaces": true,
+    "default_encoding": "UTF-8",
+    "default_line_ending": "unix",
+    "detect_indentation": false,
+    "ensure_newline_at_eof_on_save": true,
+    "file_exclude_patterns": [
+        ".DS_Store",
+        "Desktop.ini",
+        "*.pyc",
+        "Thumbs.db",
+        ".Spotlight-V100",
+        ".Trashes"
+    ],
+    "folder_exclude_patterns": [
+        ".git",
+        "node_modules"
+    ],
+    "highlight_modified_tabs": true,
+    "hot_exit": false,
+    "line_padding_bottom": 2,
+    "match_brackets": true,
+    "match_brackets_angle": true,
+    "tab_size": 4,
+    "translate_tabs_to_spaces": false,
+    "trim_trailing_white_space_on_save": true,
+    "word_wrap": true
+}

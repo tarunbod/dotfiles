@@ -3,3 +3,6 @@ cmp -s ~/dotfiles/data/com.apple.Terminal.plist ~/Library/Preferences/com.apple.
 if [[ ! $? -eq 0 ]]; then
     cp -f ~/dotfiles/data/com.apple.Terminal.plist ~/Library/Preferences/
 fi
+
+# Copy Sublime Text preferences
+cp -r ~/dotfiles/data/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
