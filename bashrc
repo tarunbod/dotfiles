@@ -48,7 +48,6 @@ install_package md5sum  "brew install md5sha1sum"
 
 install_package express "npm install -g express-generator"
 
-
 shopt -s cdspell
 
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
