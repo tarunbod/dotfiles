@@ -7,6 +7,9 @@ alias reload='exec $SHELL -l'
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
+alias showallfiles="defaults write com.apple.Finder AppleShowAllFiles -bool YES"
+alias hideallfiles="defaults write com.apple.Finder AppleShowAllFiles -bool NO"
+
 # Empty the Trash on all mounted volumes and the main HDD
 # Also, clear Apple's System Logs to improve shell startup speed
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
