@@ -11,12 +11,12 @@ function update() {
   brew cleanup
   brew cask cleanup
 
-  pip install --upgrade pip
-  pip3 install --upgrade pip
-  pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
-  pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U
-  pip install --upgrade setuptools
-  pip3 install --upgrade setuptools
+  sudo pip install --upgrade pip
+  sudo pip3 install --upgrade pip
+  sudo pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
+  sudo pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U
+  sudo pip install --upgrade setuptools
+  sudo rpip3 install --upgrade setuptools
 
   npm update -g
 
@@ -28,6 +28,7 @@ function install_brew() {
   if [[ ! -f /usr/local/bin/brew ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew tap caskroom/cask
+    brew install python
   fi
 }
 
@@ -38,6 +39,7 @@ function install_package() {
 install_brew
 
 install_package node    "brew install node"
+install_package python2 "brew install python"
 install_package python3 "brew install python3"
 install_package fortune "brew install fortune"
 install_package tree    "brew install tree"
