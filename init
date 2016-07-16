@@ -1,3 +1,12 @@
-ln -s ~/dotfiles/bash_profile ~/.bash_profile
-ln -s ~/dotfiles/bashrc ~/.bashrc
+# Ask for sudo permission upfront
+sudo -v
+
+# Symlink bash_profile and bashrc files into home directory
+ln -s ~/dotfiles/.bash_profile ~/.bash_profile
+ln -s ~/dotfiles/.bashrc ~/.bashrc
+
+# Setup defaults for macOS
+source ./.macos
+
+# Reload the shell to have changes take effect
 exec $SHELL -l

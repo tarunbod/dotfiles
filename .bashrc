@@ -46,18 +46,20 @@ install_package tree    "brew install tree"
 install_package subl    "brew cask install sublime-text"
 install_package md5sum  "brew install md5sha1sum"
 install_package cmake   "brew install cmake"
-install_package mongodb "brew install mongodb"
+install_package mongod  "brew install mongodb"
 install_package express "npm install -g express-generator"
 
 shopt -s cdspell
 
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export LSCOLORS="gxfxcxdxbxegedabagacad"
+export EDITOR="nano";
+export NODE_REPL_HISTORY=~/.node_history;
+export NODE_REPL_HISTORY_SIZE='32768';
+export PYTHONIOENCODING='UTF-8';
 
-for file in `find ~/dotfiles -type f -name ".[^.]*" -maxdepth 1`; do
-  if [[ ! $file =~ "gitignore" ]]; then
-      source $file
-  fi
+for file in ~/dotfiles/.{alias,functions,bash_prompt}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done
 
 fortune -s
