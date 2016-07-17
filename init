@@ -6,7 +6,7 @@ ln -s ~/dotfiles/.bash_profile ~/.bash_profile
 ln -s ~/dotfiles/.bashrc ~/.bashrc
 
 # Setup defaults for macOS
-source ./.macos
+source ~/dotfiles/.macos
 
 # Reload the shell to have changes take effect
 exec $SHELL -l
