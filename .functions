@@ -81,3 +81,14 @@ function o() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+# Function to add files, commit, and push (acp) to github
+function git-acp() {
+	git add .
+	if [[ -n $1 ]]; then
+		git commit -m "$1"
+	else
+		git commit -m "update"
+	fi
+	git push
+}

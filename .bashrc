@@ -16,7 +16,7 @@ function update() {
   sudo pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
   sudo pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U
   sudo pip install --upgrade setuptools
-  sudo rpip3 install --upgrade setuptools
+  sudo pip3 install --upgrade setuptools
 
   npm update -g
 
@@ -33,7 +33,7 @@ export NODE_REPL_HISTORY=~/.node_history;
 export NODE_REPL_HISTORY_SIZE='32768';
 export PYTHONIOENCODING='UTF-8';
 
-for file in ~/dotfiles/.{alias,functions,bash_prompt}; do
+for file in ~/dotfiles/.{alias,functions,bash_prompt,install}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done
 

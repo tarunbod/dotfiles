@@ -4,6 +4,10 @@ cp -f ~/dotfiles/data/com.apple.Terminal.plist ~/Library/Preferences/
 # Copy Sublime Text preferences
 cp -r ~/dotfiles/data/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
 
+# Use Dark menu bar and dock
+defaults write "Apple Global Domain" AppleInterfaceStyle "Dark"
+
+# Show DevTools in Safari
 defaults write com.apple.Safari IncludeDevelopMenu 1
 
 # Expand save panel by default
@@ -15,8 +19,6 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Disable "Are you sure you want to open this application?" dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
 # Restart automatically if the computer freezes
 sudo systemsetup -setrestartfreeze on
