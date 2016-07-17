@@ -28,7 +28,6 @@ function install_brew() {
   if [[ ! -f /usr/local/bin/brew ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew tap caskroom/cask
-    brew install python
   fi
 }
 
@@ -37,6 +36,8 @@ function install_package() {
 }
 
 install_brew
+
+install_package java    "brew cask install java"
 
 install_package node    "brew install node"
 install_package python2 "brew install python"
