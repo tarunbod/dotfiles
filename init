@@ -8,5 +8,8 @@ ln -s ~/dotfiles/.bashrc ~/.bashrc
 # Setup defaults for macOS
 source ~/dotfiles/.macos
 
+# Install programs/packages
+source ~/dotfiles/.install
+
 # Reload the shell to have changes take effect
 exec $SHELL -l

@@ -24,32 +24,6 @@ function update() {
 
 }
 
-function install_brew() {
-  if [[ ! -f /usr/local/bin/brew ]]; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew tap caskroom/cask
-  fi
-}
-
-function install_package() {
-  command -v "$1" >/dev/null 2>&1 || { echo "$1 not found. Installing." >&2; $2; }
-}
-
-install_brew
-
-install_package java    "brew cask install java"
-
-install_package node    "brew install node"
-install_package python2 "brew install python"
-install_package python3 "brew install python3"
-install_package fortune "brew install fortune"
-install_package tree    "brew install tree"
-install_package subl    "brew cask install sublime-text"
-install_package md5sum  "brew install md5sha1sum"
-install_package cmake   "brew install cmake"
-install_package mongod  "brew install mongodb"
-install_package express "npm install -g express-generator"
-
 shopt -s cdspell
 
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH

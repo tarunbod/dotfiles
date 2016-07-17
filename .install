@@ -1,0 +1,15 @@
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew tap caskroom/cask
+
+brew cask install java
+
+brew install node
+brew install python
+brew install python3
+brew install fortune
+brew install tree
+brew cask install sublime-text
+brew install md5sha1sum
+brew install cmake
+brew install mongodb
+npm install -g express-generator
