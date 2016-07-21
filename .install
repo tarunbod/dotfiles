@@ -1,30 +1,52 @@
-function install_brew() {
-  if [[ ! -f /usr/local/bin/brew ]]; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew tap caskroom/cask
-    brew tap homebrew/dupes
-  fi
-}
+if [[ $OS == "macos" ]]; then
 
-function install_package() {
-  [[ -f "/usr/local/bin/$1" ]] || { echo "$1 not found. Installing." >&2; $2; }
-}
+    function install_package() {
+        [[ -f "/usr/local/bin/$1" ]] || { echo "$1 not found. Installing." >&2; $2; }
+    }
 
-install_brew
+    function install_brew() {
+        if [[ ! -f /usr/local/bin/brew ]]; then
+            /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+            brew tap caskroom/cask
+            brew tap homebrew/dupes
+        fi
+    }
 
-if [[ ! -d /usr/local/Caskroom/java ]]; then
-	brew cask install java
+    install_brew
+
+    if [[ ! -d /usr/local/Caskroom/java ]]; then
+        brew cask install java
+    fi
+
+    install_package "node"    "brew install node"
+    install_package "python2" "brew install python"
+    install_package "python3" "brew install python3"
+    install_package "fortune" "brew install fortune"
+    install_package "tree"    "brew install tree"
+    install_package "subl"    "brew cask install sublime-text"
+    install_package "md5sum"  "brew install md5sha1sum"
+    install_package "cmake"   "brew install cmake"
+    install_package "mongod"  "brew install mongodb"
+    install_package "cloc"    "brew install cloc"
+    install_package "nano"    "brew install nano"
+
+elif [[ $OS == "linux" ]]; then
+
+    function install_package() {
+        command -v $1 >/dev/null 2>&1 || { echo "$1 not found. Installing." >&2; $2; }
+    }
+
+    install_package "nodejs"  "sudo apt-get install nodejs"
+    install_package "python2" "sudo apt-get install python"
+    install_package "pip"     "sudo apt-get install python-pip"
+    install_package "python3" "sudo apt-get install python3"
+    install_package "pip3"    "sudo apt-get install python3-pip"
+    install_package "fortune" "sudo apt-get install fortune-mod"
+    install_package "tree"    "sudo apt-get install tree"
+    install_package "cmake"   "sudo apt-get install cmake"
+    install_package "mongod"  "sudo apt-get install mongodb-server"
+    install_package "cloc"    "sudo apt-get install cloc"
+
 fi
 
-install_package "node"    "brew install node"
-install_package "python2" "brew install python"
-install_package "python3" "brew install python3"
-install_package "fortune" "brew install fortune"
-install_package "tree"    "brew install tree"
-install_package "subl"    "brew cask install sublime-text"
-install_package "md5sum"  "brew install md5sha1sum"
-install_package "cmake"   "brew install cmake"
-install_package "mongod"  "brew install mongodb"
-install_package "cloc"    "brew install cloc"
-install_package "nano"    "brew install nano"
-install_package "express" "npm install -g express-generator"
+install_package "express" "sudo npm install -g express-generator"

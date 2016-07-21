@@ -5,8 +5,12 @@ sudo -v
 ln -s ~/dotfiles/.bash_profile ~/.bash_profile
 ln -s ~/dotfiles/.bashrc ~/.bashrc
 
-# Setup defaults for macOS
-source ~/dotfiles/.macos
+source ~/dotfiles/.os
+
+if [[ $OS == "macos" ]]; then
+	# Setup defaults for macOS
+	source ~/dotfiles/.macos
+fi
 
 # Install programs/packages
 source ~/dotfiles/.install
