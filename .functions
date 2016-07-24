@@ -92,3 +92,12 @@ function git-acp() {
 	fi
 	git push
 }
+
+function alert() {
+	if [[ -n $2 ]]; then
+		osascript -e "display notification \"$1\" with title \"$2\""
+	else
+		osascript -e "display notification \"$1\" with title \"Alert\""
+	fi
+}
+
