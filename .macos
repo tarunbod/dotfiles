@@ -1,9 +1,3 @@
-# Copy my terminal preferences
-cp -f ~/dotfiles/data/com.apple.Terminal.plist ~/Library/Preferences/
-
-# Copy Sublime Text preferences
-cp -r ~/dotfiles/data/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
-
 # Use Dark menu bar and dock
 defaults write "Apple Global Domain" AppleInterfaceStyle "Dark"
 
@@ -59,3 +53,10 @@ defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
 
 # Prevent Photos.app from opening when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
+
+# Copy my terminal preferences
+open ~/dotfiles/data/Galaxy.terminal
+
+# Copy Sublime Text preferences
+cp -r ~/dotfiles/data/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
