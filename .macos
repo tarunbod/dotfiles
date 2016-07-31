@@ -37,7 +37,7 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 # Show the hidden ~/Library folder
-chflags nohidden ~/Library
+sudo chflags nohidden ~/Library
 
 # Show the hidden /Volumes folder
 sudo chflags nohidden /Volumes
