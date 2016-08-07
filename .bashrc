@@ -50,4 +50,4 @@ for file in ~/dotfiles/.{alias,functions,bash_prompt,install}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done
 
-fortune -s
+clear; fortune -s
