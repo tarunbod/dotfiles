@@ -46,7 +46,7 @@ export NODE_REPL_HISTORY=~/.node_history;
 export NODE_REPL_HISTORY_SIZE='32768';
 export PYTHONIOENCODING='UTF-8';
 
-for file in ~/dotfiles/.{alias,functions,bash_prompt,install}; do
+for file in ~/dotfiles/.{alias,functions,bash_prompt}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done
 
