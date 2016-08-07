@@ -1,12 +1,5 @@
 if [[ $OS == "macos" ]]; then
 
-<<<<<<< HEAD
-=======
-    function install_package() {
-        [[ -f "/usr/local/bin/$1" ]] || { read -p "$1 not found. Do you want to install it? [y/n]: "; { [[ $REPLY = y* ]] && $2; } }
-    }
-
->>>>>>> d8940d82179410e3bc18ad451054853b15567ffa
     function install_brew() {
         if [[ ! -f /usr/local/bin/brew ]]; then
             /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -22,7 +15,7 @@ if [[ $OS == "macos" ]]; then
     }
 
     function install_package() {
-        [[ -f "/usr/local/bin/$1" ]] || { echo "$1 not found. Installing." >&2; $2; }
+        [[ -f "/usr/local/bin/$1" ]] || { read -p "$1 not found. Do you want to install it? [y/n]: "; { [[ $REPLY = y* ]] && $2; } }
     }
 
     install_brew
