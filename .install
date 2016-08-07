@@ -1,7 +1,7 @@
 if [[ $OS == "macos" ]]; then
 
     function install_package() {
-        [[ -f "/usr/local/bin/$1" ]] || { echo "$1 not found. Installing." >&2; $2; }
+        [[ -f "/usr/local/bin/$1" ]] || { read -p "$1 not found. Do you want to install it? [y/n]: "; { [[ $REPLY = y* ]] && $2; } }
     }
 
     function install_brew() {
@@ -33,7 +33,7 @@ if [[ $OS == "macos" ]]; then
 elif [[ $OS == "linux" ]]; then
 
     function install_package() {
-        command -v $1 >/dev/null 2>&1 || { echo "$1 not found. Installing." >&2; $2; }
+        command -v $1 >/dev/null 2>&1 || { read -p "$1 not found. Do you want to install it? [y/n]: "; { [[ $REPLY = y* ]] && $2; } }
     }
 
     install_package "nodejs"  "sudo apt-get install nodejs"
