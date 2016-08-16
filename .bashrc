@@ -7,13 +7,21 @@ function update() {
   cd ~
 
   source "~/dotfiles/.install"
+  if [[ $OS == "macos" ]]; then
 
-  brew update
-  brew upgrade --all
+      brew update
+      brew upgrade --all
 
-  brew prune
-  brew cleanup
-  brew cask cleanup
+      brew prune
+      brew cleanup
+      brew cask cleanup
+
+  elif [[ $OS == "linux" ]]; then
+
+      apt-get update
+      apt-get upgrade
+      
+  fi
 
   sudo pip install --upgrade pip
   sudo pip3 install --upgrade pip
