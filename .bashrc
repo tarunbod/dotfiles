@@ -49,4 +49,8 @@ for file in ~/dotfiles/.{alias,functions,bash_prompt}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done
 
+if [[ -f ~/.extra ]]; then
+    source ~/.extra
+fi
+
 clear; fortune -s
