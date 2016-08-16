@@ -6,6 +6,8 @@ function update() {
 
   cd ~
 
+  source "~/dotfiles/.install"
+
   brew update
   brew upgrade --all
 
