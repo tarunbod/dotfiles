@@ -1,12 +1,15 @@
 source ~/dotfiles/.os
 
+alias install="source ~/dotfiles/.install"
+
 function update() {
 
   cwd=$(pwd)
 
   cd ~
 
-  source "~/dotfiles/.install"
+  install
+
   if [[ $OS == "macos" ]]; then
 
       brew update
@@ -20,7 +23,7 @@ function update() {
 
       apt-get update
       apt-get upgrade
-      
+
   fi
 
   sudo pip install --upgrade pip

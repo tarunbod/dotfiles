@@ -1,10 +1,8 @@
 # Ask for sudo permission upfront
 sudo -v
 
-# Symlink bash_profile and bashrc files into home directory
-ln -s ~/dotfiles/.bash_profile ~/.bash_profile
-ln -s ~/dotfiles/.bashrc ~/.bashrc
-ln -s ~/dotfiles/.gitconfig ~/.gitconfig
+# Symlink bash_profile, inputrc, and bashrc files into home directory
+ln -s ~/dotfiles/.{bash_profile,bashrc,inputrc,gitconfig} ~/
 
 source ~/dotfiles/.os
 
