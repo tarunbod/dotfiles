@@ -1,2 +1,2 @@
 # dotfiles
-Dot files for macOS
+Dot files for macOS and Debian-based linux 
