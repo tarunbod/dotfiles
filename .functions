@@ -126,3 +126,7 @@ function repeat() {
         python -c "print \"$1\" * int(\"$2\")"
     fi
 }
+
+function highlight() {
+    grep --color -E "$1|$"
+}
