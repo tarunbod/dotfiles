@@ -10,7 +10,8 @@ if [[ $OS == "macos" ]]; then
 
     function install_cask() {
         if [[ ! -d "/usr/local/Caskroom/$1" ]]; then
-            brew cask install "$1"
+            read -p "$1 not found. Do you want to install it? [y/n]: "
+            [[ $REPLY = y* ]] && brew cask install "$1"
         fi
     }
 
@@ -31,10 +32,13 @@ if [[ $OS == "macos" ]]; then
     install_package "cloc"    "brew install cloc"
     install_package "nano"    "brew install nano"
     install_package "ffmpeg"  "brew install ffmpeg"
+    install_package "wget"    "brew install wget"
+    install_package "tmux"    "brew install tmux"
 
     install_cask java
     install_cask google-chrome
     install_cask audacity
+    install_cask sublime-text
 
 elif [[ $OS == "linux" ]]; then
 

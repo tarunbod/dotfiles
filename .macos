@@ -54,9 +54,10 @@ defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
 # Prevent Photos.app from opening when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
-
 # Copy my terminal preferences
 open ~/dotfiles/data/Galaxy.terminal
 
 # Copy Sublime Text preferences
-cp -r ~/dotfiles/data/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
+cp -f ~/dotfiles/data/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
+
+curl "http://packagecontrol.io/Package%20Control.sublime-package" -o "~/Library/Application Support/Sublime Text 3/Installed Packages/Package Control.sublime-package"
