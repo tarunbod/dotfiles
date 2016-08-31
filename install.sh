@@ -1,10 +1,15 @@
 if [[ $OS == "macos" ]]; then
 
     function install_brew() {
-        if [[ ! -f /usr/local/bin/brew ]]; then
+        if [[ $1 = "-f" ]]; then
             /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
             brew tap caskroom/cask
             brew tap homebrew/dupes
+        fi
+
+        if [[ ! -f /usr/local/bin/brew ]]; then
+            read -p "homebrew not found. Do you want to install it? [y/n]: "
+            [[ $REPLY = y* ]] && install_brew -f
         fi
     }
 
@@ -35,10 +40,12 @@ if [[ $OS == "macos" ]]; then
     install_package "wget"    "brew install wget"
     install_package "tmux"    "brew install tmux"
 
+    find Library/Fonts | grep "FiraCode" > /dev/null 2>&1 && brew tap caskroom/fonts && brew cask install font-fira-code
+
     install_cask java
     install_cask google-chrome
     install_cask audacity
-    install_cask sublime-text
+    install_cask atom
 
 elif [[ $OS == "linux" ]]; then
 
@@ -60,3 +67,14 @@ elif [[ $OS == "linux" ]]; then
 fi
 
 install_package "express" "sudo npm install -g express-generator"
+
+function install_atom_package() {
+    if [[ ! -d "$HOME/.atom/packages/$1" ]]; then
+        read -p "$1 not found. Do you want to install it? [y/n]: "
+        [[ $REPLY = y* ]] && apm install "$1"
+    fi
+}
+
+install_atom_package "dark-code-syntax"
+install_atom_package "seti-ui"
+install_atom_package "atom-beautify"
