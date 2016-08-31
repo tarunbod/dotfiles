@@ -3,6 +3,7 @@
         general:
             _analyticsUserId: "8b95085f-97a0-4003-9f5e-b969d374d480"
     core:
+        followSymlinks: false
         ignoredNames: [
             ".git"
             ".hg"
