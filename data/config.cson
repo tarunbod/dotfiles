@@ -1,30 +1,30 @@
 "*":
-    "atom-beautify":
-        general:
-            _analyticsUserId: "8b95085f-97a0-4003-9f5e-b969d374d480"
-    core:
-        followSymlinks: false
-        ignoredNames: [
-            ".git"
-            ".hg"
-            ".svn"
-            ".DS_Store"
-            "._*"
-            "Thumbs.db"
-            ".exe"
-        ]
-        projectHome: "/Users/tarunbod/Documents/github"
-        themes: [
-            "seti-ui"
-            "dark-code-syntax"
-        ]
-    editor:
-        fontFamily: "Fira Code"
-        fontSize: 13
-        showIndentGuide: true
-        tabLength: 4
-        tabType: "soft"
-    "exception-reporting":
-        userId: "79a9cbe6-ee3a-65f6-f98e-d143967d8808"
-    welcome:
-        showOnStartup: false
+  "atom-beautify":
+    general:
+      _analyticsUserId: "8b95085f-97a0-4003-9f5e-b969d374d480"
+  core:
+    followSymlinks: false
+    ignoredNames: [
+      ".git"
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      ".exe"
+    ]
+    projectHome: "/Users/tarunbod/Documents/github"
+    themes: [
+      "seti-ui"
+      "dark-code-syntax"
+    ]
+  editor:
+    fontFamily: "Fira Code"
+    fontSize: 13
+    showIndentGuide: true
+    tabLength: 4
+    tabType: "soft"
+  "exception-reporting":
+    userId: "79a9cbe6-ee3a-65f6-f98e-d143967d8808"
+  welcome:
+    showOnStartup: false

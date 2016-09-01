@@ -72,13 +72,12 @@ function unidecode() {
     fi;
 }
 
-# `s` with no arguments opens the current directory in Sublime Text, otherwise
-# opens the given location
-function s() {
+# opens in atom
+function a() {
 	if [ $# -eq 0 ]; then
-		subl .;
+		atom .;
 	else
-		subl "$@";
+		atom "$@";
 	fi;
 }
 
