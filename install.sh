@@ -66,7 +66,8 @@ elif [[ $OS == "linux" ]]; then
 
 fi
 
-install_package "express" "sudo npm install -g express-generator"
+install_package "express"    "sudo npm install -g express-generator"
+install_package "youtube-dl" "sudo pip install youtube-dl"
 
 function install_atom_package() {
     if [[ ! -d "$HOME/.atom/packages/$1" ]]; then
