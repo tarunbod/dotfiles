@@ -22,6 +22,8 @@
     fontFamily: "Fira Code"
     fontSize: 13
     showIndentGuide: true
+    preferredLineLength: 115
+    softWrapAtPreferredLineLength: true
     tabLength: 4
     tabType: "soft"
   "exception-reporting":
