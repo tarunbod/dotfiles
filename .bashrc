@@ -1,12 +1,15 @@
 source ~/dotfiles/.os
 
-alias install="source ~/dotfiles/.install"
+alias install="source ~/dotfiles/install.sh"
 
 function update() {
 
   cwd=$(pwd)
 
-  cd ~
+  cd ~/dotfiles
+  
+  echo "Pulling new data from https://github.com/tarunbod/dotfiles"
+  git pull
 
   install
 
