@@ -39,6 +39,7 @@ if [[ $OS == "macos" ]]; then
     install_package "ffmpeg"  "brew install ffmpeg"
     install_package "wget"    "brew install wget"
     install_package "tmux"    "brew install tmux"
+    install_package "mvn"     "brew install maven"
 
     find Library/Fonts | grep "FiraCode" > /dev/null 2>&1 && brew tap caskroom/fonts && brew cask install font-fira-code
 
