@@ -54,7 +54,11 @@ elif [[ $OS == "linux" ]]; then
         command -v $1 >/dev/null 2>&1 || { read -p "$1 not found. Do you want to install it? [y/n]: "; { [[ $REPLY = y* ]] && $2; } }
     }
 
-    install_package "nodejs"  "sudo apt-get install nodejs"
+    if [[ command -v nodejs >/dev/null 2>&1 || `nodejs --version 2>/dev/null` = "v0"* ]]; then
+        read -p "nodejs not found. Do you want to install it? [y/n]: "
+        $REPLY = y* && curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && sudo apt-get install -y nodejs
+    fi
+
     install_package "python2" "sudo apt-get install python"
     install_package "pip"     "sudo apt-get install python-pip"
     install_package "python3" "sudo apt-get install python3"
