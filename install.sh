@@ -47,6 +47,7 @@ if [[ $OS == "macos" ]]; then
     install_cask google-chrome
     install_cask audacity
     install_cask atom
+    install_cask slack
 
 elif [[ $OS == "linux" ]]; then
 

@@ -21,8 +21,8 @@
   editor:
     fontFamily: "Fira Code"
     fontSize: 13
-    showIndentGuide: true
     preferredLineLength: 115
+    showIndentGuide: true
     softWrapAtPreferredLineLength: true
     tabLength: 4
     tabType: "soft"
