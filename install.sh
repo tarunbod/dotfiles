@@ -57,7 +57,7 @@ elif [[ $OS == "linux" ]]; then
 
     if [[ `nodejs --version 2>/dev/null` = "v0"* ]]; then
         read -p "nodejs not found. Do you want to install it? [y/n]: "
-        $REPLY = y* && curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && sudo apt-get install -y nodejs
+        [[ $REPLY = y* ]] && curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && sudo apt-get install -y nodejs
     fi
 
     install_package "python2" "sudo apt-get install python"
@@ -69,6 +69,8 @@ elif [[ $OS == "linux" ]]; then
     install_package "cmake"   "sudo apt-get install cmake"
     install_package "mongod"  "sudo apt-get install mongodb-server"
     install_package "cloc"    "sudo apt-get install cloc"
+    install_package "tmux"    "sudo apt-get install tmux"
+    install_package "nmap"    "sudo apt-get install nmap"
 
 fi
 
