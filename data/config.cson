@@ -14,6 +14,7 @@
       "node_modules"
     ]
     projectHome: "/Users/tarunbod/Documents/github"
+    telemetryConsent: "limited"
     themes: [
       "seti-ui"
       "dark-code-syntax"
