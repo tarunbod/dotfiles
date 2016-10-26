@@ -2,7 +2,7 @@
 sudo -v
 
 # Symlink bash_profile, inputrc, and bashrc files into home directory
-ln -s ~/dotfiles/.{bash_profile,bashrc,inputrc,gitconfig} ~/
+ln -s ~/dotfiles/.{bash_profile,bashrc,inputrc,gitconfig,tmux.conf} ~/
 
 # Source script to identify OS
 source ~/dotfiles/.os
