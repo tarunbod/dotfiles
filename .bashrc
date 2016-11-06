@@ -69,4 +69,9 @@ if [[ -f ~/.extra ]]; then
     source ~/.extra
 fi
 
-clear; fortune -s
+if command -v tmux >/dev/null 2>&1 && [[ ! -n $TMUX ]]; then
+    tmux new -d -s 0 2>/dev/null
+    tmux attach -t 0
+fi
+
+fortune -s;

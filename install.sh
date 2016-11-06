@@ -41,7 +41,7 @@ if [[ $OS == "macos" ]]; then
     install_package "tmux"    "brew install tmux"
     install_package "mvn"     "brew install maven"
 
-    find Library/Fonts | grep "FiraCode" > /dev/null 2>&1 && brew tap caskroom/fonts && brew cask install font-fira-code
+    find ~/Library/Fonts | grep "FiraCode" > /dev/null 2>&1 || brew tap caskroom/fonts && brew cask install font-fira-code
 
     install_cask java
     install_cask google-chrome
@@ -87,3 +87,5 @@ function install_atom_package() {
 install_atom_package "dark-code-syntax"
 install_atom_package "seti-ui"
 install_atom_package "atom-beautify"
+install_atom_package "minimap"
+install_atom_package "emmet"
