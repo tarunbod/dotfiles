@@ -56,7 +56,7 @@ else
 fi
 
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/games:$PATH
-export EDITOR="nano";
+export EDITOR="vi";
 export NODE_REPL_HISTORY=~/.node_history;
 export NODE_REPL_HISTORY_SIZE='32768';
 export PYTHONIOENCODING='UTF-8';
