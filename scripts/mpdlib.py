@@ -61,7 +61,7 @@ elif cmd == cmds[5]: # play
 elif cmd == cmds[6]: # status cmd
     status = client.status()
     song = client.currentsong()
-    if song:
+    if song and status['state'] == 'play':
         char = '*' if status['state'] == 'play' else '-'
         time_parts = status['time'].split(':')
         percent = float(time_parts[0]) / float(time_parts[1]) * 100
