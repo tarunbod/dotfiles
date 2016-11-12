@@ -19,6 +19,7 @@
       "seti-ui"
       "dark-code-syntax"
     ]
+    useCustomTitleBar: true
   editor:
     fontFamily: "Fira Code"
     fontSize: 13

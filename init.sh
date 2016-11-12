@@ -4,6 +4,10 @@ sudo -v
 # Symlink bash_profile, inputrc, and bashrc files into home directory
 ln -s ~/dotfiles/.{bash_profile,bashrc,inputrc,gitconfig,tmux.conf} ~/
 
+# Setup custom scripts
+mkdir ~/bin
+ln -s ~/dotfiles/scripts/{mpdlib.py} ~/bin/
+
 # Source script to identify OS
 source ~/dotfiles/.os
 

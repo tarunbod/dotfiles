@@ -40,6 +40,8 @@ if [[ $OS == "macos" ]]; then
     install_package "wget"    "brew install wget"
     install_package "tmux"    "brew install tmux"
     install_package "mvn"     "brew install maven"
+    install_package "mpd"     "brew install mpd"
+    install_package "mpc"     "brew install mpc"
 
     find ~/Library/Fonts | grep "FiraCode" > /dev/null 2>&1 || brew tap caskroom/fonts && brew cask install font-fira-code
 
@@ -71,11 +73,13 @@ elif [[ $OS == "linux" ]]; then
     install_package "cloc"    "sudo apt-get install cloc"
     install_package "tmux"    "sudo apt-get install tmux"
     install_package "nmap"    "sudo apt-get install nmap"
+    install_package "mpd"     "sudo apt-get install mpd"
 
 fi
 
 install_package "express"    "sudo npm install -g express-generator"
 install_package "youtube-dl" "sudo pip install youtube-dl"
+
 
 function install_atom_package() {
     if [[ ! -d "$HOME/.atom/packages/$1" ]]; then
