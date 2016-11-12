@@ -63,6 +63,8 @@ elif cmd == cmds[6]: # status cmd
     song = client.currentsong()
     if song:
         char = '*' if status['state'] == 'play' else '-'
-        print(song['artist'] + ' - ' + song['title'] + ' (' + char + ')')
+        time_parts = status['time'].split(':')
+        percent = float(time_parts[0]) / float(time_parts[1]) * 100
+        print('%s (%s) %3.2f%%' % (song['title'], char, percent))
     else:
         print("No song playing")
