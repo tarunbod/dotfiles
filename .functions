@@ -129,3 +129,12 @@ function repeat() {
 function highlight() {
     grep --color -E "$1|$"
 }
+
+# start mpd, add songs to playlist, shuffle and play
+function mpdinit() {
+    mpd
+    mpc clear
+    mpc ls | mpc add
+    mpc shuffle
+    mpc play
+}

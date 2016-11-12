@@ -13,27 +13,43 @@ if len(sys.argv) < 2 or sys.argv[1] not in cmds:
     sys.exit(0)
 
 cmd = sys.argv[1]
-def show(str):
-    to_print = ""
-    if len(sys.argv) == 3 and sys.argv[2] == '--front-space':
-        to_print += " "
-    to_print += str
-    print(to_print)
+options = {
+    'print-no-server': False
+}
+if len(sys.argv) > 2:
+    for arg in options.keys():
+        if '--' + arg in sys.argv:
+            options[arg] = True
+
+
+# def show(str):
+#     to_print = ""
+#     if len(sys.argv) == 3 and sys.argv[2] == '--front-space':
+#         to_print += " "
+#     to_print += str
+#     print(to_print)
 
 client = MPDClient()
 try:
     client.connect("localhost", 6600)
 except ConnectionRefusedError as e: 
-    print('Server probably not running', file=sys.stderr)
+    if options['print-no-server']:
+        print('No MPD Server')
     sys.exit(0)
 
 if cmd == cmds[0]: # current song info
     song = client.currentsong()
-    print(song['artist'] + ' - ' + song['title'])
+    if song:
+        print(song['artist'] + ' - ' + song['title'])
+    else:
+        print("No song playing")
 elif cmd == cmds[1]: # get next song info
     status = client.status()
     song = client.playlistid(status['nextsongid'])[0]
-    print(song['artist'] + ' - ' + song['title'])
+    if song:
+        print(song['artist'] + ' - ' + song['title'])
+    else:
+        print("No song next")
 elif cmd == cmds[2]: # next
     client.next()
 elif cmd == cmds[3]: # previous
@@ -45,5 +61,8 @@ elif cmd == cmds[5]: # play
 elif cmd == cmds[6]: # status cmd
     status = client.status()
     song = client.currentsong()
-    char = '*' if status['state'] == 'play' else '-'
-    print(song['artist'] + ' - ' + song['title'] + ' (' + char + ')')
+    if song:
+        char = '*' if status['state'] == 'play' else '-'
+        print(song['artist'] + ' - ' + song['title'] + ' (' + char + ')')
+    else:
+        print("No song playing")
