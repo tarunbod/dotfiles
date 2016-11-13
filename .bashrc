@@ -75,3 +75,6 @@ if command -v tmux >/dev/null 2>&1 && [[ ! -n $TMUX ]]; then
 fi
 
 fortune -s;
+echo;
+echo "TODO:" 
+todo.py list
