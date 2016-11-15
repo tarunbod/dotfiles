@@ -16,6 +16,7 @@ source ~/dotfiles/install.sh
 
 if [[ $OS == "macos" ]]; then
     # Setup defaults for macOS
+    cp ~/dotfiles/.tmux-osx.conf ~/
     source ~/dotfiles/.macos
 fi
 

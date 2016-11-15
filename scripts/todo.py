@@ -37,9 +37,12 @@ if args[0] == "add":
     }
     print("Added " + args[1] + " to todo list")
 elif args[0] == "list":
-    for i in range(1, task_count + 1):
-        task = todo_list[str(i)]
-        print("%d) %s (%s)" % (i, task["name"], "✔" if task["completed"] else "╳")) 
+    if task_count == 0:
+        print("Woohoo, nothing to do!")
+    else:
+        for i in range(1, task_count + 1):
+            task = todo_list[str(i)]
+            print("%d) %s (%s)" % (i, task["name"], "✔" if task["completed"] else "╳")) 
 elif args[0] == "del":
     if len(args) != 2:
         usage()
