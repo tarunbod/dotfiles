@@ -138,3 +138,9 @@ function mpdinit() {
     mpc shuffle
     mpc play
 }
+
+function mpdkill() {
+    mpc stop
+    mpc clear
+    mpd --kill
+}
