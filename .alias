@@ -25,6 +25,8 @@ alias tma='tmux attach'
 alias takeover='tmux detach -a'
 alias reload='exec $SHELL -l'
 
+alias untar='tar -xvf'
+
 if [[ $OS == "macos" ]]; then
 	# Hide/show all desktop icons (useful when presenting)
 	alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool NO; killall Finder"

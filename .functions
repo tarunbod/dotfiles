@@ -55,7 +55,7 @@ function phpserver() {
 }
 
 # UTF-8-encode a string of Unicode symbols
-function escape() {
+function uniencode() {
     printf "\\\x%s" $(printf "$@" | xxd -p -c1 -u);
     # print a newline unless we’re piping the output to another program
     if [ -t 1 ]; then
@@ -132,7 +132,6 @@ function highlight() {
 
 # start mpd, add songs to playlist, shuffle and play
 function mpdinit() {
-    mpd
     mpc clear
     mpc ls | mpc add
     mpc shuffle
@@ -144,3 +143,23 @@ function mpdkill() {
     mpc clear
     mpd --kill
 }
+
+# create new tmux session, 
+# detach from the current and attach to new
+function tns() {
+    if [[ $# -eq 1 ]]; then
+        tmux new-session -d -s "$1"
+        tmux switch-client -t "$1"
+    else
+        echo "Usage: tns <new session name>"
+    fi
+}
+
+function tmswitch() {
+    if [[ $# -eq 1 ]]; then
+        tmux switch-client -t "$1"
+    else
+        tmux ls
+    fi
+}
+
