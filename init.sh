@@ -6,7 +6,7 @@ ln -s ~/dotfiles/.{bash_profile,bashrc,inputrc,gitconfig,tmux.conf} ~/
 
 # Setup custom scripts
 mkdir ~/bin
-ln -s ~/dotfiles/scripts/{mpdlib.py} ~/bin/
+ln -s ~/dotfiles/scripts/{mpdlib.py,todo.py} ~/bin/
 
 # Source script to identify OS
 source ~/dotfiles/.os

@@ -50,7 +50,9 @@ if [[ $OS == "macos" ]]; then
     install_cask audacity
     install_cask atom
     install_cask slack
-    install_cask iterm2
+
+    brew tap caskroom/versions
+    install_cask iterm2-nightly
 
 elif [[ $OS == "linux" ]]; then
 
