@@ -1,37 +1,32 @@
 LAMBDA='λ'
 
-# Most of this is a clone of Mathias Bynen's bash_prompt
-
-# if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
-#   export TERM='gnome-256color';
-# elif infocmp xterm-256color >/dev/null 2>&1; then
-#   export TERM='xterm-256color';
-# fi;
-
 prompt_git() {
     local s='';
     local branchName='';
 
-    # Check if the current directory is in a Git repository.
-    if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
-
-        if ! $(git diff-index --quiet HEAD --); then
-               s+='+';
-        fi;
-
-        branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
-            git rev-parse --short HEAD 2> /dev/null || \
-            echo '(unknown)')";
-
-        [ -n "${s}" ] && s=" [${s}]";
-
-        echo -e "${1}${branchName}${2}${s}";
-    else
+    output="$(git status 2>/dev/null)";
+    if [[ $? -ne 0 ]]; then
         return;
     fi;
+    if echo "$output" | grep 'Changes to be committed' >/dev/null; then
+        s+='+';
+    fi
+
+    if echo "$output" | grep 'not staged for commit' >/dev/null; then
+        s+='!';
+    fi;
+
+    if echo "$output" | grep 'Untracked files' >/dev/null; then
+        s+='?';
+    fi;
+
+    branchName="$(git branch | cut -c 3-)";
+
+    [ -n "${s}" ] && s=" [${s}]";
+
+    echo -e "${1}${branchName}${2}${s}";
 }
 
-# bold="";
 reset="\e[0m";
 black="\e[1;30m";
 blue="\e[1;94m";
