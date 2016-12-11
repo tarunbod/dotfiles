@@ -17,6 +17,7 @@ alias ip='ifconfig | grep inet'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias b='cd -' # go to last folder
 
 alias py='python'
 alias py3='python3'
