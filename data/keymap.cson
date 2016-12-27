@@ -1,2 +1,6 @@
 'atom-text-editor':
     'ctrl-shift-w': 'editor:toggle-soft-wrap'
+    'ctrl-cmd-up': 'editor:add-selection-above'
+    'ctrl-cmd-down': 'editor:add-selection-below'
+    'ctrl-shift-up': 'editor:move-line-up'
+    'ctrl-shift-down': 'editor:move-line-down'

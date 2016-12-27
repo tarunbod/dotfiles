@@ -20,7 +20,7 @@ prompt_git() {
         s+='?';
     fi;
 
-    branchName="$(git branch | cut -c 3-)";
+    branchName="$(git branch | grep '\*' | cut -c 3-)";
 
     [ -n "${s}" ] && s=" [${s}]";
 
