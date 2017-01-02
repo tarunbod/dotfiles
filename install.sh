@@ -1,3 +1,10 @@
+# install pathogen for vim
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+# install NERDTree
+git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
+
 if [[ $OS == "macos" ]]; then
 
     function install_brew() {
