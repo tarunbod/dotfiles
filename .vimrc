@@ -13,3 +13,5 @@ set splitright
 execute pathogen#infect()
 autocmd vimenter * NERDTree
 
+let NERDTreeShowHidden=1
+
