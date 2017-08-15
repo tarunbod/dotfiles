@@ -55,7 +55,7 @@ if [[ $OS == "macos" ]]; then
     install_cask java
     install_cask google-chrome
     install_cask audacity
-    install_cask atom
+    install_cask visual-studio-code
     install_cask slack
 
     brew tap caskroom/versions
