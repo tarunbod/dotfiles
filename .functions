@@ -164,3 +164,20 @@ function tmswitch() {
     fi
 }
 
+function git-newbranch() {
+    if [[ $# -ne 1 ]]; then
+        echo "Usage: git-newbranch <branch name>"
+    else
+        git checkout -b "$1"
+        git push -u origin "$1"
+    end
+}
+
+function git-newissue() {
+    if [[ $# -ne 2 ]]; then
+        echo "Usage: git-newissue <issue number> <issue name>"
+    else
+        git-newbranch "issue/$1/$2"
+        git-newbranch "issue/$1/tb614"
+    end
+}
