@@ -170,7 +170,7 @@ function git-newbranch() {
     else
         git checkout -b "$1"
         git push -u origin "$1"
-    end
+    fi
 }
 
 function git-newissue() {
@@ -179,5 +179,5 @@ function git-newissue() {
     else
         git-newbranch "issue/$1/$2"
         git-newbranch "issue/$1/tb614"
-    end
+    fi
 }
