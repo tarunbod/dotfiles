@@ -69,7 +69,7 @@ if [[ -f ~/.extra ]]; then
     source ~/.extra
 fi
 
-if command -v tmux >/dev/null 2>&1 && [[ ! -n $TMUX ]]; then
+if command -v tmux >/dev/null 2>&1 && [[ ! -n $TMUX ]] && [[ ! -n no_tmux ]]; then
     tmux new -d -s 0 2>/dev/null
     tmux attach -t 0
 fi
