@@ -2,9 +2,8 @@
 sudo -v
 
 # Symlink bash_profile, inputrc, and bashrc files into home directory
-ln -s ~/dotfiles/.{bash_profile,bashrc,inputrc,vimrc,gitconfig,tmux.conf} ~/
-
-cp -r ~/dotfiles/data/.vim ~/
+ln -s ~/dotfiles/.{bash_profile,bashrc,inputrc,emacs,gitconfig,tmux.conf} ~/
+ln -s ~/dotfiles/data/.emacs.d ~/
 
 # Setup custom scripts
 mkdir ~/bin
