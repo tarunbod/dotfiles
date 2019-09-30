@@ -29,7 +29,7 @@ There are two things you can do about this warning:
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(diff-switches "-u")
- '(package-selected-packages (quote (autopair))))
+ '(package-selected-packages nil))
 
 ;;; uncomment for CJK utf-8 support for non-Asian users
 ;; (require 'un-define)
@@ -74,6 +74,8 @@ There are two things you can do about this warning:
 
 (global-linum-mode t)
 (setq linum-format "%4d \u2502 ")
+
+(electric-pair-mode)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
