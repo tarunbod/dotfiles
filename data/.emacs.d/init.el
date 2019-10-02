@@ -23,13 +23,20 @@ There are two things you can do about this warning:
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+(require 'powerline)
+(powerline-default-theme)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (monokai-pro)))
+ '(custom-safe-themes
+   (quote
+    ("930f7841c24772dda4f22291e510dac1d58813b59dcb9f54ad4f1943ea89cdcd" default)))
  '(diff-switches "-u")
- '(package-selected-packages nil))
+ '(package-selected-packages (quote (powerline monokai-pro-theme))))
 
 ;;; uncomment for CJK utf-8 support for non-Asian users
 ;; (require 'un-define)
