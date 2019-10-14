@@ -1,3 +1,5 @@
+[[ $- == *i* ]] || return  
+
 source ~/dotfiles/.os
 
 alias install="source ~/dotfiles/install.sh"
