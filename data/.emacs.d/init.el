@@ -31,10 +31,14 @@ There are two things you can do about this warning:
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (monokai-pro)))
+ '(ansi-color-names-vector
+   ["#2d2a2e" "#ff6188" "#a9dc76" "#ffd866" "#78dce8" "#ab9df2" "#ff6188" "#fcfcfa"])
+ '(ansi-term-color-vector
+   [unspecified "#2d2a2e" "#ff6188" "#a9dc76" "#ffd866" "#78dce8" "#ab9df2" "#ff6188" "#fcfcfa"])
+ '(custom-enabled-themes (quote (custom-dark)))
  '(custom-safe-themes
    (quote
-    ("930f7841c24772dda4f22291e510dac1d58813b59dcb9f54ad4f1943ea89cdcd" default)))
+    ("009d2d3f0f1926ff084b2ce3d681aeb5074fc244e80983ee540eb8d74c58c9e7" "930f7841c24772dda4f22291e510dac1d58813b59dcb9f54ad4f1943ea89cdcd" default)))
  '(diff-switches "-u")
  '(package-selected-packages (quote (powerline monokai-pro-theme))))
 

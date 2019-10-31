@@ -18,6 +18,8 @@
 	<string>manual</string>
 	<key>Default Bookmark Guid</key>
 	<string>6339B4B4-1AB5-4482-A1AB-E5F5F0D41DB6</string>
+	<key>HapticFeedbackForEsc</key>
+	<false/>
 	<key>Hotkey</key>
 	<true/>
 	<key>HotkeyChar</key>
@@ -784,7 +786,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>501212406.08280802</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>19</integer>
+	<integer>28</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1547,13 +1549,15 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-09-26T20:06:35Z</date>
+	<date>2019-10-07T18:43:00Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
 	<true/>
+	<key>SoundForEsc</key>
+	<false/>
 	<key>SwitchPaneModifier</key>
 	<integer>9</integer>
 	<key>TmuxDashboardLimit</key>
@@ -1563,6 +1567,8 @@
 		<key>ssh</key>
 		<string>6339B4B4-1AB5-4482-A1AB-E5F5F0D41DB6</string>
 	</dict>
+	<key>VisualIndicatorForEsc</key>
+	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>findMode_iTerm</key>
