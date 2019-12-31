@@ -48,9 +48,18 @@ There are two things you can do about this warning:
     (local-set-key (kbd "RET") 'newline-and-indent))
 (add-hook 'c-mode 'set-newline-and-indent)
 
+(defun infer-indentation-style ()
+  ;; if our source file uses tabs, we use tabs, if spaces spaces, and if
+  ;; neither, we use the current indent-tabs-mode
+  (let ((space-count (how-many "^  " (point-min) (point-max)))
+        (tab-count (how-many "^\t" (point-min) (point-max))))
+    (if (> space-count tab-count) (setq indent-tabs-mode nil))
+    (if (> tab-count space-count) (setq indent-tabs-mode t))))
+
 (setq c-basic-offset 4)
 (setq tab-width 4)
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
+(infer-indentation-style)
 (setq global-linum-mode t)
 
 (defun move-line-up ()
@@ -68,8 +77,8 @@ There are two things you can do about this warning:
   (forward-line -1)
   (indent-according-to-mode))
 
-(global-set-key [(meta shift <up>)]  'move-line-up)
-(global-set-key [(meta shift <down>)]  'move-line-down)
+(global-set-key (kbd "<M-up>") 'move-line-up)
+(global-set-key (kbd "<M-down>")  'move-line-down)
 
 (defvar user-temporary-file-directory
   (concat temporary-file-directory user-login-name "/"))
@@ -93,4 +102,4 @@ There are two things you can do about this warning:
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "Fira Code" :foundry "outline" :slant normal :weight normal :height 98 :width normal)))))
