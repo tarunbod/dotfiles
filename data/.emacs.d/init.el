@@ -68,8 +68,8 @@ There are two things you can do about this warning:
   (forward-line -1)
   (indent-according-to-mode))
 
-(global-set-key [(meta shift <up>)]  'move-line-up)
-(global-set-key [(meta shift <down>)]  'move-line-down)
+(global-set-key (kbd "M-<up>")  'move-line-up)
+(global-set-key (kbd "M-<down>")  'move-line-down)
 
 (defvar user-temporary-file-directory
   (concat temporary-file-directory user-login-name "/"))
@@ -87,6 +87,8 @@ There are two things you can do about this warning:
 (setq linum-format "%4d \u2502 ")
 
 (electric-pair-mode)
+
+(set-frame-font "Fira Code 12" nil t)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
