@@ -35,7 +35,7 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryCli
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
-# Save screenshots to the desktop
+# Save screenshots to ~/Pictures
 defaults write com.apple.screencapture location -string "${HOME}/Pictures"
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
@@ -88,8 +88,3 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 # Copy my terminal preferences
 open ~/dotfiles/data/Galaxy.terminal
-
-# Copy Atom preferences
-[[ ! -d "$HOME/.atom" ]] && mkdir ~/.atom
-ln -fs ~/dotfiles/data/config.cson ~/.atom/config.cson
-ln -fs ~/dotfiles/data/keymap.cson ~/.atom/keymap.cson

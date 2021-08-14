@@ -2,8 +2,10 @@
 sudo -v
 
 # Symlink bash_profile, inputrc, and bashrc files into home directory
-ln -s ~/dotfiles/.{bash_profile,bashrc,inputrc,gitconfig,tmux.conf} ~/
+ln -s ~/dotfiles/.{bash_profile,bashrc,zshrc,inputrc,gitconfig,tmux.conf} ~/
 ln -s ~/dotfiles/data/.emacs.d ~/
+
+git clone https://github.com/tarunbod/ohmyzsh.git
 
 # Setup custom scripts
 mkdir ~/bin

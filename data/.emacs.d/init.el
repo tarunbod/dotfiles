@@ -38,9 +38,18 @@ There are two things you can do about this warning:
  '(custom-enabled-themes (quote (custom-dark)))
  '(custom-safe-themes
    (quote
-    ("009d2d3f0f1926ff084b2ce3d681aeb5074fc244e80983ee540eb8d74c58c9e7" "930f7841c24772dda4f22291e510dac1d58813b59dcb9f54ad4f1943ea89cdcd" default)))
+    ("12fd668c90c4e32e07d24385b2b4cd7a81758bf5872ff17374e65857974e67a7" "36ca907d32cfd617319e5eb23f3aeb0fcc9acc0e9ffcaf1fcaab21e5a23d4ff6" "d99ba4ba502299f8cfd7750b78cc7e154eb25ac0b2223378c415b8a76551c3eb" "9a94d9cfd0b38389fba7d9645d283066197cbd2cfd1599b04993e88acdbcb925" "02afde53c32890d806114cf5fd5e3c737fb70027abfc45e10b9536a8425f9f44" "8069469aef3c8579fb5d21ad60251a200b65f5e4a0edba450eaff6dc3ebb907a" "ae14e91e93099e53e1e6955f977d34f7405bd26e07841d0c5c5b55634d76ffbe" "e6487d2f5e95f2d834566b8ca90d560210559ceb5152f99ca776333a029fc4f4" "9298b11f0ec88c826cd652303c183e314604d69176de5e545574545eee7d17c0" "eb6a808a744abcd292eb46ec795121bb6fc53100e970a5d0acc44ece2fa2bce2" "009d2d3f0f1926ff084b2ce3d681aeb5074fc244e80983ee540eb8d74c58c9e7" "930f7841c24772dda4f22291e510dac1d58813b59dcb9f54ad4f1943ea89cdcd" default)))
  '(diff-switches "-u")
  '(package-selected-packages (quote (powerline monokai-pro-theme))))
+
+;; transparent background
+(defun set-background-for-terminal (&optional frame)
+  (or frame (setq frame (selected-frame)))
+  "unsets the background color in terminal mode"
+  (unless (display-graphic-p frame)
+    (set-face-background 'default "unspecified-bg" frame)))
+(add-hook 'after-make-frame-functions 'set-background-for-terminal)
+(add-hook 'window-setup-hook 'set-background-for-terminal)
 
 ;;; uncomment for CJK utf-8 support for non-Asian users
 ;; (require 'un-define)
@@ -104,4 +113,4 @@ There are two things you can do about this warning:
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Fira Code" :foundry "outline" :slant normal :weight normal :height 98 :width normal)))))
+ )

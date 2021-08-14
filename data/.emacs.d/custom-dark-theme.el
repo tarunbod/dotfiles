@@ -1,9 +1,8 @@
 (deftheme custom-dark
-  "Created 2019-10-10.")
+  "Created 2021-03-04.")
 
 (custom-theme-set-faces
  'custom-dark
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#fcfcfa" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 1 :width normal :foundry "default" :family "default"))))
  '(cursor ((t (:background "#fcfcfa"))))
  '(fixed-pitch ((t (:family "Monospace"))))
  '(variable-pitch ((((type w32)) (:foundry "outline" :family "Arial")) (t (:family "Sans Serif"))))
@@ -16,18 +15,18 @@
  '(secondary-selection ((t (:background "#403e41"))))
  '(trailing-whitespace ((t (:foreground "#fcfcfa" :background "#ff6188"))))
  '(font-lock-builtin-face ((t (:foreground "#ab9df2"))))
- '(font-lock-comment-delimiter-face ((t (:foreground "#727072"))))
- '(font-lock-comment-face ((t (:slant italic :foreground "#727072"))))
+ '(font-lock-comment-delimiter-face ((t (:foreground "color-103"))))
+ '(font-lock-comment-face ((t (:foreground "color-103"))))
  '(font-lock-constant-face ((t (:foreground "#ab9df2"))))
  '(font-lock-doc-face ((t (:foreground "#727072"))))
- '(font-lock-function-name-face ((t (:foreground "#a9dc76"))))
- '(font-lock-keyword-face ((t (:foreground "#ff6188"))))
+ '(font-lock-function-name-face ((t (:foreground "color-71"))))
+ '(font-lock-keyword-face ((t (:foreground "#b54762"))))
  '(font-lock-negation-char-face ((t nil)))
  '(font-lock-preprocessor-face ((t (:inherit (font-lock-builtin-face)))))
  '(font-lock-regexp-grouping-backslash ((t (:inherit (bold)))))
  '(font-lock-regexp-grouping-construct ((t (:inherit (bold)))))
  '(font-lock-string-face ((t (:foreground "#ffd866"))))
- '(font-lock-type-face ((t (:foreground "#78dce8"))))
+ '(font-lock-type-face ((t (:foreground "color-30"))))
  '(font-lock-variable-name-face ((t (:foreground "#fcfcfa"))))
  '(font-lock-warning-face ((t (:foreground "#fc9867"))))
  '(button ((t (:inherit (link)))))
@@ -46,6 +45,7 @@
  '(lazy-highlight ((t (:inverse-video t :foreground "#c1c0c0"))))
  '(match ((t (:inverse-video t :foreground "#ffd866" :background "#2d2a2e"))))
  '(next-error ((t (:inherit (region)))))
- '(query-replace ((t (:inherit (isearch))))))
+ '(query-replace ((t (:inherit (isearch)))))
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 1 :width normal :foundry "default" :family "default")))))
 
 (provide-theme 'custom-dark)
