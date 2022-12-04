@@ -12,7 +12,7 @@ else
 fi
 
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$PATH
-export EDITOR="emacs";
+export EDITOR="nvim";
 export NODE_REPL_HISTORY=$HOME/.node_history;
 export NODE_REPL_HISTORY_SIZE='32768';
 export PYTHONIOENCODING='UTF-8';
