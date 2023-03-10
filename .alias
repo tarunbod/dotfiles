@@ -47,4 +47,4 @@ if [[ $OS == "macos" ]]; then
 fi
 
 alias master='git checkout master'
-
+alias main='git checkout main'

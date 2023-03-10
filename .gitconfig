@@ -4,7 +4,17 @@
 	signingkey = 9D920C0C5DD1DF07
 [push]
 	default = simple
+	autoSetupRemote = true
 [credentials]
 	username = tarunbod
 [commit]
 	gpgsign = false
+[github]
+	user = tarunbod
+[alias]
+	pushu = push -u origin HEAD
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

@@ -1,3 +1,5 @@
+source $HOME/dotfiles/.os
+
 # ohmyzsh setup
 export ZSH=$HOME/ohmyzsh
 ZSH_THEME="tarunbod"
@@ -21,7 +23,7 @@ for file in $HOME/dotfiles/.{alias,functions}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done
 
-if [[ -f $HOME/.extra ]]; then
+if [[ -f "$HOME/.extra" ]]; then
     source $HOME/.extra
 fi
 
@@ -33,6 +35,3 @@ fi
 
 # motd stuff
 fortune -s;
-echo;
-echo "TODO:" 
-todo.py list
