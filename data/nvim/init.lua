@@ -12,7 +12,12 @@ vim.opt.hidden = true
 vim.opt.errorbells = false
 vim.opt.scrolloff = 8
 
-vim.cmd("colorscheme jellybeans")
+vim.cmd("autocmd Filetype javascript      setlocal ts=2 sw=2 sts=2 expandtab")
+vim.cmd("autocmd Filetype javascriptreact setlocal ts=2 sw=2 sts=2 expandtab")
+vim.cmd("autocmd Filetype typescript      setlocal ts=2 sw=2 sts=2 expandtab")
+vim.cmd("autocmd Filetype typescriptreact setlocal ts=2 sw=2 sts=2 expandtab")
+vim.cmd("autocmd Filetype html            setlocal ts=2 sw=2 sts=2 expandtab")
+vim.cmd("autocmd Filetype go              setlocal noexpandtab")
 
 -- Keybinds
 
@@ -47,19 +52,50 @@ vim.call("plug#begin")
 
 vim.call("plug#", "nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
 vim.call("plug#", "nvim-lua/plenary.nvim")
-vim.call("plug#", "nvim-telescope/telescope.nvim", { tag = "0.1.0" })
+vim.call("plug#", "nvim-telescope/telescope.nvim", { ["tag"] = "0.1.0" })
 vim.call("plug#", "nvim-tree/nvim-web-devicons")
 vim.call("plug#", "nvim-tree/nvim-tree.lua")
 vim.call("plug#", "williamboman/mason.nvim")
 vim.call("plug#", "williamboman/mason-lspconfig.nvim")
 vim.call("plug#", "neovim/nvim-lspconfig")
+vim.call("plug#", "nvim-lualine/lualine.nvim")
+vim.call("plug#", "rebelot/kanagawa.nvim")
 
 vim.call("plug#end")
 
-local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+require "kanagawa".setup {
+    overrides = function(colors)
+        local theme = colors.theme
+        return {
+            TelescopeTitle = { fg = theme.ui.special, bold = true },
+            TelescopePromptNormal = { bg = theme.ui.bg_p1 },
+            TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
+            TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+            TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
+            TelescopePreviewNormal = { bg = theme.ui.bg_dim },
+            TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
+            Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
+            PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+            PmenuSbar = { bg = theme.ui.bg_m1 },
+            PmenuThumb = { bg = theme.ui.bg_p2 },
+        }
+    end
+}
+vim.cmd("colorscheme kanagawa")
 
+require "lualine".setup {
+    options = {
+        theme = "kanagawa"
+    }
+}
+
+require "nvim-treesitter.configs".setup {
+    highlight = {
+        enable = true
+    }
+}
+
+local on_attach = function(client, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
@@ -67,7 +103,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', '<C-space>', vim.lsp.omnifunc, bufopts)
+  vim.keymap.set('i', '<C-o>', vim.lsp.omnifunc, bufopts)
   vim.keymap.set('n', '<leader>d', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
