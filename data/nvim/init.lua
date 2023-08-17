@@ -11,13 +11,22 @@ vim.opt.hlsearch = false
 vim.opt.hidden = true
 vim.opt.errorbells = false
 vim.opt.scrolloff = 8
+vim.opt.colorcolumn = "80"
 
 vim.cmd("autocmd Filetype javascript      setlocal ts=2 sw=2 sts=2 expandtab")
 vim.cmd("autocmd Filetype javascriptreact setlocal ts=2 sw=2 sts=2 expandtab")
 vim.cmd("autocmd Filetype typescript      setlocal ts=2 sw=2 sts=2 expandtab")
 vim.cmd("autocmd Filetype typescriptreact setlocal ts=2 sw=2 sts=2 expandtab")
 vim.cmd("autocmd Filetype html            setlocal ts=2 sw=2 sts=2 expandtab")
+vim.cmd("autocmd Filetype css             setlocal ts=2 sw=2 sts=2 expandtab")
 vim.cmd("autocmd Filetype go              setlocal noexpandtab")
+
+local my_group = vim.api.nvim_create_augroup("tarunbod", {})
+vim.api.nvim_create_autocmd({"BufWritePre"}, {
+    group = my_group,
+    pattern = "*",
+    command = [[%s/\s\+$//e]],
+})
 
 -- Keybinds
 
@@ -28,11 +37,11 @@ function map(mode, shortcut, command)
 end
 
 function nmap(shortcut, command)
-    map('n', shortcut, command)
+    map("n", shortcut, command)
 end
 
 function imap(shortcut, command)
-    map('i', shortcut, command)
+    map("i", shortcut, command)
 end
 
 nmap("<leader>p", "<cmd>Telescope find_files<cr>")
@@ -96,22 +105,22 @@ require "nvim-treesitter.configs".setup {
     }
 }
 
-
+ts_builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>t", ts_builtin.treesitter)
 local on_attach = function(client, bufnr)
-    ts_builtin = require("telescope.builtin")
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'gr', ts_builtin.lsp_references, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'ge', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('i', '<C-o>', vim.lsp.omnifunc, bufopts)
-    vim.keymap.set('n', '<leader>d', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-    vim.keymap.set('n', '<leader>wl', function()
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+    vim.keymap.set("n", "gr", ts_builtin.lsp_references, bufopts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set("n", "gh", vim.lsp.buf.hover, bufopts)
+    vim.keymap.set("n", "ge", vim.lsp.buf.rename, bufopts)
+    vim.keymap.set("i", "<C-o>", vim.lsp.omnifunc, bufopts)
+    vim.keymap.set("n", "<leader>d", vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set("n", "<leader>r", vim.lsp.buf.format, bufopts)
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set("n", "<leader>wl", function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, bufopts)
 end
