@@ -69,8 +69,19 @@ vim.call("plug#", "williamboman/mason-lspconfig.nvim")
 vim.call("plug#", "neovim/nvim-lspconfig")
 vim.call("plug#", "nvim-lualine/lualine.nvim")
 vim.call("plug#", "rebelot/kanagawa.nvim")
+vim.call("plug#", "ThePrimeagen/harpoon")
 
 vim.call("plug#end")
+
+local harpoon_mark = require("harpoon.mark")
+local harpoon_ui = require("harpoon.ui")
+vim.keymap.set("n", "<leader>y", function()
+    harpoon_mark.add_file()
+    print("Added " .. vim.fn.expand("%") .. " to harpoon marks")
+end)
+vim.keymap.set("n", "<leader>u", harpoon_ui.nav_prev)
+vim.keymap.set("n", "<leader>i", harpoon_ui.nav_next)
+vim.keymap.set("n", "<leader>o", harpoon_ui.toggle_quick_menu)
 
 require "kanagawa".setup {
     overrides = function(colors)
@@ -105,7 +116,7 @@ require "nvim-treesitter.configs".setup {
     }
 }
 
-ts_builtin = require("telescope.builtin")
+local ts_builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>t", ts_builtin.treesitter)
 local on_attach = function(client, bufnr)
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
