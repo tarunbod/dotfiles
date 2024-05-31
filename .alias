@@ -48,3 +48,5 @@ fi
 
 alias master='git checkout master'
 alias main='git checkout main'
+
+alias vim=nvim

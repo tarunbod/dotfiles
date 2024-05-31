@@ -13,6 +13,8 @@ vim.opt.errorbells = false
 vim.opt.scrolloff = 8
 vim.opt.colorcolumn = "80"
 
+vim.cmd("autocmd Filetype json            setlocal ts=2 sw=2 sts=2 expandtab")
+vim.cmd("autocmd Filetype lua             setlocal ts=2 sw=2 sts=2 expandtab")
 vim.cmd("autocmd Filetype javascript      setlocal ts=2 sw=2 sts=2 expandtab")
 vim.cmd("autocmd Filetype javascriptreact setlocal ts=2 sw=2 sts=2 expandtab")
 vim.cmd("autocmd Filetype typescript      setlocal ts=2 sw=2 sts=2 expandtab")
@@ -28,32 +30,32 @@ vim.api.nvim_create_autocmd({"BufWritePre"}, {
     command = [[%s/\s\+$//e]],
 })
 
+local yank_group = vim.api.nvim_create_augroup('HighlightYank', {})
+vim.api.nvim_create_autocmd('TextYankPost', {
+    group = yank_group,
+    pattern = '*',
+    callback = function()
+        vim.highlight.on_yank({
+            higroup = 'IncSearch',
+            timeout = 40,
+        })
+    end,
+})
+
 -- Keybinds
 
 vim.g.mapleader = " "
 
-function map(mode, shortcut, command)
-    vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true })
-end
-
-function nmap(shortcut, command)
-    map("n", shortcut, command)
-end
-
-function imap(shortcut, command)
-    map("i", shortcut, command)
-end
-
-nmap("<leader>p", "<cmd>Telescope find_files<cr>")
-nmap("<leader>s", "<cmd>Telescope git_status<cr>")
-nmap("<leader>b", "<cmd>Telescope buffers<cr>")
-nmap("<leader>f", "<cmd>Telescope live_grep<cr>")
-nmap("<leader>g", "<cmd>NvimTreeToggle<cr>")
-nmap("<C-w>", "<cmd>bdelete<cr>")
-nmap("<leader>h", "<cmd>wincmd h<cr>")
-nmap("<leader>j", "<cmd>wincmd j<cr>")
-nmap("<leader>k", "<cmd>wincmd k<cr>")
-nmap("<leader>l", "<cmd>wincmd l<cr>")
+vim.keymap.set("n", "<leader>p", "<cmd>Telescope find_files<cr>")
+vim.keymap.set("n", "<leader>s", "<cmd>Telescope git_status<cr>")
+vim.keymap.set("n", "<leader>b", "<cmd>Telescope buffers<cr>")
+vim.keymap.set("n", "<leader>f", "<cmd>Telescope live_grep<cr>")
+vim.keymap.set("n", "<leader>g", "<cmd>NvimTreeToggle<cr>")
+vim.keymap.set("n", "<C-w>", "<cmd>bdelete<cr>")
+vim.keymap.set("n", "<leader>h", "<cmd>wincmd h<cr>")
+vim.keymap.set("n", "<leader>j", "<cmd>wincmd j<cr>")
+vim.keymap.set("n", "<leader>k", "<cmd>wincmd k<cr>")
+vim.keymap.set("n", "<leader>l", "<cmd>wincmd l<cr>")
 
 -- Plugins
 
@@ -61,15 +63,16 @@ vim.call("plug#begin")
 
 vim.call("plug#", "nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
 vim.call("plug#", "nvim-lua/plenary.nvim")
-vim.call("plug#", "nvim-telescope/telescope.nvim", { ["tag"] = "0.1.0" })
+vim.call("plug#", "nvim-telescope/telescope.nvim", { ["tag"] = "0.1.8" })
 vim.call("plug#", "nvim-tree/nvim-web-devicons")
 vim.call("plug#", "nvim-tree/nvim-tree.lua")
 vim.call("plug#", "williamboman/mason.nvim")
 vim.call("plug#", "williamboman/mason-lspconfig.nvim")
 vim.call("plug#", "neovim/nvim-lspconfig")
 vim.call("plug#", "nvim-lualine/lualine.nvim")
-vim.call("plug#", "rebelot/kanagawa.nvim")
 vim.call("plug#", "ThePrimeagen/harpoon")
+vim.call("plug#", "github/copilot.vim")
+vim.call("plug#", "EdenEast/nightfox.nvim")
 
 vim.call("plug#end")
 
@@ -83,30 +86,11 @@ vim.keymap.set("n", "<leader>u", harpoon_ui.nav_prev)
 vim.keymap.set("n", "<leader>i", harpoon_ui.nav_next)
 vim.keymap.set("n", "<leader>o", harpoon_ui.toggle_quick_menu)
 
-require "kanagawa".setup {
-    overrides = function(colors)
-        local theme = colors.theme
-        return {
-            TelescopeTitle = { fg = theme.ui.special, bold = true },
-            TelescopePromptNormal = { bg = theme.ui.bg_p1 },
-            TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
-            TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
-            TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
-            TelescopePreviewNormal = { bg = theme.ui.bg_dim },
-            TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
-
-            Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
-            PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
-            PmenuSbar = { bg = theme.ui.bg_m1 },
-            PmenuThumb = { bg = theme.ui.bg_p2 },
-        }
-    end
-}
-vim.cmd("colorscheme kanagawa")
+vim.cmd("colorscheme carbonfox")
 
 require "lualine".setup {
     options = {
-        theme = "kanagawa"
+        theme = "tokyonight"
     }
 }
 
@@ -134,6 +118,9 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "<leader>wl", function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, bufopts)
+
+    vim.keymap.set("n", "<leader>n", vim.diagnostic.goto_next)
+    vim.keymap.set("n", "<leader>m", vim.diagnostic.goto_prev)
 end
 
 require("nvim-tree").setup {
@@ -147,10 +134,15 @@ require("mason").setup()
 require("mason-lspconfig").setup {
     ensure_installed = { "rust_analyzer", "gopls" }
 }
+
+local lspconfig = require("lspconfig")
+
+local default_handler = function(server_name)
+    lspconfig[server_name].setup {
+        on_attach = on_attach
+    }
+end
+
 require("mason-lspconfig").setup_handlers {
-    function (server_name)
-        require("lspconfig")[server_name].setup {
-            on_attach = on_attach
-        }
-    end
+  default_handler
 }
