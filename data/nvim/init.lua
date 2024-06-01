@@ -25,21 +25,21 @@ vim.cmd("autocmd Filetype go              setlocal noexpandtab")
 
 local my_group = vim.api.nvim_create_augroup("tarunbod", {})
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
-    group = my_group,
-    pattern = "*",
-    command = [[%s/\s\+$//e]],
+  group = my_group,
+  pattern = "*",
+  command = [[%s/\s\+$//e]],
 })
 
-local yank_group = vim.api.nvim_create_augroup('HighlightYank', {})
-vim.api.nvim_create_autocmd('TextYankPost', {
-    group = yank_group,
-    pattern = '*',
-    callback = function()
-        vim.highlight.on_yank({
-            higroup = 'IncSearch',
-            timeout = 40,
-        })
-    end,
+local yank_group = vim.api.nvim_create_augroup("HighlightYank", {})
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = yank_group,
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank({
+      higroup = "IncSearch",
+      timeout = 40,
+    })
+  end,
 })
 
 -- Keybinds
@@ -69,6 +69,14 @@ vim.call("plug#", "nvim-tree/nvim-tree.lua")
 vim.call("plug#", "williamboman/mason.nvim")
 vim.call("plug#", "williamboman/mason-lspconfig.nvim")
 vim.call("plug#", "neovim/nvim-lspconfig")
+vim.call("plug#", "rafamadriz/friendly-snippets")
+vim.call("plug#", "L3MON4D3/LuaSnip", { ["tag"] = "v2.*", ["do"] = "make install_jsregexp" })
+vim.call("plug#", "saadparwaiz1/cmp_luasnip")
+vim.call("plug#", "hrsh7th/cmp-nvim-lsp")
+vim.call("plug#", "hrsh7th/cmp-buffer")
+vim.call("plug#", "hrsh7th/cmp-path")
+vim.call("plug#", "hrsh7th/cmp-cmdline")
+vim.call("plug#", "hrsh7th/nvim-cmp")
 vim.call("plug#", "nvim-lualine/lualine.nvim")
 vim.call("plug#", "ThePrimeagen/harpoon")
 vim.call("plug#", "github/copilot.vim")
@@ -79,8 +87,8 @@ vim.call("plug#end")
 local harpoon_mark = require("harpoon.mark")
 local harpoon_ui = require("harpoon.ui")
 vim.keymap.set("n", "<leader>y", function()
-    harpoon_mark.add_file()
-    print("Added " .. vim.fn.expand("%") .. " to harpoon marks")
+  harpoon_mark.add_file()
+  print("Added " .. vim.fn.expand("%") .. " to harpoon marks")
 end)
 vim.keymap.set("n", "<leader>u", harpoon_ui.nav_prev)
 vim.keymap.set("n", "<leader>i", harpoon_ui.nav_next)
@@ -89,60 +97,154 @@ vim.keymap.set("n", "<leader>o", harpoon_ui.toggle_quick_menu)
 vim.cmd("colorscheme carbonfox")
 
 require "lualine".setup {
-    options = {
-        theme = "tokyonight"
-    }
+  options = {
+    theme = "tokyonight"
+  }
 }
 
+local cmp = require("cmp")
+local luasnip = require("luasnip")
+require("luasnip.loaders.from_vscode").lazy_load()
+
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+      -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+    end,
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-o>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+            if luasnip.expandable() then
+                luasnip.expand()
+            else
+                cmp.confirm({
+                    select = true,
+                })
+            end
+        else
+            fallback()
+        end
+    end),
+
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.locally_jumpable(1) then
+        luasnip.jump(1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.locally_jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+  }),
+  sources = cmp.config.sources({
+    { name = "nvim_lsp" },
+    { name = "luasnip" },
+  }, {
+    { name = "buffer" },
+  }),
+})
+
+cmp.setup.cmdline({ "/", "?" }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = "buffer" }
+  }
+})
+
+cmp.setup.cmdline(":", {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = "path" }
+  }, {
+    { name = "cmdline" }
+  }),
+  matching = { disallow_symbol_nonprefix_matching = false }
+})
+
+vim.diagnostic.config({
+  -- update_in_insert = true,
+  float = {
+    focusable = false,
+    style = "minimal",
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+  },
+})
+
 require "nvim-treesitter.configs".setup {
-    highlight = {
-        enable = true
-    }
+  highlight = {
+    enable = true
+  }
 }
 
 local ts_builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>t", ts_builtin.treesitter)
 local on_attach = function(client, bufnr)
-    local bufopts = { noremap=true, silent=true, buffer=bufnr }
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-    vim.keymap.set("n", "gr", ts_builtin.lsp_references, bufopts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set("n", "gh", vim.lsp.buf.hover, bufopts)
-    vim.keymap.set("n", "ge", vim.lsp.buf.rename, bufopts)
-    vim.keymap.set("i", "<C-o>", vim.lsp.omnifunc, bufopts)
-    vim.keymap.set("n", "<leader>d", vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set("n", "<leader>r", vim.lsp.buf.format, bufopts)
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
-    vim.keymap.set("n", "<leader>wl", function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+  vim.keymap.set("n", "gr", ts_builtin.lsp_references, bufopts)
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set("n", "gh", vim.lsp.buf.hover, bufopts)
+  vim.keymap.set("n", "ge", vim.lsp.buf.rename, bufopts)
+  -- vim.keymap.set("i", "<C-o>", vim.lsp.omnifunc, bufopts)
+  vim.keymap.set("n", "<leader>d", vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set("n", "<leader>r", vim.lsp.buf.format, bufopts)
+  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set("n", "<leader>wl", function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, bufopts)
 
-    vim.keymap.set("n", "<leader>n", vim.diagnostic.goto_next)
-    vim.keymap.set("n", "<leader>m", vim.diagnostic.goto_prev)
+  vim.keymap.set("n", "<leader>n", vim.diagnostic.goto_next)
+  vim.keymap.set("n", "<leader>m", vim.diagnostic.goto_prev)
 end
 
 require("nvim-tree").setup {
-    sync_root_with_cwd = true,
-    view = {
-        side = "right"
-    }
+  sync_root_with_cwd = true,
+  view = {
+    side = "right"
+  }
 }
 
 require("mason").setup()
-require("mason-lspconfig").setup {
-    ensure_installed = { "rust_analyzer", "gopls" }
+
+local mason_lspconfig = require("mason-lspconfig")
+mason_lspconfig.setup {
+  ensure_installed = { "rust_analyzer", "gopls" }
 }
-
-local lspconfig = require("lspconfig")
-
-local default_handler = function(server_name)
-    lspconfig[server_name].setup {
-        on_attach = on_attach
+mason_lspconfig.setup_handlers {
+  function(server_name)
+    require("lspconfig")[server_name].setup {
+      on_attach = on_attach
     }
-end
-
-require("mason-lspconfig").setup_handlers {
-  default_handler
+  end
 }
+
+vim.keymap.set("i", "<C-j>", "copilot#Accept(\"\")", {
+  expr = true,
+  replace_keycodes = false
+})
+vim.g.copilot_no_tab_map = true
