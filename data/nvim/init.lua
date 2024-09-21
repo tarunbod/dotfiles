@@ -80,7 +80,13 @@ vim.call("plug#", "hrsh7th/nvim-cmp")
 vim.call("plug#", "nvim-lualine/lualine.nvim")
 vim.call("plug#", "ThePrimeagen/harpoon")
 vim.call("plug#", "github/copilot.vim")
+vim.call("plug#", "HakonHarnes/img-clip.nvim")
+--vim.call("plug#", "zbirenbaum/copilot.lua")
 vim.call("plug#", "EdenEast/nightfox.nvim")
+vim.call("plug#", "ellisonleao/gruvbox.nvim")
+vim.call("plug#", "stevearc/dressing.nvim")
+vim.call("plug#", "MunifTanjim/nui.nvim")
+vim.call("plug#", "yetone/avante.nvim", { ["branch"] = "main", ["do"] = "make" })
 
 vim.call("plug#end")
 
@@ -94,7 +100,10 @@ vim.keymap.set("n", "<leader>u", harpoon_ui.nav_prev)
 vim.keymap.set("n", "<leader>i", harpoon_ui.nav_next)
 vim.keymap.set("n", "<leader>o", harpoon_ui.toggle_quick_menu)
 
-vim.cmd("colorscheme carbonfox")
+require("gruvbox").setup({
+  contrast = "hard",
+})
+vim.cmd("colorscheme gruvbox")
 
 require "lualine".setup {
   options = {
@@ -248,3 +257,17 @@ vim.keymap.set("i", "<C-j>", "copilot#Accept(\"\")", {
   replace_keycodes = false
 })
 vim.g.copilot_no_tab_map = true
+
+require("img-clip").setup({
+  default = {
+    embed_image_as_base64 = false,
+    prompt_for_file_name = false,
+    drag_and_drop = {
+      insert_mode = true,
+    },
+  },
+})
+require("avante_lib").load()
+require("avante").setup({
+  provider = "openai",
+})

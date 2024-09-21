@@ -28,7 +28,7 @@ alias reload='exec $SHELL -l'
 
 alias untar='tar -xvf'
 
-alias my-issues='git branch | grep "tb614"'
+alias k='kubectl'
 
 if [[ $OS == "macos" ]]; then
 	# Hide/show all desktop icons (useful when presenting)

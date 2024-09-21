@@ -35,3 +35,6 @@ fi
 
 # motd stuff
 fortune -s;
+
+# bun completions
+[ -s "/Users/tarunbod/.bun/_bun" ] && source "/Users/tarunbod/.bun/_bun"
