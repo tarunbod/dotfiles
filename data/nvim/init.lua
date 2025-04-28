@@ -2,9 +2,9 @@
 
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.hlsearch = false
@@ -12,16 +12,9 @@ vim.opt.hidden = true
 vim.opt.errorbells = false
 vim.opt.scrolloff = 8
 vim.opt.colorcolumn = "80"
+vim.opt.background = "dark"
 
-vim.cmd("autocmd Filetype json            setlocal ts=2 sw=2 sts=2 expandtab")
-vim.cmd("autocmd Filetype lua             setlocal ts=2 sw=2 sts=2 expandtab")
-vim.cmd("autocmd Filetype javascript      setlocal ts=2 sw=2 sts=2 expandtab")
-vim.cmd("autocmd Filetype javascriptreact setlocal ts=2 sw=2 sts=2 expandtab")
-vim.cmd("autocmd Filetype typescript      setlocal ts=2 sw=2 sts=2 expandtab")
-vim.cmd("autocmd Filetype typescriptreact setlocal ts=2 sw=2 sts=2 expandtab")
-vim.cmd("autocmd Filetype html            setlocal ts=2 sw=2 sts=2 expandtab")
-vim.cmd("autocmd Filetype css             setlocal ts=2 sw=2 sts=2 expandtab")
-vim.cmd("autocmd Filetype go              setlocal noexpandtab")
+vim.cmd("autocmd Filetype go setlocal ts=4 sw=4 sts=4 noexpandtab")
 
 local my_group = vim.api.nvim_create_augroup("tarunbod", {})
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
@@ -82,13 +75,29 @@ vim.call("plug#", "ThePrimeagen/harpoon")
 vim.call("plug#", "github/copilot.vim")
 vim.call("plug#", "HakonHarnes/img-clip.nvim")
 --vim.call("plug#", "zbirenbaum/copilot.lua")
-vim.call("plug#", "EdenEast/nightfox.nvim")
-vim.call("plug#", "ellisonleao/gruvbox.nvim")
+vim.call("plug#", "tiagovla/tokyodark.nvim")
 vim.call("plug#", "stevearc/dressing.nvim")
 vim.call("plug#", "MunifTanjim/nui.nvim")
 vim.call("plug#", "yetone/avante.nvim", { ["branch"] = "main", ["do"] = "make" })
 
 vim.call("plug#end")
+
+require("tokyodark").setup({
+  styles = {
+    comments = { italic = false },
+    keywords = { italic = false },
+    identifiers = { italic = false },
+    functions = {},
+    variables = {},
+  }
+})
+vim.cmd("colorscheme tokyodark")
+
+require("lualine").setup({
+  options = {
+    theme = "tokyodark"
+  }
+})
 
 local harpoon_mark = require("harpoon.mark")
 local harpoon_ui = require("harpoon.ui")
@@ -99,17 +108,6 @@ end)
 vim.keymap.set("n", "<leader>u", harpoon_ui.nav_prev)
 vim.keymap.set("n", "<leader>i", harpoon_ui.nav_next)
 vim.keymap.set("n", "<leader>o", harpoon_ui.toggle_quick_menu)
-
-require("gruvbox").setup({
-  contrast = "hard",
-})
-vim.cmd("colorscheme gruvbox")
-
-require "lualine".setup {
-  options = {
-    theme = "tokyonight"
-  }
-}
 
 local cmp = require("cmp")
 local luasnip = require("luasnip")
@@ -267,7 +265,10 @@ require("img-clip").setup({
     },
   },
 })
+
 require("avante_lib").load()
 require("avante").setup({
-  provider = "openai",
+  claude = {
+    model = "claude-3-7-sonnet-20250219",
+  }
 })
