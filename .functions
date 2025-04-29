@@ -1,58 +1,5 @@
-function calc() {
-	# local result="";
-	# result="$(printf "scale=10;$*\n" | bc --mathlib | tr -d '\\\n')";
-	# #                       └─ default (when `--mathlib` is used) is 20
-	# #
-	# if [[ "$result" == *.* ]]; then
-	# 	# improve the output for decimal numbers
-	# 	printf "$result" |
-	# 	sed -e 's/^\./0./'        `# add "0" for cases like ".5"` \
-	# 	    -e 's/^-\./-0./'      `# add "0" for cases like "-.5"`\
-	# 	    -e 's/0*$//;s/\.$//';  # remove trailing zeros
-	# else
-	# 	printf "$result";
-	# fi;
-	# printf "\n";
-        python3 -c "from math import *; print($*)"
-}
-
 function mkcd() {
 	mkdir -p "$@" && cd "$_";
-}
-
-function cdf() { # short for `cdfinder`
-	cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";
-}
-
-function fs() {
-	if du -b /dev/null > /dev/null 2>&1; then
-		local arg=-sbh;
-	else
-		local arg=-sh;
-	fi
-	if [[ -n "$@" ]]; then
-		du $arg -- "$@";
-	else
-		du $arg .[^.]* ./*;
-	fi;
-}
-
-# UTF-8-encode a string of Unicode symbols
-function uniencode() {
-    printf "\\\x%s" $(printf "$@" | xxd -p -c1 -u);
-    # print a newline unless we’re piping the output to another program
-    if [ -t 1 ]; then
-        echo ""; # newline
-    fi;
-}
-
-# Decode \x{ABCD}-style Unicode escape sequences
-function unidecode() {
-    perl -e "binmode(STDOUT, ':utf8'); print \"$@\"";
-    # print a newline unless we’re piping the output to another program
-    if [ -t 1 ]; then
-        echo ""; # newline
-    fi;
 }
 
 # `o` with no arguments opens the current directory, otherwise opens the given
@@ -70,7 +17,7 @@ function o() {
 # `less` with options to preserve color and line numbers, unless the output is
 # small enough for one screen.
 function tre() {
-	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+	tree -aC -I '.git|node_modules' --dirsfirst "$@" | less -FRNX;
 }
 
 # Function to add files, commit, and push (acp) to github
@@ -90,44 +37,4 @@ function alert() {
 	else
 		osascript -e "display notification \"$1\" with title \"Alert\""
 	fi
-}
-
-function repeat() {
-    if [[ $# -ne 2 ]]; then
-        echo "Usage: repeat \"string\" <number_of_times>"
-    else
-        python -c "print \"$1\" * int(\"$2\")"
-    fi
-}
-
-function highlight() {
-    grep --color -E "$1|$"
-}
-
-# create new tmux session, 
-# detach from the current and attach to new
-function tns() {
-    if [[ $# -eq 1 ]]; then
-        tmux new-session -d -s "$1"
-        tmux switch-client -t "$1"
-    else
-        echo "Usage: tns <new session name>"
-    fi
-}
-
-function tmswitch() {
-    if [[ $# -eq 1 ]]; then
-        tmux switch-client -t "$1"
-    else
-        tmux ls
-    fi
-}
-
-function git-newbranch() {
-    if [[ $# -ne 1 ]]; then
-        echo "Usage: git-newbranch <branch name>"
-    else
-        git checkout -b "$1"
-        git push -u origin "$1"
-    fi
 }

@@ -82,9 +82,3 @@ defaults write com.apple.dock show-process-indicators -bool true
 # Top left screen corner → Mission Control
 defaults write com.apple.dock wvous-tl-corner -int 2
 defaults write com.apple.dock wvous-tl-modifier -int 0
-
-# Prevent Photos.app from opening when devices are plugged in
-defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
-
-# Copy my terminal preferences
-open ~/dotfiles/data/Galaxy.terminal

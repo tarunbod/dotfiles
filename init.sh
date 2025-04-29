@@ -3,13 +3,16 @@ sudo -v
 
 # Symlink bash_profile, inputrc, and bashrc files into home directory
 ln -s ~/dotfiles/.{bash_profile,bashrc,zshrc,inputrc,gitconfig,tmux.conf} ~/
-ln -s ~/dotfiles/data/nvim ~/.config/nvim
 
-git clone https://github.com/tarunbod/ohmyzsh.git
+# neovim
+ln -s ~/dotfiles/nvim ~/.config/nvim
 
-# Setup custom scripts
+# nushell
+mkdir -p ~/.config/nushell
+ln -s ~/dotfiles/config.nu ~/.config/nushell/config.nu
+
+# create home bin dir
 mkdir ~/bin
-ln -s ~/dotfiles/scripts/{mpdlib.py,todo.py} ~/bin/
 
 # Source script to identify OS
 source ~/dotfiles/.os

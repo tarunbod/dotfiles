@@ -1,7 +1,6 @@
 [user]
 	email = tarunbod@gmail.com
 	name = Tarun Boddupalli
-	signingkey = 9D920C0C5DD1DF07
 [push]
 	default = simple
 	autoSetupRemote = true

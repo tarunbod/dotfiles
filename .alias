@@ -9,8 +9,6 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
 
 alias ip='ifconfig | grep inet'
 
@@ -18,9 +16,6 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias b='cd -' # go to last folder
-
-alias py='python'
-alias py3='python3'
 
 alias tma='tmux attach'
 alias takeover='tmux detach -a'
@@ -48,5 +43,8 @@ fi
 
 alias master='git checkout master'
 alias main='git checkout main'
+alias gc='git commit'
+alias gd='git diff'
+alias gs='git status'
 
 alias vim=nvim
