@@ -272,3 +272,26 @@ require("avante").setup({
     model = "claude-3-7-sonnet-20250219",
   }
 })
+
+local open_in_github = function()
+  local url = vim.fn.system("git remote get-url origin")
+  local branch = vim.fn.system("git rev-parse --abbrev-ref HEAD")
+  local line = vim.fn.line(".")
+  local column = vim.fn.col(".")
+  local file = vim.fn.expand("%")
+
+  local url = string.gsub(url, "git@", "https://")
+  local url = string.gsub(url, "github.com:", "github.com/")
+  local url = string.gsub(url, "%.git", "")
+  local url = string.gsub(url, "\n", "")
+  local branch = string.gsub(branch, "\n", "")
+  local url = url .. "/blob/" .. branch .. "/" .. file .. "#L" .. line
+  vim.fn.system("open \"" .. url .. "\"")
+end
+
+local open_in_github_safe = function()
+  if not pcall(open_in_github) then
+    print("Failed to open in github")
+  end
+end
+vim.keymap.set("n", "<leader>og", open_in_github_safe)
