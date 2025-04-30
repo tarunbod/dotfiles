@@ -70,10 +70,10 @@ case $TC in
         ;;
 esac
 
-G0=$(tmux_get @tmux_power_g0 "#262626")
+G0=$(tmux_get @tmux_power_g0 "#212234")
 G1=$(tmux_get @tmux_power_g1 "#303030")
-G2=$(tmux_get @tmux_power_g2 "#3a3a3a")
-G3=$(tmux_get @tmux_power_g3 "#444444")
+G2=$(tmux_get @tmux_power_g2 "#393a59")
+G3=$(tmux_get @tmux_power_g3 "#51527e")
 G4=$(tmux_get @tmux_power_g4 "#626262")
 
 # Status options
