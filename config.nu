@@ -20,7 +20,7 @@
 $env.config.show_banner = false
 $env.config.edit_mode = 'vi'
 
-alias la = ls -al
+alias ll = ls -al
 alias o = ^open
 alias tma = tmux attach
 alias k = kubectl
