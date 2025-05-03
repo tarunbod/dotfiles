@@ -1,0 +1,33 @@
+format = """
+$directory\
+[](fg:#212234 bg:#282a44)\
+$git_branch\
+$git_status\
+[](bg:#393a59 fg:#282a44)\
+$time\
+[](fg:#393a59)\
+\n$character"""
+
+[directory]
+style = "fg:#a0a8cd bg:#212234 bold"
+format = "[ $path ]($style)"
+truncate_to_repo = false
+truncation_length = 5
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+format = '[[ $symbol $branch ](fg:#a0a8cd bg:#282a44)]($style)'
+
+[git_status]
+format = '[[($all_status$ahead_behind )](fg:#ee6d85 bg:#393a59)]($style)'
+
+[time]
+disabled = false
+time_format = "%T"
+format = '[  $time ](fg:#a0a8cd bg:#393a59)'
+
+[character]
+format = '$symbol'
+success_symbol = '[\$](green)'
+error_symbol = '[\$](red)'
