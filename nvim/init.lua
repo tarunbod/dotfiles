@@ -75,27 +75,24 @@ vim.call("plug#", "ThePrimeagen/harpoon")
 vim.call("plug#", "github/copilot.vim")
 vim.call("plug#", "HakonHarnes/img-clip.nvim")
 --vim.call("plug#", "zbirenbaum/copilot.lua")
-vim.call("plug#", "tiagovla/tokyodark.nvim")
+vim.call("plug#", "rose-pine/neovim")
 vim.call("plug#", "stevearc/dressing.nvim")
 vim.call("plug#", "MunifTanjim/nui.nvim")
 vim.call("plug#", "yetone/avante.nvim", { ["branch"] = "main", ["do"] = "make" })
 
 vim.call("plug#end")
 
-require("tokyodark").setup({
+require("rose-pine").setup({
+  variant = "main",
   styles = {
-    comments = { italic = false },
-    keywords = { italic = false },
-    identifiers = { italic = false },
-    functions = {},
-    variables = {},
+    italic = false,
   }
 })
-vim.cmd("colorscheme tokyodark")
+vim.cmd("colorscheme rose-pine")
 
 require("lualine").setup({
   options = {
-    theme = "tokyodark"
+    theme = "rose-pine"
   }
 })
 
