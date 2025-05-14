@@ -16,7 +16,7 @@ alias ga = git add -A
 alias gc = git commit -m
 alias gp = git push
 
-def mkcd [ $dir_name: string ] {
+def --env mkcd [ $dir_name: string ] {
   mkdir $dir_name
   cd $dir_name
 }
