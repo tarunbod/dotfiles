@@ -205,26 +205,28 @@ require "nvim-treesitter.configs".setup {
 
 local ts_builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>t", ts_builtin.treesitter)
-local on_attach = function(client, bufnr)
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-  vim.keymap.set("n", "gr", ts_builtin.lsp_references, bufopts)
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set("n", "gh", vim.lsp.buf.hover, bufopts)
-  vim.keymap.set("n", "ge", vim.lsp.buf.rename, bufopts)
-  -- vim.keymap.set("i", "<C-o>", vim.lsp.omnifunc, bufopts)
-  vim.keymap.set("n", "<leader>d", vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set("n", "<leader>r", vim.lsp.buf.format, bufopts)
-  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set("n", "<leader>wl", function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(client, bufnr)
+    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+    vim.keymap.set("n", "gr", ts_builtin.lsp_references, bufopts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set("n", "gh", vim.lsp.buf.hover, bufopts)
+    vim.keymap.set("n", "ge", vim.lsp.buf.rename, bufopts)
+    -- vim.keymap.set("i", "<C-o>", vim.lsp.omnifunc, bufopts)
+    vim.keymap.set("n", "<leader>d", vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set("n", "<leader>r", vim.lsp.buf.format, bufopts)
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set("n", "<leader>wl", function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, bufopts)
 
-  vim.keymap.set("n", "<leader>n", vim.diagnostic.goto_next)
-  vim.keymap.set("n", "<leader>m", vim.diagnostic.goto_prev)
-end
+    vim.keymap.set("n", "<leader>n", vim.diagnostic.goto_next)
+    vim.keymap.set("n", "<leader>m", vim.diagnostic.goto_prev)
+  end
+})
 
 require("nvim-tree").setup {
   sync_root_with_cwd = true,
@@ -237,14 +239,8 @@ require("mason").setup()
 
 local mason_lspconfig = require("mason-lspconfig")
 mason_lspconfig.setup {
-  ensure_installed = { "rust_analyzer", "gopls" }
-}
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require("lspconfig")[server_name].setup {
-      on_attach = on_attach
-    }
-  end
+  ensure_installed = { "rust_analyzer", "gopls" },
+  autosetup_enabled = true
 }
 
 vim.keymap.set("i", "<C-j>", "copilot#Accept(\"\")", {
@@ -265,8 +261,10 @@ require("img-clip").setup({
 
 require("avante_lib").load()
 require("avante").setup({
-  claude = {
-    model = "claude-3-7-sonnet-20250219",
+  providers = {
+    claude = {
+      model = "claude-sonnet-4-20250514",
+    }
   }
 })
 
