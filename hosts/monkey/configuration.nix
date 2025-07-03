@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, unstable, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -14,14 +14,12 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_testing;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
   };
-
-  # hardware.amdgpu.opencl.enable = true;
 
   systemd.sleep.extraConfig = ''
     AllowSuspend=no
@@ -126,11 +124,15 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    linuxKernel.packages.linux_zen.nct6687d
+
     git
+    git-lfs
     ghostty
     nushell
     neovim
     fortune
+    ffmpeg
     wget
     tmux
     starship
@@ -142,17 +144,23 @@
     delta
     carapace
     killall
+    lm_sensors
+    uni-sync
+    ripgrep
 
     discord
     google-chrome
     prismlauncher
+    spotify
 
-    unstable.goose-cli
-    unstable.rocmPackages.rocminfo
-    (unstable.callPackage ./ollama.nix {
-      acceleration = "rocm";
-    })
+    goose-cli
+    # rocmPackages.rocminfo
+    # (callPackage ./ollama.nix {
+    #   acceleration = "rocm";
+    # })
   ];
+
+  virtualisation.multipass.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
