@@ -3,6 +3,7 @@ $env.config.show_banner = false
 $env.config.edit_mode = 'vi'
 
 # aliases
+alias l = ls
 alias ll = ls -al
 alias o = ^open
 alias tma = tmux attach
@@ -34,6 +35,8 @@ $env.CARAPACE_BRIDGES = 'zsh,bash'
 mkdir ~/.cache/carapace
 carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
 source ~/.cache/carapace/init.nu
+
+$env.BAT_THEME = "base16"
 
 # fortune on shell start
 if $nu.is-interactive {
