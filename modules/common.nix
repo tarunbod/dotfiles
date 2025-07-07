@@ -69,7 +69,7 @@ in
       age = {
         secrets.github_token = {
           file = ../secrets/secrets.age;
-          path = "${homeDir}/.secrets";
+          path = "${homeDir}/.secrets.json";
         };
       };
     };
