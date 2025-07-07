@@ -48,10 +48,6 @@ in
 
   users.users.tarunbod.home = homeDir;
 
-  age = {
-    secrets.github_token.file = ../secrets/github_token.age;
-  };
-
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -62,14 +58,19 @@ in
       agenix.homeManagerModules.default
     ];
 
-    users.tarunbod.home = {
-      username = "tarunbod";
-      homeDirectory = homeDir;
-      stateVersion = "25.05";
+    users.tarunbod = {
+      home = {
+        username = "tarunbod";
+        homeDirectory = homeDir;
+        stateVersion = "25.05";
+      };
 
-      # file.".github_token" = {
-      #   source = config.age.secrets.github_token.path;
-      # };
+      age = {
+        secrets.github_token = {
+          file = ../secrets/github_token.age;
+          path = "${homeDir}/.github_token";
+        };
+      };
     };
   };
 }
