@@ -46,8 +46,9 @@ in
     agenix.packages.${system}.default
   ];
 
-  users.users.tarunbod.home = homeDir;
+  age.identityPaths = ["${homeDir}/.ssh/id_ed25519"];
 
+  users.users.tarunbod.home = homeDir;
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -67,8 +68,8 @@ in
 
       age = {
         secrets.github_token = {
-          file = ../secrets/github_token.age;
-          path = "${homeDir}/.github_token";
+          file = ../secrets/secrets.age;
+          path = "${homeDir}/.secrets";
         };
       };
     };
