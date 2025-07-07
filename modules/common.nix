@@ -25,6 +25,7 @@ in
     pkgs.gcc
     pkgs.git-lfs
     (if isDarwin then pkgs.ghostty-bin else pkgs.ghostty)
+    pkgs.jq
     pkgs.kubectl
     # pkgs.libgcc
     pkgs.neofetch
