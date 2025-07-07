@@ -30,9 +30,10 @@
     ...
   }@inputs: {
     nixosConfigurations = {
-      monkey = nixpkgs.lib.nixosSystem {
+      monkey = nixpkgs.lib.nixosSystem (rec {
         system = "x86_64-linux";
         specialArgs = {
+          system = system;
           agenix = agenix;
         };
 
@@ -57,12 +58,14 @@
           home-manager.nixosModules.home-manager
           agenix.nixosModules.default
         ];
-      };
+      });
     };
 
     darwinConfigurations = {
-      TMBP = nix-darwin.lib.darwinSystem {
+      TMBP = nix-darwin.lib.darwinSystem (rec {
+        system = "aarch64-darwin";
         specialArgs = {
+          system = system;
           agenix = agenix;
         };
 
@@ -74,7 +77,7 @@
           home-manager.darwinModules.home-manager
           agenix.darwinModules.default
         ];
-      };
+      });
     };
   };
 }

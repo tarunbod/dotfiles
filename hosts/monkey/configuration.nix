@@ -63,15 +63,19 @@
 
   environment.systemPackages = [
     pkgs.linuxKernel.packages.linux_zen.nct6687d
+    pkgs.git
     pkgs.lm_sensors
     pkgs.prismlauncher
     pkgs.ripgrep
     pkgs.uni-sync
   ];
 
+  services.tailscale.enable = true;
+
   virtualisation.multipass.enable = true;
 
   services.openssh.enable = true;
+  programs.ssh.startAgent = true;
 
   networking.firewall.enable = false;
 

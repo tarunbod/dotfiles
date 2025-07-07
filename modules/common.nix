@@ -1,8 +1,8 @@
-{ pkgs, config, agenix, ... }:
+{ pkgs, config, system, agenix, ... }:
 
 let
  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
- homeDir = if isDarwin then /Users/tarunbod else /home/tarunbod;
+ homeDir = if isDarwin then "/Users/tarunbod" else "/home/tarunbod";
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -10,6 +10,7 @@ in
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   environment.systemPackages = [
+    pkgs.age
     pkgs.bat
     pkgs.bitwarden-desktop
     pkgs.btop
@@ -35,14 +36,14 @@ in
     pkgs.nushellPlugins.formats
     pkgs.nushellPlugins.formats
 
-    pkgs.rage
-    pkgs.ragenix
     pkgs.ripgrep
     pkgs.spotify
     pkgs.starship
     pkgs.tmux
     pkgs.wget
     pkgs.yt-dlp
+
+    agenix.packages.${system}.default
   ];
 
   users.users.tarunbod.home = homeDir;

@@ -10,7 +10,7 @@
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" "amdgpu" ];
-  boot.kernelModules = [ "kvm-amd" "i2c-dev" "nct6687" ];
+  boot.kernelModules = [ "kvm-amd" "i2c-dev" "nct6687d" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ nct6687d ];
 
   fileSystems."/" =
