@@ -7,7 +7,11 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.inputs.darwin.follows = "nix-darwin";
+
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     fenix = {
@@ -16,10 +20,21 @@
     };
   };
 
-  outputs = { self, nixpkgs, nix-darwin, fenix, home-manager, ... }@inputs: {
+  outputs = {
+    self,
+    nixpkgs,
+    nix-darwin,
+    agenix,
+    home-manager,
+    fenix,
+    ...
+  }@inputs: {
     nixosConfigurations = {
       monkey = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = {
+          agenix = agenix;
+        };
 
         modules = [
           ./modules/common.nix
@@ -40,18 +55,24 @@
           })
 
           home-manager.nixosModules.home-manager
+          agenix.nixosModules.default
         ];
       };
     };
 
     darwinConfigurations = {
       TMBP = nix-darwin.lib.darwinSystem {
+        specialArgs = {
+          agenix = agenix;
+        };
+
         modules = [
           ./modules/common.nix
           ./modules/common-darwin.nix
           ./hosts/TMBP/configuration.nix
 
           home-manager.darwinModules.home-manager
+          agenix.darwinModules.default
         ];
       };
     };

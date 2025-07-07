@@ -58,26 +58,8 @@
     isNormalUser = true;
     description = "Tarun";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
   };
   users.defaultUserShell = pkgs.nushell;
-
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-
-    backupFileExtension = "backup";
-
-    users.tarunbod = {
-      home.username = "tarunbod";
-      home.homeDirectory = "/home/tarunbod";
-
-      home.stateVersion = "25.05";
-    };
-  };
-
 
   environment.systemPackages = [
     pkgs.linuxKernel.packages.linux_zen.nct6687d
