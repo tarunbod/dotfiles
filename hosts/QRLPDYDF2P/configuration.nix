@@ -6,7 +6,7 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   environment.systemPackages = [
-    pkgs.discord
     pkgs.ipatool
   ];
 }
+

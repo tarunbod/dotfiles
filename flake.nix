@@ -78,6 +78,23 @@
           agenix.darwinModules.default
         ];
       });
+
+      QRLPDYDF2P = nix-darwin.lib.darwinSystem (rec {
+        system = "aarch64-darwin";
+        specialArgs = {
+          system = system;
+          agenix = agenix;
+        };
+
+        modules = [
+          ./modules/common.nix
+          ./modules/common-darwin.nix
+          ./hosts/QRLPDYDF2P/configuration.nix
+
+          home-manager.darwinModules.home-manager
+          agenix.darwinModules.default
+        ];
+      });
     };
   };
 }

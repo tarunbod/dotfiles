@@ -16,13 +16,13 @@ in
     pkgs.btop
     pkgs.carapace
     pkgs.delta
-    pkgs.discord
     pkgs.fortune
     pkgs.ffmpeg
     pkgs.go
     pkgs.google-chrome
     pkgs.goose-cli
     pkgs.gcc
+    pkgs.gh
     pkgs.git-lfs
     (if isDarwin then pkgs.ghostty-bin else pkgs.ghostty)
     pkgs.jq
@@ -37,6 +37,7 @@ in
     pkgs.nushellPlugins.formats
     pkgs.nushellPlugins.formats
 
+    pkgs.opencode
     pkgs.ripgrep
     pkgs.spotify
     pkgs.starship
