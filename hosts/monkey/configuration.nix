@@ -63,8 +63,9 @@
 
   environment.systemPackages = [
     pkgs.linuxKernel.packages.linux_zen.nct6687d
-    pkgs.git
     pkgs.discord
+    pkgs.ghostty
+    pkgs.git
     pkgs.lm_sensors
     pkgs.prismlauncher
     pkgs.ripgrep

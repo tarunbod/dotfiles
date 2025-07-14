@@ -39,6 +39,7 @@
 
         modules = [
           ./modules/common.nix
+          ./modules/common-linux.nix
           ./hosts/monkey/configuration.nix
 
           ({ pkgs, ... }: {

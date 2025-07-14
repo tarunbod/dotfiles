@@ -24,7 +24,6 @@ in
     pkgs.gcc
     pkgs.gh
     pkgs.git-lfs
-    (if isDarwin then pkgs.ghostty-bin else pkgs.ghostty)
     pkgs.jq
     pkgs.kubectl
     # pkgs.libgcc
@@ -35,9 +34,7 @@ in
     pkgs.nushellPlugins.polars
     pkgs.nushellPlugins.query
     pkgs.nushellPlugins.formats
-    pkgs.nushellPlugins.formats
 
-    pkgs.opencode
     pkgs.ripgrep
     pkgs.spotify
     pkgs.starship
@@ -47,8 +44,6 @@ in
 
     agenix.packages.${system}.default
   ];
-
-  age.identityPaths = ["${homeDir}/.ssh/id_ed25519"];
 
   users.users.tarunbod.home = homeDir;
   home-manager = {
@@ -66,6 +61,13 @@ in
         username = "tarunbod";
         homeDirectory = homeDir;
         stateVersion = "25.05";
+
+        file = {
+          bashrc = {
+            source = ../.bashrc;
+            target = ".bashrc";
+          };
+        };
       };
 
       age = {

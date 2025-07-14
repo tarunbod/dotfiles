@@ -22,6 +22,8 @@ def --env mkcd [ $dir_name: string ] {
   cd $dir_name
 }
 
+load-env (open ~/.secrets.json)
+
 # extras
 const extra_config_path = "~/extra.nu"
 source (if ($extra_config_path | path exists) { $extra_config_path } else { null })
