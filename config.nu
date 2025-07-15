@@ -22,7 +22,9 @@ def --env mkcd [ $dir_name: string ] {
   cd $dir_name
 }
 
-load-env (open ~/.secrets.json)
+if ('~/.secrets.json' | path exists) {
+  load-env (open ~/.secrets.json)
+}
 
 # extras
 const extra_config_path = "~/extra.nu"

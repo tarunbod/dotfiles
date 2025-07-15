@@ -2,6 +2,7 @@
 
 {
   environment.systemPackages = [
+    pkgs.gcc
     pkgs.opencode
   ];
 }

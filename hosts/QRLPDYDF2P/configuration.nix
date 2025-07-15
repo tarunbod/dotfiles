@@ -6,7 +6,12 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   environment.systemPackages = [
-    pkgs.ipatool
+    pkgs.kind
+    pkgs.k9s
+  ];
+
+  homebrew.casks = [
+    "orbstack"
   ];
 }
 

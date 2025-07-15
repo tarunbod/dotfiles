@@ -21,7 +21,6 @@ in
     pkgs.go
     pkgs.google-chrome
     pkgs.goose-cli
-    pkgs.gcc
     pkgs.gh
     pkgs.git-lfs
     pkgs.jq
