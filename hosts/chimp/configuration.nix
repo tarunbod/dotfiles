@@ -36,6 +36,8 @@ in
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  programs.nix-ld.enable = true;
+
   users.users.tarunbod = {
     isNormalUser = true;
     description = "Tarun";
@@ -139,7 +141,6 @@ in
     settings = {
       base-url = "https://ntfy.burritogaming.com";
       listen-http = ":2586";
-      auth-file = "/var/lib/ntfy-sh/user.db";
       auth-default-access = "deny-all";
       behind-proxy = true;
       upstream-base-url = "https://ntfy.sh";
