@@ -66,9 +66,11 @@
     pkgs.discord
     pkgs.ghostty
     pkgs.git
+    pkgs.google-chrome
     pkgs.lm_sensors
     pkgs.prismlauncher
     pkgs.ripgrep
+    pkgs.spotify
     pkgs.uni-sync
   ];
 

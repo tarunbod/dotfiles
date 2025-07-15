@@ -12,20 +12,16 @@ in
   environment.systemPackages = [
     pkgs.age
     pkgs.bat
-    pkgs.bitwarden-desktop
     pkgs.btop
     pkgs.carapace
     pkgs.delta
     pkgs.fortune
     pkgs.ffmpeg
     pkgs.go
-    pkgs.google-chrome
-    pkgs.goose-cli
     pkgs.gh
     pkgs.git-lfs
     pkgs.jq
     pkgs.kubectl
-    # pkgs.libgcc
     pkgs.neofetch
     pkgs.neovim
 
@@ -35,7 +31,6 @@ in
     pkgs.nushellPlugins.formats
 
     pkgs.ripgrep
-    pkgs.spotify
     pkgs.starship
     pkgs.tmux
     pkgs.wget
@@ -70,7 +65,7 @@ in
       };
 
       age = {
-        secrets.github_token = {
+        secrets.secrets_json = {
           file = ../secrets/secrets.age;
           path = "${homeDir}/.secrets.json";
         };

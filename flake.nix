@@ -60,6 +60,23 @@
           agenix.nixosModules.default
         ];
       });
+
+      chimp = nixpkgs.lib.nixosSystem (rec {
+        system = "aarch64-linux";
+        specialArgs = {
+          system = system;
+          agenix = agenix;
+        };
+
+        modules = [
+          # ./modules/common.nix
+          # ./modules/common-linux.nix
+          ./hosts/chimp/configuration.nix
+
+          home-manager.nixosModules.home-manager
+          agenix.nixosModules.default
+        ];
+      });
     };
 
     darwinConfigurations = {

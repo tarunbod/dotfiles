@@ -8,6 +8,7 @@
   environment.systemPackages = [
     pkgs.kind
     pkgs.k9s
+    pkgs.google-chrome
   ];
 
   homebrew.casks = [
