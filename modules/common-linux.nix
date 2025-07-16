@@ -5,4 +5,6 @@
     pkgs.gcc
     pkgs.opencode
   ];
+
+  programs.nix-ld.enable = true;
 }

@@ -33,6 +33,7 @@ in
     pkgs.ripgrep
     pkgs.starship
     pkgs.tmux
+    pkgs.uv
     pkgs.wget
     pkgs.yt-dlp
 

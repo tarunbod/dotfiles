@@ -237,11 +237,10 @@ require("nvim-tree").setup {
 
 require("mason").setup()
 
-local mason_lspconfig = require("mason-lspconfig")
-mason_lspconfig.setup {
+require("mason-lspconfig").setup({
   ensure_installed = { "rust_analyzer", "gopls" },
-  autosetup_enabled = true
-}
+  automatic_enable = true,
+})
 
 vim.keymap.set("i", "<C-j>", "copilot#Accept(\"\")", {
   expr = true,

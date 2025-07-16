@@ -63,16 +63,20 @@
 
   environment.systemPackages = [
     pkgs.linuxKernel.packages.linux_zen.nct6687d
+    pkgs.awscli2
     pkgs.discord
     pkgs.ghostty
     pkgs.git
     pkgs.google-chrome
     pkgs.lm_sensors
-    pkgs.prismlauncher
-    pkgs.ripgrep
+    pkgs.nodejs_24
+    pkgs.pnpm_9
     pkgs.spotify
     pkgs.uni-sync
   ];
+
+  nixpkgs.config.rocmSupport = true;
+  services.ollama.enable = true;
 
   services.tailscale.enable = true;
 

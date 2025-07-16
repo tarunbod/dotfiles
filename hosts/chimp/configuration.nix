@@ -36,8 +36,6 @@ in
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  programs.nix-ld.enable = true;
-
   users.users.tarunbod = {
     isNormalUser = true;
     description = "Tarun";
