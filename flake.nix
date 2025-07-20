@@ -40,6 +40,7 @@
         modules = [
           ./modules/common.nix
           ./modules/common-linux.nix
+          ./modules/lsp.nix
           ./hosts/monkey/configuration.nix
 
           ({ pkgs, ... }: {
@@ -90,6 +91,7 @@
         modules = [
           ./modules/common.nix
           ./modules/common-darwin.nix
+          ./modules/lsp.nix
           ./hosts/TMBP/configuration.nix
 
           home-manager.darwinModules.home-manager
@@ -107,6 +109,7 @@
         modules = [
           ./modules/common.nix
           ./modules/common-darwin.nix
+          ./modules/lsp.nix
           ./hosts/QRLPDYDF2P/configuration.nix
 
           home-manager.darwinModules.home-manager

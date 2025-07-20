@@ -14,7 +14,7 @@ vim.opt.scrolloff = 8
 vim.opt.colorcolumn = "80"
 vim.opt.background = "dark"
 
-vim.cmd("autocmd Filetype go setlocal ts=4 sw=4 sts=4 noexpandtab")
+vim.cmd("autocmd Filetype go setlocal noexpandtab")
 
 local my_group = vim.api.nvim_create_augroup("tarunbod", {})
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
@@ -35,21 +35,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- Keybinds
-
-vim.g.mapleader = " "
-
-vim.keymap.set("n", "<leader>p", "<cmd>Telescope find_files<cr>")
-vim.keymap.set("n", "<leader>s", "<cmd>Telescope git_status<cr>")
-vim.keymap.set("n", "<leader>b", "<cmd>Telescope buffers<cr>")
-vim.keymap.set("n", "<leader>f", "<cmd>Telescope live_grep<cr>")
-vim.keymap.set("n", "<leader>g", "<cmd>NvimTreeToggle<cr>")
-vim.keymap.set("n", "<C-w>", "<cmd>bdelete<cr>")
-vim.keymap.set("n", "<leader>h", "<cmd>wincmd h<cr>")
-vim.keymap.set("n", "<leader>j", "<cmd>wincmd j<cr>")
-vim.keymap.set("n", "<leader>k", "<cmd>wincmd k<cr>")
-vim.keymap.set("n", "<leader>l", "<cmd>wincmd l<cr>")
-
 -- Plugins
 
 vim.call("plug#begin")
@@ -59,8 +44,8 @@ vim.call("plug#", "nvim-lua/plenary.nvim")
 vim.call("plug#", "nvim-telescope/telescope.nvim", { ["tag"] = "0.1.8" })
 vim.call("plug#", "nvim-tree/nvim-web-devicons")
 vim.call("plug#", "nvim-tree/nvim-tree.lua")
-vim.call("plug#", "williamboman/mason.nvim")
-vim.call("plug#", "williamboman/mason-lspconfig.nvim")
+vim.call("plug#", "mason-org/mason.nvim")
+vim.call("plug#", "mason-org/mason-lspconfig.nvim")
 vim.call("plug#", "neovim/nvim-lspconfig")
 vim.call("plug#", "rafamadriz/friendly-snippets")
 vim.call("plug#", "L3MON4D3/LuaSnip", { ["tag"] = "v2.*", ["do"] = "make install_jsregexp" })
@@ -96,16 +81,6 @@ require("lualine").setup({
   }
 })
 
-local harpoon_mark = require("harpoon.mark")
-local harpoon_ui = require("harpoon.ui")
-vim.keymap.set("n", "<leader>y", function()
-  harpoon_mark.add_file()
-  print("Added " .. vim.fn.expand("%") .. " to harpoon marks")
-end)
-vim.keymap.set("n", "<leader>u", harpoon_ui.nav_prev)
-vim.keymap.set("n", "<leader>i", harpoon_ui.nav_next)
-vim.keymap.set("n", "<leader>o", harpoon_ui.toggle_quick_menu)
-
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -126,7 +101,7 @@ cmp.setup({
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-o>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.abort(),
-    ["<CR>"] = cmp.mapping(function(fallback)
+    ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
             if luasnip.expandable() then
                 luasnip.expand()
@@ -139,26 +114,6 @@ cmp.setup({
             fallback()
         end
     end),
-
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.locally_jumpable(1) then
-        luasnip.jump(1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
   }),
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
@@ -197,14 +152,61 @@ vim.diagnostic.config({
   },
 })
 
-require "nvim-treesitter.configs".setup {
+require "nvim-treesitter.configs".setup({
   highlight = {
     enable = true
   }
-}
+})
 
+require("nvim-tree").setup({
+  sync_root_with_cwd = true,
+  view = {
+    side = "right"
+  }
+})
+
+lspconfig = require("lspconfig")
+lspconfig.gopls.setup({})
+lspconfig.ruff.setup({})
+lspconfig.rust_analyzer.setup({})
+lspconfig.ts_ls.setup({})
+
+require("img-clip").setup({
+  default = {
+    embed_image_as_base64 = false,
+    prompt_for_file_name = false,
+    drag_and_drop = {
+      insert_mode = true,
+    },
+  },
+})
+
+require("avante_lib").load()
+require("avante").setup({
+  providers = {
+    claude = {
+      model = "claude-sonnet-4-20250514",
+    }
+  }
+})
+
+-- Keybinds
+
+vim.g.mapleader = " "
+
+vim.keymap.set("n", "<leader>p", "<cmd>Telescope find_files<cr>")
+vim.keymap.set("n", "<leader>s", "<cmd>Telescope git_status<cr>")
+vim.keymap.set("n", "<leader>b", "<cmd>Telescope buffers<cr>")
+vim.keymap.set("n", "<leader>f", "<cmd>Telescope live_grep<cr>")
+vim.keymap.set("n", "<leader>g", "<cmd>NvimTreeToggle<cr>")
 local ts_builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>t", ts_builtin.treesitter)
+vim.keymap.set("n", "<C-w>", "<cmd>bdelete<cr>")
+vim.keymap.set("n", "<leader>h", "<cmd>wincmd h<cr>")
+vim.keymap.set("n", "<leader>j", "<cmd>wincmd j<cr>")
+vim.keymap.set("n", "<leader>k", "<cmd>wincmd k<cr>")
+vim.keymap.set("n", "<leader>l", "<cmd>wincmd l<cr>")
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(client, bufnr)
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
@@ -228,44 +230,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
-require("nvim-tree").setup {
-  sync_root_with_cwd = true,
-  view = {
-    side = "right"
-  }
-}
-
-require("mason").setup()
-
-require("mason-lspconfig").setup({
-  ensure_installed = { "rust_analyzer", "gopls" },
-  automatic_enable = true,
-})
-
 vim.keymap.set("i", "<C-j>", "copilot#Accept(\"\")", {
   expr = true,
   replace_keycodes = false
 })
 vim.g.copilot_no_tab_map = true
 
-require("img-clip").setup({
-  default = {
-    embed_image_as_base64 = false,
-    prompt_for_file_name = false,
-    drag_and_drop = {
-      insert_mode = true,
-    },
-  },
-})
-
-require("avante_lib").load()
-require("avante").setup({
-  providers = {
-    claude = {
-      model = "claude-sonnet-4-20250514",
-    }
-  }
-})
+local harpoon_mark = require("harpoon.mark")
+local harpoon_ui = require("harpoon.ui")
+vim.keymap.set("n", "<leader>y", function()
+  harpoon_mark.add_file()
+  print("Added " .. vim.fn.expand("%") .. " to harpoon marks")
+end)
+vim.keymap.set("n", "<leader>u", harpoon_ui.nav_prev)
+vim.keymap.set("n", "<leader>i", harpoon_ui.nav_next)
+vim.keymap.set("n", "<leader>o", harpoon_ui.toggle_quick_menu)
 
 local open_in_github = function()
   local url = vim.fn.system("git remote get-url origin")

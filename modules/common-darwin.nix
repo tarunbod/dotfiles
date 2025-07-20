@@ -20,5 +20,7 @@
 
   system.defaults.dock.autohide = true;
   system.defaults.dock.autohide-delay = 0.1;
+
+  security.pam.services.sudo_local.enable = true;
 }
 
