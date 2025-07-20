@@ -15,62 +15,63 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, nix-darwin, agenix, home-manager, ... }:
+  outputs =
+    {
+      nixpkgs,
+      nix-darwin,
+      agenix,
+      home-manager,
+      ...
+    }:
     let
-      buildSystem = (builder: system: extraModules: builder {
-        inherit system;
-        specialArgs = { inherit agenix; };
-        modules = [
-          ./modules/common.nix
-        ] ++ extraModules;
-      });
-
-      linuxSystem = (system: extraModules: buildSystem
-        (nixpkgs.lib.nixosSystem)
-        system
-        (
-          [
-            ./modules/common-linux.nix
-            home-manager.nixosModules.home-manager
-            agenix.nixosModules.default
-          ] ++ extraModules
-        )
-      );
-
-      darwinSystem = (extraModules: buildSystem
-        (nix-darwin.lib.darwinSystem)
-        "aarch64-darwin"
-        (
-          [
-            ./modules/common-darwin.nix
-            home-manager.darwinModules.home-manager
-            agenix.darwinModules.default
-          ] ++ extraModules
-        )
-      );
+      buildSystem =
+        system: extraModules:
+        let
+          isDarwin = nixpkgs.lib.strings.hasInfix "darwin" system;
+          defaultModules =
+            if isDarwin then
+              [
+                ./modules/common-darwin.nix
+                home-manager.darwinModules.home-manager
+                agenix.darwinModules.default
+              ]
+            else
+              [
+                ./modules/common-linux.nix
+                home-manager.nixosModules.home-manager
+                agenix.nixosModules.default
+              ];
+          builder = if isDarwin then nix-darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
+        in
+        builder {
+          inherit system;
+          specialArgs = { inherit agenix; };
+          modules = [ ./modules/common.nix ] ++ defaultModules ++ extraModules;
+        };
+      darwinSystem = buildSystem "aarch64-darwin";
     in
     {
       nixosConfigurations = {
-        monkey = linuxSystem "x86_64-linux" ([
+        monkey = buildSystem "x86_64-linux" [
           ./modules/lsp.nix
           ./hosts/monkey/configuration.nix
-        ]);
+        ];
 
-        chimp = linuxSystem "aarch64-linux" ([
+        chimp = buildSystem "aarch64-linux" [
           ./hosts/chimp/configuration.nix
-        ]);
+        ];
       };
 
       darwinConfigurations = {
-        TMBP = darwinSystem ([
+        TMBP = darwinSystem [
           ./modules/lsp.nix
           ./hosts/TMBP/configuration.nix
-        ]);
+        ];
 
-        QRLPDYDF2P = darwinSystem ([
+        QRLPDYDF2P = darwinSystem [
           ./modules/lsp.nix
           ./hosts/QRLPDYDF2P/configuration.nix
-        ]);
+        ];
       };
     };
 }

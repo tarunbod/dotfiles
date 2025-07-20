@@ -170,6 +170,7 @@ lspconfig.gopls.setup({})
 lspconfig.ruff.setup({})
 lspconfig.rust_analyzer.setup({})
 lspconfig.ts_ls.setup({})
+lspconfig.nil_ls.setup({})
 
 require("img-clip").setup({
   default = {
