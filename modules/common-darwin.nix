@@ -22,5 +22,6 @@
   system.defaults.dock.autohide-delay = 0.1;
 
   security.pam.services.sudo_local.enable = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 }
 

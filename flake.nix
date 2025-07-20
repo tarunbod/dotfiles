@@ -17,33 +17,37 @@
 
   outputs = { nixpkgs, nix-darwin, agenix, home-manager, ... }:
     let
-      linuxSystem = (system: extraModules: nixpkgs.lib.nixosSystem (rec {
+      buildSystem = (builder: system: extraModules: builder {
         inherit system;
-        specialArgs = {
-          agenix = agenix;
-        };
-
+        specialArgs = { inherit agenix; };
         modules = [
           ./modules/common.nix
-          ./modules/common-linux.nix
-          home-manager.nixosModules.home-manager
-          agenix.nixosModules.default
         ] ++ extraModules;
-      }));
+      });
 
-      darwinSystem = (extraModules: nix-darwin.lib.darwinSystem (rec {
-        system = "aarch64-darwin";
-        specialArgs = {
-          agenix = agenix;
-        };
+      linuxSystem = (system: extraModules: buildSystem
+        (nixpkgs.lib.nixosSystem)
+        system
+        (
+          [
+            ./modules/common-linux.nix
+            home-manager.nixosModules.home-manager
+            agenix.nixosModules.default
+          ] ++ extraModules
+        )
+      );
 
-        modules = [
-          ./modules/common.nix
-          ./modules/common-darwin.nix
-          home-manager.darwinModules.home-manager
-          agenix.darwinModules.default
-        ] ++ extraModules;
-      }));
+      darwinSystem = (extraModules: buildSystem
+        (nix-darwin.lib.darwinSystem)
+        "aarch64-darwin"
+        (
+          [
+            ./modules/common-darwin.nix
+            home-manager.darwinModules.home-manager
+            agenix.darwinModules.default
+          ] ++ extraModules
+        )
+      );
     in
     {
       nixosConfigurations = {
