@@ -5,5 +5,6 @@
     pkgs.gopls
     pkgs.typescript-language-server
     pkgs.ruff
+    pkgs.nil
   ];
 }

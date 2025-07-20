@@ -53,20 +53,7 @@ in
   system.stateVersion = "25.11";
 
   environment.systemPackages = [
-    pkgs.age
-    pkgs.bat
-    pkgs.btop
-    pkgs.carapace
-    pkgs.delta
-    pkgs.fortune
-    pkgs.ffmpeg
-    pkgs.go
-    pkgs.gh
     pkgs.git
-    pkgs.git-lfs
-    pkgs.jq
-    pkgs.neofetch
-    pkgs.neovim
 
     pkgs.nushell
     pkgs.nushellPlugins.polars
@@ -80,40 +67,6 @@ in
 
     agenix.packages.${system}.default
   ];
-
-  users.users.tarunbod.home = homeDir;
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-
-    backupFileExtension = "backup";
-
-    sharedModules = [
-      agenix.homeManagerModules.default
-    ];
-
-    users.tarunbod = {
-      home = {
-        username = "tarunbod";
-        homeDirectory = homeDir;
-        stateVersion = "25.05";
-
-        file = {
-          bashrc = {
-            source = ../../.bashrc;
-            target = ".bashrc";
-          };
-        };
-      };
-
-      age = {
-        secrets.secrets_json = {
-          file = ../../secrets/secrets.age;
-          path = "${homeDir}/.secrets.json";
-        };
-      };
-    };
-  };
 
   services.caddy = {
     enable = true;

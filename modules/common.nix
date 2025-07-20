@@ -1,4 +1,4 @@
-{ pkgs, config, system, agenix, ... }:
+{ pkgs, agenix, ... }:
 
 let
  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
@@ -33,11 +33,9 @@ in
     pkgs.ripgrep
     pkgs.starship
     pkgs.tmux
-    pkgs.uv
     pkgs.wget
-    pkgs.yt-dlp
 
-    agenix.packages.${system}.default
+    agenix.packages.${pkgs.system}.default
   ];
 
   users.users.tarunbod.home = homeDir;

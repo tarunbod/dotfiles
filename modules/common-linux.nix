@@ -1,10 +1,5 @@
-{ pkgs, config, system, agenix, ... }:
+{ pkgs, ... }:
 
 {
-  environment.systemPackages = [
-    pkgs.gcc
-    pkgs.opencode
-  ];
-
   programs.nix-ld.enable = true;
 }

@@ -65,6 +65,7 @@
     pkgs.linuxKernel.packages.linux_zen.nct6687d
     pkgs.awscli2
     pkgs.discord
+    pkgs.gcc
     pkgs.ghostty
     pkgs.git
     pkgs.google-chrome
@@ -73,6 +74,8 @@
     pkgs.pnpm_9
     pkgs.spotify
     pkgs.uni-sync
+    pkgs.uv
+    pkgs.yt-dlp
   ];
 
   nixpkgs.config.rocmSupport = true;

@@ -10,5 +10,7 @@
     pkgs.discord
     pkgs.ipatool
     pkgs.spotify
+    pkgs.uv
+    pkgs.yt-dlp
   ];
 }
