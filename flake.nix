@@ -53,7 +53,7 @@
     {
       nixosConfigurations = {
         monkey = buildSystem "x86_64-linux" [
-          ./modules/lsp.nix
+          ./modules/languages.nix
           ./hosts/monkey/configuration.nix
         ];
 
@@ -64,12 +64,12 @@
 
       darwinConfigurations = {
         TMBP = darwinSystem [
-          ./modules/lsp.nix
+          ./modules/languages.nix
           ./hosts/TMBP/configuration.nix
         ];
 
         QRLPDYDF2P = darwinSystem [
-          ./modules/lsp.nix
+          ./modules/languages.nix
           ./hosts/QRLPDYDF2P/configuration.nix
         ];
       };

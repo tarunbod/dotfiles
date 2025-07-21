@@ -74,7 +74,6 @@
     pkgs.pnpm_9
     pkgs.spotify
     pkgs.uni-sync
-    pkgs.uv
     pkgs.yt-dlp
   ];
 

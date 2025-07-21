@@ -9,7 +9,6 @@
     pkgs.kind
     pkgs.k9s
     pkgs.google-chrome
-    pkgs.uv
   ];
 
   homebrew.casks = [

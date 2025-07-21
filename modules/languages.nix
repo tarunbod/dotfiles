@@ -3,8 +3,11 @@
 {
   environment.systemPackages = [
     pkgs.gopls
-    pkgs.typescript-language-server
-    pkgs.ruff
     pkgs.nil
+    pkgs.ruff
+    pkgs.typescript-language-server
+
+    pkgs.uv
+    pkgs.rustup
   ];
 }
