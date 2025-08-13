@@ -59,11 +59,11 @@ vim.call("plug#", "nvim-lualine/lualine.nvim")
 vim.call("plug#", "ThePrimeagen/harpoon")
 vim.call("plug#", "github/copilot.vim")
 vim.call("plug#", "HakonHarnes/img-clip.nvim")
---vim.call("plug#", "zbirenbaum/copilot.lua")
 vim.call("plug#", "rose-pine/neovim")
 vim.call("plug#", "stevearc/dressing.nvim")
 vim.call("plug#", "MunifTanjim/nui.nvim")
-vim.call("plug#", "yetone/avante.nvim", { ["branch"] = "main", ["do"] = "make" })
+vim.call("plug#", "folke/snacks.nvim")
+vim.call("plug#", "NickvanDyke/opencode.nvim")
 
 vim.call("plug#end")
 
@@ -171,6 +171,8 @@ lspconfig.ruff.setup({})
 lspconfig.rust_analyzer.setup({})
 lspconfig.ts_ls.setup({})
 lspconfig.nil_ls.setup({})
+lspconfig.clangd.setup({})
+lspconfig.nushell.setup({})
 
 require("img-clip").setup({
   default = {
@@ -180,15 +182,6 @@ require("img-clip").setup({
       insert_mode = true,
     },
   },
-})
-
-require("avante_lib").load()
-require("avante").setup({
-  providers = {
-    claude = {
-      model = "claude-sonnet-4-20250514",
-    }
-  }
 })
 
 -- Keybinds
@@ -269,3 +262,18 @@ local open_in_github_safe = function()
   end
 end
 vim.keymap.set("n", "<leader>og", open_in_github_safe)
+
+local opencode = require("opencode")
+opencode.setup({
+  provider_id = "anthropic",
+  model_id = "claude-sonnet-4-20250514",
+  auto_reload = true,
+})
+
+--  keys = {
+--    { '<leader>aa', function() opencode.ask('@file ') end, desc = 'Ask opencode about current file', mode = { 'n', 'v' } },
+--    { '<leader>ae', function() opencode.ask('@selection ') end, desc = 'Ask opencode about current selection', mode = { 'n', 'v' } },
+--    { '<leader>ar', function() opencode.prompt('Who are you') end, desc = 'Ask opencode about current selection', mode = { 'n', 'v' } },
+--  }
+vim.keymap.set("n", "<leader>aa", function() opencode.ask('@file ') end, { desc = 'Ask opencode about current file' })
+vim.keymap.set("v", "<leader>ae", function() opencode.ask('@selection ') end, { desc = 'Ask opencode about current selection' })

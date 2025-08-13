@@ -1,8 +1,5 @@
-{ config, pkgs, inputs, system, agenix, ... }:
+{ pkgs, system, agenix, ... }:
 
-let
-  homeDir = "/home/tarunbod";
-in
 {
   imports = [
     ./hardware-configuration.nix

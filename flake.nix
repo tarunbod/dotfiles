@@ -25,39 +25,41 @@
     }:
     let
       buildSystem =
-        system: extraModules:
-        let
-          isDarwin = nixpkgs.lib.strings.hasInfix "darwin" system;
-          defaultModules =
-            if isDarwin then
-              [
-                ./modules/common-darwin.nix
-                home-manager.darwinModules.home-manager
-                agenix.darwinModules.default
-              ]
-            else
-              [
-                ./modules/common-linux.nix
-                home-manager.nixosModules.home-manager
-                agenix.nixosModules.default
-              ];
-          builder = if isDarwin then nix-darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
-        in
+        builder: system: extraModules:
         builder {
           inherit system;
           specialArgs = { inherit agenix; };
-          modules = [ ./modules/common.nix ] ++ defaultModules ++ extraModules;
+          modules = [ ./modules/common.nix ] ++ extraModules;
         };
-      darwinSystem = buildSystem "aarch64-darwin";
+      nixosSystem =
+        system: extraModules:
+        buildSystem (nixpkgs.lib.nixosSystem) system (
+          [
+            ./modules/common-linux.nix
+            home-manager.nixosModules.home-manager
+            agenix.nixosModules.default
+          ]
+          ++ extraModules
+        );
+      darwinSystem =
+        extraModules:
+        buildSystem (nix-darwin.lib.darwinSystem) "aarch64-darwin" (
+          [
+            ./modules/common-darwin.nix
+            home-manager.darwinModules.home-manager
+            agenix.darwinModules.default
+          ]
+          ++ extraModules
+        );
     in
     {
       nixosConfigurations = {
-        monkey = buildSystem "x86_64-linux" [
+        monkey = nixosSystem "x86_64-linux" [
           ./modules/languages.nix
           ./hosts/monkey/configuration.nix
         ];
 
-        chimp = buildSystem "aarch64-linux" [
+        chimp = nixosSystem "aarch64-linux" [
           ./hosts/chimp/configuration.nix
         ];
       };
