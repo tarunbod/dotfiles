@@ -11,6 +11,10 @@
     pkgs.google-chrome
   ];
 
+  homebrew.brews = [
+    "duckdb"
+  ];
+
   homebrew.casks = [
     "orbstack"
   ];
