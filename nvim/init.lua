@@ -64,6 +64,7 @@ vim.call("plug#", "stevearc/dressing.nvim")
 vim.call("plug#", "MunifTanjim/nui.nvim")
 vim.call("plug#", "folke/snacks.nvim")
 vim.call("plug#", "NickvanDyke/opencode.nvim")
+vim.call("plug#", "dmtrKovalenko/fff.nvim", { ["do"] = "nix run .#release" })
 
 vim.call("plug#end")
 
@@ -166,6 +167,7 @@ require("nvim-tree").setup({
 })
 
 lspconfig = require("lspconfig")
+lspconfig.astro.setup({})
 lspconfig.gopls.setup({})
 lspconfig.ruff.setup({})
 lspconfig.rust_analyzer.setup({})
@@ -184,11 +186,15 @@ require("img-clip").setup({
   },
 })
 
+require("fff").setup({})
+
 -- Keybinds
 
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<leader>p", "<cmd>Telescope find_files<cr>")
+vim.keymap.set("n", "<leader>p", function()
+  require("fff").find_in_git_root()
+end)
 vim.keymap.set("n", "<leader>s", "<cmd>Telescope git_status<cr>")
 vim.keymap.set("n", "<leader>b", "<cmd>Telescope buffers<cr>")
 vim.keymap.set("n", "<leader>f", "<cmd>Telescope live_grep<cr>")

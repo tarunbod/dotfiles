@@ -5,25 +5,28 @@
 
   nixpkgs.hostPlatform = "aarch64-darwin";
 
+  homebrew.casks = [
+    "google-chrome"
+    "discord"
+    "signal"
+    "spotify"
+  ];
+
   environment.systemPackages = [
-    pkgs.google-chrome
-    pkgs.discord
     pkgs.ipatool
-    pkgs.signal-desktop-bin
-    pkgs.spotify
     pkgs.yt-dlp
   ];
 
   system.defaults.dock.persistent-apps = [
-    { app = "/Applications/Nix Apps/Google Chrome.app"; }
+    { app = "/Applications/Google Chrome.app"; }
     { app = "/System/Applications/Calendar.app"; }
     { spacer = {}; }
     { app = "/System/Applications/Messages.app"; }
-    { app = "/Applications/Nix Apps/Discord.app"; }
-    { app = "/Applications/Nix Apps/Signal.app"; }
-    { app = "/Applications/Nix Apps/Spotify.app"; }
+    { app = "/Applications/Discord.app"; }
+    { app = "/Applications/Signal.app"; }
+    { app = "/Applications/Spotify.app"; }
     { spacer = {}; }
-    { app = "/Applications/Nix Apps/Ghostty.app"; }
+    { app = "/Applications/Ghostty.app"; }
     { app = "/System/Applications/System Settings.app"; }
   ];
 

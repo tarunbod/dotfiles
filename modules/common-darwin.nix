@@ -1,19 +1,18 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   system.primaryUser = "tarunbod";
 
-  environment.systemPackages = [
-    pkgs.bitwarden-desktop
-    pkgs.raycast
-    pkgs.rectangle
-
-    pkgs.ghostty-bin
-  ];
-
   homebrew.enable = true;
   homebrew.brews = [
     "opencode"
+  ];
+
+  homebrew.casks = [
+    "bitwarden"
+    "raycast"
+    "rectangle"
+    "ghostty"
   ];
 
   system.defaults.controlcenter.BatteryShowPercentage = true;

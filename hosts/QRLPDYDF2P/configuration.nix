@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   system.stateVersion = 6;
@@ -8,7 +8,6 @@
   environment.systemPackages = [
     pkgs.kind
     pkgs.k9s
-    pkgs.google-chrome
   ];
 
   homebrew.brews = [
