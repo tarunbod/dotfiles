@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -57,24 +57,34 @@
   users.users.tarunbod = {
     isNormalUser = true;
     description = "Tarun";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
   users.defaultUserShell = pkgs.nushell;
 
   environment.systemPackages = [
     pkgs.linuxKernel.packages.linux_zen.nct6687d
     pkgs.awscli2
+    pkgs.blender-hip
     pkgs.discord
     pkgs.gcc
     pkgs.ghostty
     pkgs.git
+    pkgs.glib
     pkgs.google-chrome
     pkgs.lm_sensors
     pkgs.nodejs_24
     pkgs.pnpm_9
+
+    pkgs.rocmPackages.rocm-smi
+
     pkgs.spotify
     pkgs.uni-sync
     pkgs.yt-dlp
+  ];
+
+  programs.nix-ld.libraries = [
+    pkgs.libGL
+    pkgs.glib
   ];
 
   nixpkgs.config.rocmSupport = true;
@@ -83,6 +93,8 @@
   services.tailscale.enable = true;
 
   virtualisation.multipass.enable = true;
+
+  virtualisation.docker.enable = true;
 
   services.openssh.enable = true;
   programs.ssh.startAgent = true;
