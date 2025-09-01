@@ -99,6 +99,8 @@
   services.openssh.enable = true;
   programs.ssh.startAgent = true;
 
+  services.uni-sync-curve.enable = true;
+
   networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default

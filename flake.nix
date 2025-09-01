@@ -13,6 +13,9 @@
 
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    uni-sync-curve.url = "github:tarunbod/uni-sync-curve";
+    uni-sync-curve.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -21,6 +24,7 @@
       nix-darwin,
       agenix,
       home-manager,
+      uni-sync-curve,
       ...
     }:
     let
@@ -56,6 +60,7 @@
       nixosConfigurations = {
         monkey = nixosSystem "x86_64-linux" [
           ./modules/languages.nix
+          uni-sync-curve.nixosModules.default
           ./hosts/monkey/configuration.nix
         ];
 
