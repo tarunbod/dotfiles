@@ -73,6 +73,7 @@
     pkgs.google-chrome
     pkgs.lm_sensors
     pkgs.nodejs_24
+    pkgs.opencode
     pkgs.pnpm_9
 
     pkgs.rocmPackages.rocm-smi

@@ -26,13 +26,13 @@
       home-manager,
       uni-sync-curve,
       ...
-    }:
+    }@inputs:
     let
       buildSystem =
         builder: system: extraModules:
         builder {
           inherit system;
-          specialArgs = { inherit agenix; };
+          specialArgs = { inherit agenix inputs; };
           modules = [ ./modules/common.nix ] ++ extraModules;
         };
       nixosSystem =
