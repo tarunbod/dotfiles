@@ -1,13 +1,16 @@
 { pkgs, agenix, ... }:
 
 let
- isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
- homeDir = if isDarwin then "/Users/tarunbod" else "/home/tarunbod";
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+  homeDir = if isDarwin then "/Users/tarunbod" else "/home/tarunbod";
 in
 {
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   environment.systemPackages = [
     pkgs.age
@@ -49,26 +52,59 @@ in
       agenix.homeManagerModules.default
     ];
 
-    users.tarunbod = {
-      home = {
-        username = "tarunbod";
-        homeDirectory = homeDir;
-        stateVersion = "25.05";
+    users.tarunbod =
+      { lib, ... }:
+      {
+        home = {
+          username = "tarunbod";
+          homeDirectory = homeDir;
+          stateVersion = "25.05";
 
-        file = {
-          bashrc = {
-            source = ../.bashrc;
-            target = ".bashrc";
+          file = {
+            zshrc = {
+              source = ../.zshrc;
+              target = ".zshrc";
+            };
+
+            ghostty = {
+              target = ".config/ghostty/config";
+              text = ''
+                font-family = "FiraCode Nerd Font Mono"
+                link-url
+
+                theme = "rose-pine"
+                font-size = ${if isDarwin then "12" else "11"}
+              '';
+            };
+
+            nushell = {
+              source = ../config.nu;
+              target = ".config/nushell/config.nu";
+            };
+
+            starship = {
+              source = ../starship.toml;
+              target = ".config/starship.toml";
+            };
+          };
+
+          activation = {
+            shell-autoload = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+              run /run/current-system/sw/bin/nu -c "
+                mkdir (\$nu.data-dir | path join "vendor/autoload");
+                /run/current-system/sw/bin/starship init nu | save -f (\$nu.data-dir | path join 'vendor/autoload/starship.nu');
+                /run/current-system/sw/bin/carapace _carapace nushell | save -f (\$nu.data-dir | path join 'vendor/autoload/carapace.nu');
+              ";
+            '';
+          };
+        };
+
+        age = {
+          secrets.secrets_json = {
+            file = ../secrets/secrets.age;
+            path = "${homeDir}/.secrets.json";
           };
         };
       };
-
-      age = {
-        secrets.secrets_json = {
-          file = ../secrets/secrets.age;
-          path = "${homeDir}/.secrets.json";
-        };
-      };
-    };
   };
 }

@@ -175,6 +175,7 @@ lspconfig.ts_ls.setup({})
 lspconfig.nil_ls.setup({})
 lspconfig.clangd.setup({})
 lspconfig.nushell.setup({})
+lspconfig.zls.setup({})
 
 require("img-clip").setup({
   default = {

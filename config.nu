@@ -30,15 +30,7 @@ if ('~/.secrets.json' | path exists) {
 const extra_config_path = "~/extra.nu"
 source (if ($extra_config_path | path exists) { $extra_config_path } else { null })
 
-# starship (prompt)
-mkdir ($nu.data-dir | path join "vendor/autoload")
-starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
-
-# carapace (autocomplete)
 $env.CARAPACE_BRIDGES = 'zsh,bash'
-mkdir ~/.cache/carapace
-carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
-source ~/.cache/carapace/init.nu
 
 $env.BAT_THEME = "base16"
 
