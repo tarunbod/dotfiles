@@ -16,6 +16,7 @@ in
     pkgs.age
     pkgs.bat
     pkgs.btop
+    pkgs.bun
     pkgs.carapace
     pkgs.delta
     pkgs.fortune
@@ -27,6 +28,7 @@ in
     pkgs.kubectl
     pkgs.neofetch
     pkgs.neovim
+    pkgs.nodejs_24
 
     pkgs.nushell
     pkgs.nushellPlugins.polars
