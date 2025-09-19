@@ -74,7 +74,7 @@ in
                 font-family = "FiraCode Nerd Font Mono"
                 link-url
 
-                theme = "rose-pine"
+                theme = "Rose Pine"
                 font-size = ${if isDarwin then "12" else "11"}
               '';
             };
