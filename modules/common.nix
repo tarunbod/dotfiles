@@ -17,6 +17,7 @@ in
     pkgs.bat
     pkgs.btop
     pkgs.bun
+    pkgs.cachix
     pkgs.carapace
     pkgs.delta
     pkgs.fortune
