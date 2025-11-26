@@ -10,11 +10,13 @@
     "discord"
     "signal"
     "spotify"
+    "inkscape"
   ];
 
   environment.systemPackages = [
     pkgs.ipatool
     pkgs.yt-dlp
+    pkgs.postgresql
   ];
 
   system.defaults.dock.persistent-apps = [
