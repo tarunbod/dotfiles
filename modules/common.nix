@@ -12,6 +12,8 @@ in
     "flakes"
   ];
 
+  nix.settings.trusted-users = [ "root" "tarunbod" ];
+
   environment.systemPackages = [
     pkgs.age
     pkgs.bat
