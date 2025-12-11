@@ -75,9 +75,8 @@
     pkgs.nodejs_24
     pkgs.opencode
     pkgs.pnpm_9
-
+    pkgs.prismlauncher
     pkgs.rocmPackages.rocm-smi
-
     pkgs.spotify
     pkgs.uni-sync
     pkgs.yt-dlp
@@ -92,8 +91,6 @@
   services.ollama.enable = true;
 
   services.tailscale.enable = true;
-
-  virtualisation.multipass.enable = true;
 
   virtualisation.docker.enable = true;
 

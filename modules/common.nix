@@ -43,7 +43,7 @@ in
     pkgs.tmux
     pkgs.wget
 
-    agenix.packages.${pkgs.system}.default
+    agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   users.users.tarunbod.home = homeDir;
