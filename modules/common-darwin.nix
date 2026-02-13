@@ -13,6 +13,7 @@
     "raycast"
     "rectangle"
     "ghostty"
+    "obsidian"
   ];
 
   system.defaults.controlcenter.BatteryShowPercentage = true;

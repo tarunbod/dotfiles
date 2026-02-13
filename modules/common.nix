@@ -28,6 +28,7 @@ in
     pkgs.gh
     pkgs.git-lfs
     pkgs.jq
+    pkgs.jujutsu
     pkgs.kubectl
     pkgs.neofetch
     pkgs.neovim
@@ -96,9 +97,11 @@ in
           activation = {
             shell-autoload = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
               run /run/current-system/sw/bin/nu -c "
-                mkdir (\$nu.data-dir | path join "vendor/autoload");
-                /run/current-system/sw/bin/starship init nu | save -f (\$nu.data-dir | path join 'vendor/autoload/starship.nu');
-                /run/current-system/sw/bin/carapace _carapace nushell | save -f (\$nu.data-dir | path join 'vendor/autoload/carapace.nu');
+                let autoload_dir = (\$nu.data-dir | path join 'vendor/autoload');
+                mkdir \$autoload_dir;
+                /run/current-system/sw/bin/starship init nu | save -f (\$autoload_dir | path join 'starship.nu');
+                /run/current-system/sw/bin/carapace _carapace nushell | save -f (\$autoload_dir | path join 'carapace.nu');
+                /run/current-system/sw/bin/jj util completion nushell | save -f (\$autoload_dir | path join 'jj.nu');
               ";
             '';
           };

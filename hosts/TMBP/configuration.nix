@@ -26,6 +26,7 @@
     { app = "/System/Applications/Messages.app"; }
     { app = "/Applications/Discord.app"; }
     { app = "/Applications/Signal.app"; }
+    { app = "/Applications/Obsidian.app"; }
     { app = "/Applications/Spotify.app"; }
     { spacer = {}; }
     { app = "/Applications/Ghostty.app"; }
