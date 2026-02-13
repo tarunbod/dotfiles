@@ -39,13 +39,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 vim.call("plug#begin")
 
-vim.call("plug#", "nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
+vim.call("plug#", "nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate", ["branch"] = "master" })
 vim.call("plug#", "nvim-lua/plenary.nvim")
-vim.call("plug#", "nvim-telescope/telescope.nvim", { ["tag"] = "0.1.8" })
+vim.call("plug#", "nvim-telescope/telescope.nvim")
 vim.call("plug#", "nvim-tree/nvim-web-devicons")
 vim.call("plug#", "nvim-tree/nvim-tree.lua")
-vim.call("plug#", "mason-org/mason.nvim")
-vim.call("plug#", "mason-org/mason-lspconfig.nvim")
 vim.call("plug#", "neovim/nvim-lspconfig")
 vim.call("plug#", "rafamadriz/friendly-snippets")
 vim.call("plug#", "L3MON4D3/LuaSnip", { ["tag"] = "v2.*", ["do"] = "make install_jsregexp" })
@@ -56,7 +54,6 @@ vim.call("plug#", "hrsh7th/cmp-path")
 vim.call("plug#", "hrsh7th/cmp-cmdline")
 vim.call("plug#", "hrsh7th/nvim-cmp")
 vim.call("plug#", "nvim-lualine/lualine.nvim")
-vim.call("plug#", "ThePrimeagen/harpoon")
 vim.call("plug#", "github/copilot.vim")
 vim.call("plug#", "HakonHarnes/img-clip.nvim")
 vim.call("plug#", "rose-pine/neovim")
@@ -153,7 +150,7 @@ vim.diagnostic.config({
   },
 })
 
-require "nvim-treesitter.configs".setup({
+require("nvim-treesitter.configs").setup({
   highlight = {
     enable = true
   }
@@ -166,16 +163,21 @@ require("nvim-tree").setup({
   }
 })
 
-lspconfig = require("lspconfig")
-lspconfig.astro.setup({})
-lspconfig.gopls.setup({})
-lspconfig.ruff.setup({})
-lspconfig.rust_analyzer.setup({})
-lspconfig.ts_ls.setup({})
-lspconfig.nil_ls.setup({})
-lspconfig.clangd.setup({})
-lspconfig.nushell.setup({})
-lspconfig.zls.setup({})
+vim.lsp.enable({
+  'astro',
+  'gopls',
+  'ruff',
+  'rust_analyzer',
+  'ts_ls',
+  'nil_ls',
+  'clangd',
+  'nushell',
+  'zls'
+})
+
+vim.lsp.config('elixirls', {
+  cmd = { "elixir-ls" }
+})
 
 require("img-clip").setup({
   default = {
@@ -237,16 +239,6 @@ vim.keymap.set("i", "<C-j>", "copilot#Accept(\"\")", {
 })
 vim.g.copilot_no_tab_map = true
 
-local harpoon_mark = require("harpoon.mark")
-local harpoon_ui = require("harpoon.ui")
-vim.keymap.set("n", "<leader>y", function()
-  harpoon_mark.add_file()
-  print("Added " .. vim.fn.expand("%") .. " to harpoon marks")
-end)
-vim.keymap.set("n", "<leader>u", harpoon_ui.nav_prev)
-vim.keymap.set("n", "<leader>i", harpoon_ui.nav_next)
-vim.keymap.set("n", "<leader>o", harpoon_ui.toggle_quick_menu)
-
 local open_in_github = function()
   local url = vim.fn.system("git remote get-url origin")
   local branch = vim.fn.system("git rev-parse --abbrev-ref HEAD")
@@ -271,11 +263,6 @@ end
 vim.keymap.set("n", "<leader>og", open_in_github_safe)
 
 local opencode = require("opencode")
-opencode.setup({
-  provider_id = "anthropic",
-  model_id = "claude-sonnet-4-20250514",
-  auto_reload = true,
-})
 
 --  keys = {
 --    { '<leader>aa', function() opencode.ask('@file ') end, desc = 'Ask opencode about current file', mode = { 'n', 'v' } },
