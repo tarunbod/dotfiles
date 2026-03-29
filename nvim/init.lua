@@ -196,7 +196,7 @@ require("fff").setup({})
 vim.g.mapleader = " "
 
 vim.keymap.set("n", "<leader>p", function()
-  require("fff").find_in_git_root()
+  require("fff").find_files()
 end)
 vim.keymap.set("n", "<leader>s", "<cmd>Telescope git_status<cr>")
 vim.keymap.set("n", "<leader>b", "<cmd>Telescope buffers<cr>")

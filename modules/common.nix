@@ -21,7 +21,8 @@ in
     pkgs.bun
     pkgs.cachix
     pkgs.carapace
-    pkgs.delta
+    pkgs.difftastic
+    pkgs.fastfetch
     pkgs.fortune
     pkgs.ffmpeg
     pkgs.go
@@ -30,7 +31,6 @@ in
     pkgs.jq
     pkgs.jujutsu
     pkgs.kubectl
-    pkgs.neofetch
     pkgs.neovim
     pkgs.nodejs_24
 

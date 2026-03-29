@@ -26,6 +26,10 @@ if ('~/.secrets.json' | path exists) {
   load-env (open ~/.secrets.json)
 }
 
+def timestamp [] {
+  date now | format date '%s' | into int | $in * 1000
+}
+
 # extras
 const extra_config_path = "~/extra.nu"
 source (if ($extra_config_path | path exists) { $extra_config_path } else { null })
