@@ -172,7 +172,8 @@ vim.lsp.enable({
   'nil_ls',
   'clangd',
   'nushell',
-  'zls'
+  'zls',
+  'ocamllsp'
 })
 
 vim.lsp.config('elixirls', {

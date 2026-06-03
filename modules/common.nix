@@ -1,4 +1,4 @@
-{ pkgs, agenix, ... }:
+{ pkgs, agenix, nushell, ... }:
 
 let
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
@@ -34,10 +34,10 @@ in
     pkgs.neovim
     pkgs.nodejs_24
 
-    pkgs.nushell
-    pkgs.nushellPlugins.polars
-    pkgs.nushellPlugins.query
-    pkgs.nushellPlugins.formats
+    nushell.packages.${pkgs.stdenv.hostPlatform.system}.nushell
+    nushell.legacyPackages.${pkgs.stdenv.hostPlatform.system}.nushellPlugins.polars
+    nushell.legacyPackages.${pkgs.stdenv.hostPlatform.system}.nushellPlugins.query
+    nushell.legacyPackages.${pkgs.stdenv.hostPlatform.system}.nushellPlugins.formats
 
     pkgs.ripgrep
     pkgs.starship

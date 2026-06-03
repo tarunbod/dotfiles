@@ -14,8 +14,16 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
     uni-sync-curve.url = "github:tarunbod/uni-sync-curve";
     uni-sync-curve.inputs.nixpkgs.follows = "nixpkgs";
+    uni-sync-curve.inputs.rust-overlay.follows = "rust-overlay";
+
+    nushell.url = "github:nushell/nushell?dir=scripts/nix";
+    nushell.inputs.nixpkgs.follows = "nixpkgs";
+    nushell.inputs.rust-overlay.follows = "rust-overlay";
   };
 
   outputs =
@@ -25,6 +33,7 @@
       agenix,
       home-manager,
       uni-sync-curve,
+      nushell,
       ...
     }@inputs:
     let
@@ -32,7 +41,7 @@
         builder: system: extraModules:
         builder {
           inherit system;
-          specialArgs = { inherit agenix inputs; };
+          specialArgs = { inherit agenix nushell inputs; };
           modules = [ ./modules/common.nix ] ++ extraModules;
         };
       nixosSystem =

@@ -1,0 +1,638 @@
+building the system configuration...
+warning: Git tree '/Users/tarunbod/dotfiles' is dirty
+error:
+       … while calling the 'derivationStrict' builtin
+         at <nix/derivation-internal.nix>:37:12:
+           36|
+           37|   strict = derivationStrict drvAttrs;
+             |            ^
+           38|
+
+       … while evaluating derivation 'darwin-system-26.05.06648f4'
+         whose name attribute is located at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/stdenv/generic/make-derivation.nix:541:11
+
+       … while evaluating attribute 'activationScript' of derivation 'darwin-system-26.05.06648f4'
+         at /nix/store/jz2wwz18fnladl35z2bc4406fl9w5ifw-source/modules/system/default.nix:89:7:
+           88|
+           89|       activationScript = cfg.activationScripts.script.text;
+             |       ^
+           90|
+
+       … from call site
+         at /nix/store/jz2wwz18fnladl35z2bc4406fl9w5ifw-source/modules/system/default.nix:89:26:
+           88|
+           89|       activationScript = cfg.activationScripts.script.text;
+             |                          ^
+           90|
+
+       … while calling anonymous lambda
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/attrsets.nix:1187:17:
+         1186|         mapAttrs (
+         1187|           name: value:
+             |                 ^
+         1188|           if isAttrs value && cond value then recurse (path ++ [ name ]) value else f (path ++ [ name ]) value
+
+       … from call site
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/attrsets.nix:1188:85:
+         1187|           name: value:
+         1188|           if isAttrs value && cond value then recurse (path ++ [ name ]) value else f (path ++ [ name ]) value
+             |                                                                                     ^
+         1189|         );
+
+       … while calling anonymous lambda
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:283:71:
+          282|           # For definitions that have an associated option
+          283|           declaredConfig = mapAttrsRecursiveCond (v: !isOption v) (_: v: v.value) options;
+             |                                                                       ^
+          284|
+
+       … while evaluating the attribute 'value'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1159:7:
+         1158|     // {
+         1159|       value = addErrorContext "while evaluating the option `${showOption loc}':" value;
+             |       ^
+         1160|       inherit (res.defsFinal') highestPrio;
+
+       … while evaluating the option `system.activationScripts.script.text':
+
+       … while evaluating the attribute 'mergedValue'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1256:5:
+         1255|     # Type-check the remaining definitions, and merge them. Or throw if no definitions.
+         1256|     mergedValue =
+             |     ^
+         1257|       if isDefined then
+
+       … while evaluating a branch condition
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1257:7:
+         1256|     mergedValue =
+         1257|       if isDefined then
+             |       ^
+         1258|         if type.merge ? v2 then
+
+       … while evaluating the attribute 'values'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1250:11:
+         1249|         {
+         1250|           values = defsSorted;
+             |           ^
+         1251|           inherit (defsFiltered) highestPrio;
+
+       … while evaluating a branch condition
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1221:11:
+         1220|           # Avoid sorting if we don't have to.
+         1221|           if any (def: def.value._type or "" == "order") defsFiltered.values then
+             |           ^
+         1222|             sortProperties defsFiltered.values
+
+       … while calling the 'any' builtin
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1221:14:
+         1220|           # Avoid sorting if we don't have to.
+         1221|           if any (def: def.value._type or "" == "order") defsFiltered.values then
+             |              ^
+         1222|             sortProperties defsFiltered.values
+
+       … while evaluating the attribute 'values'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1437:7:
+         1436|     {
+         1437|       values = concatMap (def: if getPrio def == highestPrio then [ (strip def) ] else [ ]) defs;
+             |       ^
+         1438|       inherit highestPrio;
+
+       … while calling the 'concatMap' builtin
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1437:16:
+         1436|     {
+         1437|       values = concatMap (def: if getPrio def == highestPrio then [ (strip def) ] else [ ]) defs;
+             |                ^
+         1438|       inherit highestPrio;
+
+       … while calling the 'concatMap' builtin
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1201:26:
+         1200|         # Process mkMerge and mkIf properties.
+         1201|         defsNormalized = concatMap (
+             |                          ^
+         1202|           m:
+
+       … while calling anonymous lambda
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1202:11:
+         1201|         defsNormalized = concatMap (
+         1202|           m:
+             |           ^
+         1203|           map (
+
+       … while calling the 'map' builtin
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1203:11:
+         1202|           m:
+         1203|           map (
+             |           ^
+         1204|             value:
+
+       … while evaluating definitions from `/nix/store/jz2wwz18fnladl35z2bc4406fl9w5ifw-source/modules/system/activation-scripts.nix':
+
+       … from call site
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1212:80:
+         1211|               }
+         1212|           ) (addErrorContext "while evaluating definitions from `${m.file}':" (dischargeProperties m.value))
+             |                                                                                ^
+         1213|         ) defs;
+
+       … while calling 'dischargeProperties'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1388:5:
+         1387|   dischargeProperties =
+         1388|     def:
+             |     ^
+         1389|     if def._type or "" == "merge" then
+
+       … while evaluating a branch condition
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1389:5:
+         1388|     def:
+         1389|     if def._type or "" == "merge" then
+             |     ^
+         1390|       concatMap dischargeProperties def.contents
+
+       … while evaluating the attribute 'value'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:846:21:
+          845|             inherit (module) file;
+          846|             inherit value;
+             |                     ^
+          847|           }) module.config
+
+       … from call site
+         at /nix/store/jz2wwz18fnladl35z2bc4406fl9w5ifw-source/modules/system/activation-scripts.nix:121:9:
+          120|       ${cfg.activationScripts.users.text}
+          121|       ${cfg.activationScripts.applications.text}
+             |         ^
+          122|       ${cfg.activationScripts.pam.text}
+
+       … while calling anonymous lambda
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/attrsets.nix:1187:17:
+         1186|         mapAttrs (
+         1187|           name: value:
+             |                 ^
+         1188|           if isAttrs value && cond value then recurse (path ++ [ name ]) value else f (path ++ [ name ]) value
+
+       … from call site
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/attrsets.nix:1188:85:
+         1187|           name: value:
+         1188|           if isAttrs value && cond value then recurse (path ++ [ name ]) value else f (path ++ [ name ]) value
+             |                                                                                     ^
+         1189|         );
+
+       … while calling anonymous lambda
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:283:71:
+          282|           # For definitions that have an associated option
+          283|           declaredConfig = mapAttrsRecursiveCond (v: !isOption v) (_: v: v.value) options;
+             |                                                                       ^
+          284|
+
+       … while evaluating the attribute 'value'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1159:7:
+         1158|     // {
+         1159|       value = addErrorContext "while evaluating the option `${showOption loc}':" value;
+             |       ^
+         1160|       inherit (res.defsFinal') highestPrio;
+
+       … while evaluating the option `system.activationScripts.applications.text':
+
+       (10 duplicate frames omitted)
+
+       … while evaluating definitions from `/nix/store/jz2wwz18fnladl35z2bc4406fl9w5ifw-source/modules/system/applications.nix':
+
+       … from call site
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1212:80:
+         1211|               }
+         1212|           ) (addErrorContext "while evaluating definitions from `${m.file}':" (dischargeProperties m.value))
+             |                                                                                ^
+         1213|         ) defs;
+
+       … while calling 'dischargeProperties'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1388:5:
+         1387|   dischargeProperties =
+         1388|     def:
+             |     ^
+         1389|     if def._type or "" == "merge" then
+
+       … while evaluating a branch condition
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:1389:5:
+         1388|     def:
+         1389|     if def._type or "" == "merge" then
+             |     ^
+         1390|       concatMap dischargeProperties def.contents
+
+       … while evaluating the attribute 'value'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/modules.nix:846:21:
+          845|             inherit (module) file;
+          846|             inherit value;
+             |                     ^
+          847|           }) module.config
+
+       … while calling the 'getAttr' builtin
+         at <nix/derivation-internal.nix>:50:17:
+           49|     value = commonAttrs // {
+           50|       outPath = builtins.getAttr outputName strict;
+             |                 ^
+           51|       drvPath = strict.drvPath;
+
+       … while calling the 'derivationStrict' builtin
+         at <nix/derivation-internal.nix>:37:12:
+           36|
+           37|   strict = derivationStrict drvAttrs;
+             |            ^
+           38|
+
+       … while evaluating derivation 'system-applications'
+         whose name attribute is located at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/stdenv/generic/make-derivation.nix:541:11
+
+       … while evaluating attribute 'passAsFile' of derivation 'system-applications'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/build-support/trivial-builders/default.nix:81:9:
+           80|         inherit buildCommand name;
+           81|         passAsFile = [ "buildCommand" ] ++ (derivationArgs.passAsFile or [ ]);
+             |         ^
+           82|       }
+
+       … while evaluating the attribute 'passAsFile'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/build-support/buildenv/default.nix:116:9:
+          115|         # XXX: The size is somewhat arbitrary
+          116|         passAsFile = if builtins.stringLength pkgs >= 128 * 1024 then [ "pkgs" ] else [ ];
+             |         ^
+          117|       }
+
+       … while evaluating a branch condition
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/build-support/buildenv/default.nix:116:22:
+          115|         # XXX: The size is somewhat arbitrary
+          116|         passAsFile = if builtins.stringLength pkgs >= 128 * 1024 then [ "pkgs" ] else [ ];
+             |                      ^
+          117|       }
+
+       … in the argument of the not operator
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/build-support/buildenv/default.nix:116:52:
+          115|         # XXX: The size is somewhat arbitrary
+          116|         passAsFile = if builtins.stringLength pkgs >= 128 * 1024 then [ "pkgs" ] else [ ];
+             |                                                    ^
+          117|       }
+
+       … while calling the 'lessThan' builtin
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/build-support/buildenv/default.nix:116:52:
+          115|         # XXX: The size is somewhat arbitrary
+          116|         passAsFile = if builtins.stringLength pkgs >= 128 * 1024 then [ "pkgs" ] else [ ];
+             |                                                    ^
+          117|       }
+
+       … while calling the 'stringLength' builtin
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/build-support/buildenv/default.nix:116:25:
+          115|         # XXX: The size is somewhat arbitrary
+          116|         passAsFile = if builtins.stringLength pkgs >= 128 * 1024 then [ "pkgs" ] else [ ];
+             |                         ^
+          117|       }
+
+       … while calling the 'toJSON' builtin
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/build-support/buildenv/default.nix:111:16:
+          110|         pathsToLinkJSON = builtins.toJSON pathsToLink;
+          111|         pkgs = builtins.toJSON chosenOutputs;
+             |                ^
+          112|         extraPathsFrom = lib.optional includeClosures (writeClosure pathsForClosure);
+
+       … while evaluating list element at index 41
+
+       … while evaluating attribute 'paths'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/build-support/buildenv/default.nix:70:7:
+           69|     chosenOutputs = map (drv: {
+           70|       paths =
+             |       ^
+           71|         # First add the usual output(s): respect if user has chosen explicitly,
+
+       … while evaluating list element at index 0
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/build-support/buildenv/default.nix:70:7:
+           69|     chosenOutputs = map (drv: {
+           70|       paths =
+             |       ^
+           71|         # First add the usual output(s): respect if user has chosen explicitly,
+
+       … in the condition of the assert statement
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/customisation.nix:428:15:
+          427|             outPath =
+          428|               assert condition;
+             |               ^
+          429|               drv.${outputName}.outPath;
+
+       … from call site
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/stdenv/generic/make-derivation.nix:850:18:
+          849|       };
+          850|       validity = checkMeta.assertValidity { inherit meta attrs; };
+             |                  ^
+          851|
+
+       … while calling 'assertValidity'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/stdenv/generic/check-meta.nix:663:5:
+          662|   assertValidity =
+          663|     { meta, attrs }:
+             |     ^
+          664|     let
+
+       … while evaluating a branch condition
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/stdenv/generic/check-meta.nix:668:5:
+          667|     in
+          668|     if isNull invalid then
+             |     ^
+          669|       if isNull problems then
+
+       … while calling the 'isNull' builtin
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/stdenv/generic/check-meta.nix:668:8:
+          667|     in
+          668|     if isNull invalid then
+             |        ^
+          669|       if isNull problems then
+
+       … from call site
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/stdenv/generic/check-meta.nix:665:17:
+          664|     let
+          665|       invalid = checkValidity attrs;
+             |                 ^
+          666|       problems = checkProblems attrs;
+
+       … while calling 'checkValidity'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/stdenv/generic/check-meta.nix:401:5:
+          400|   checkValidity =
+          401|     attrs:
+             |     ^
+          402|     # Check meta attribute types first, to make sure it is always called even when there are other issues
+
+       … while evaluating a branch condition
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/stdenv/generic/check-meta.nix:440:10:
+          439|       }
+          440|     else if hasUnsupportedPlatform attrs && !allowUnsupportedSystem then
+             |          ^
+          441|       let
+
+       … in the left operand of the AND (&&) operator
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/stdenv/generic/check-meta.nix:440:42:
+          439|       }
+          440|     else if hasUnsupportedPlatform attrs && !allowUnsupportedSystem then
+             |                                          ^
+          441|       let
+
+       … from call site
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/stdenv/generic/check-meta.nix:440:13:
+          439|       }
+          440|     else if hasUnsupportedPlatform attrs && !allowUnsupportedSystem then
+             |             ^
+          441|       let
+
+       … while calling 'hasUnsupportedPlatform'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/stdenv/generic/check-meta.nix:121:28:
+          120|
+          121|   hasUnsupportedPlatform = pkg: !(availableOn hostPlatform pkg);
+             |                            ^
+          122|
+
+       … in the argument of the not operator
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/stdenv/generic/check-meta.nix:121:35:
+          120|
+          121|   hasUnsupportedPlatform = pkg: !(availableOn hostPlatform pkg);
+             |                                   ^
+          122|
+
+       … from call site
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/stdenv/generic/check-meta.nix:121:35:
+          120|
+          121|   hasUnsupportedPlatform = pkg: !(availableOn hostPlatform pkg);
+             |                                   ^
+          122|
+
+       … while calling 'availableOn'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/meta.nix:369:15:
+          368|   availableOn =
+          369|     platform: pkg:
+             |               ^
+          370|     ((!pkg ? meta.platforms) || any (platformMatch platform) pkg.meta.platforms)
+
+       … in the left operand of the AND (&&) operator
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/meta.nix:371:5:
+          370|     ((!pkg ? meta.platforms) || any (platformMatch platform) pkg.meta.platforms)
+          371|     && all (elem: !platformMatch platform elem) (pkg.meta.badPlatforms or [ ]);
+             |     ^
+          372|
+
+       … in the right operand of the OR (||) operator
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/meta.nix:370:30:
+          369|     platform: pkg:
+          370|     ((!pkg ? meta.platforms) || any (platformMatch platform) pkg.meta.platforms)
+             |                              ^
+          371|     && all (elem: !platformMatch platform elem) (pkg.meta.badPlatforms or [ ]);
+
+       … while calling the 'any' builtin
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/meta.nix:370:33:
+          369|     platform: pkg:
+          370|     ((!pkg ? meta.platforms) || any (platformMatch platform) pkg.meta.platforms)
+             |                                 ^
+          371|     && all (elem: !platformMatch platform elem) (pkg.meta.badPlatforms or [ ]);
+
+       … while evaluating the attribute 'meta.platforms'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/build-support/rust/build-rust-package/default.nix:181:9:
+          180|         # default to Rust's platforms
+          181|         platforms = lib.intersectLists meta.platforms or lib.platforms.all rustc.targetPlatforms;
+             |         ^
+          182|       };
+
+       … while calling the 'filter' builtin
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/pkgs/build-support/rust/build-rust-package/default.nix:181:21:
+          180|         # default to Rust's platforms
+          181|         platforms = lib.intersectLists meta.platforms or lib.platforms.all rustc.targetPlatforms;
+             |                     ^
+          182|       };
+
+       … while evaluating the attribute 'rustToolchain''
+         at /nix/store/n134gl8szij1gxndh0ai9n3zpzfysrqx-source/scripts/nix/flake.nix:30:9:
+           29|         # Override the rustPlatform without forcing a rebuild of _every_ tool as well
+           30|         rustToolchain' = previous.rust-bin.fromRustupToolchainFile ../../rust-toolchain.toml;
+             |         ^
+           31|         rustPlatform' = final.makeRustPlatform {
+
+       … from call site
+         at /nix/store/n134gl8szij1gxndh0ai9n3zpzfysrqx-source/scripts/nix/flake.nix:30:26:
+           29|         # Override the rustPlatform without forcing a rebuild of _every_ tool as well
+           30|         rustToolchain' = previous.rust-bin.fromRustupToolchainFile ../../rust-toolchain.toml;
+             |                          ^
+           31|         rustPlatform' = final.makeRustPlatform {
+
+       … while calling 'fromRustupToolchainFile'
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:169:5:
+          168|   fromRustupToolchainFile =
+          169|     path:
+             |     ^
+          170|     let
+
+       … from call site
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:177:7:
+          176|     else
+          177|       fromRustupToolchain (fromTOML content).toolchain;
+             |       ^
+          178|
+
+       … while calling 'fromRustupToolchain'
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:133:5:
+          132|   fromRustupToolchain =
+          133|     {
+             |     ^
+          134|       path ? null,
+
+       … while evaluating a branch condition
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:151:11:
+          150|         pkg =
+          151|           if toolchain._profiles != { } then
+             |           ^
+          152|             toolchain._profiles.${profile'} or (throw ''
+
+       … from call site
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:146:21:
+          145|       let
+          146|         toolchain = toolchainFromManifest (selectManifest {
+             |                     ^
+          147|           inherit channel;
+
+       … while calling 'toolchainFromManifest'
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:345:5:
+          344|   toolchainFromManifest =
+          345|     manifest:
+             |     ^
+          346|     let
+
+       … in the left operand of the update (//) operator
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:461:5:
+          460|     optionalAttrs (componentSet ? ${rustHostPlatform}) result
+          461|     // {
+             |     ^
+          462|       # Internal use.
+
+       … from call site
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:460:5:
+          459|     # so others can easily check it by `toolchain ? default`.
+          460|     optionalAttrs (componentSet ? ${rustHostPlatform}) result
+             |     ^
+          461|     // {
+
+       … while calling 'optionalAttrs'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/attrsets.nix:1477:25:
+         1476|   */
+         1477|   optionalAttrs = cond: as: if cond then as else { };
+             |                         ^
+         1478|
+
+       … while evaluating a branch condition
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/attrsets.nix:1477:29:
+         1476|   */
+         1477|   optionalAttrs = cond: as: if cond then as else { };
+             |                             ^
+         1478|
+
+       … while calling the 'mapAttrs' builtin
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:367:22:
+          366|       # componentSet.x86_64-unknown-linux-gnu.cargo = <derivation>;
+          367|       componentSet = mapAttrs (
+             |                      ^
+          368|         platform: _:
+
+       … while calling the 'listToAttrs' builtin
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:349:24:
+          348|       # For fail-fast test.
+          349|       allPlatformSet = listToAttrs (
+             |                        ^
+          350|         flatten (
+
+       … from call site
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:350:9:
+          349|       allPlatformSet = listToAttrs (
+          350|         flatten (
+             |         ^
+          351|           mapAttrsToList (
+
+       … while calling 'flatten'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/lists.nix:445:13:
+          444|   */
+          445|   flatten = x: if isList x then concatMap (y: flatten y) x else [ x ];
+             |             ^
+          446|
+
+       … while evaluating a branch condition
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/lists.nix:445:16:
+          444|   */
+          445|   flatten = x: if isList x then concatMap (y: flatten y) x else [ x ];
+             |                ^
+          446|
+
+       … while calling the 'isList' builtin
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/lists.nix:445:19:
+          444|   */
+          445|   flatten = x: if isList x then concatMap (y: flatten y) x else [ x ];
+             |                   ^
+          446|
+
+       … from call site
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:351:11:
+          350|         flatten (
+          351|           mapAttrsToList (
+             |           ^
+          352|             compName:
+
+       … while calling 'mapAttrsToList'
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/attrsets.nix:1084:23:
+         1083|   */
+         1084|   mapAttrsToList = f: attrs: attrValues (mapAttrs f attrs);
+             |                       ^
+         1085|
+
+       … while calling the 'attrValues' builtin
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/attrsets.nix:1084:30:
+         1083|   */
+         1084|   mapAttrsToList = f: attrs: attrValues (mapAttrs f attrs);
+             |                              ^
+         1085|
+
+       … while calling the 'mapAttrs' builtin
+         at /nix/store/0d1kf07ph2ply64i1y247f9q2an9cw00-source/lib/attrsets.nix:1084:42:
+         1083|   */
+         1084|   mapAttrsToList = f: attrs: attrValues (mapAttrs f attrs);
+             |                                          ^
+         1085|
+
+       … from call site
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:146:44:
+          145|       let
+          146|         toolchain = toolchainFromManifest (selectManifest {
+             |                                            ^
+          147|           inherit channel;
+
+       … while calling 'selectManifest'
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:64:5:
+           63|   selectManifest =
+           64|     {
+             |     ^
+           65|       channel,
+
+       … from call site
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:109:7:
+          108|     else if asVersion != null then
+          109|       assertWith (date == null) "Stable version with specific date is not supported" (
+             |       ^
+          110|         # "1.49"
+
+       … while calling 'assertWith'
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:70:20:
+           69|       assertWith =
+           70|         cond: msg: body:
+             |                    ^
+           71|         if cond then body else throw msg;
+
+       … while evaluating the attribute 'stable."1.92.0"'
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/manifests.nix:158:3:
+          157| {
+          158|   stable = uncompressManifestSet "stable" (import ../manifests/stable);
+             |   ^
+          159|   beta = uncompressManifestSet "beta" (import ../manifests/beta);
+
+       … while calling the 'throw' builtin
+         at /nix/store/g1lz2ac5lfa22szicz1rmziivnc8n4my-source/lib/rust-bin.nix:115:43:
+          114|         else
+          115|           manifests.stable.${channel} or (throw "Stable ${channel} is not available")
+             |                                           ^
+          116|       )
+
+       error: Stable 1.92.0 is not available
