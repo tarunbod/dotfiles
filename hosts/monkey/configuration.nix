@@ -12,7 +12,12 @@
 
   hardware.graphics = {
     enable = true;
-    enable32Bit = true;
+    package = pkgs.mesa;
+    extraPackages = with pkgs; [
+      vulkan-loader
+      vulkan-validation-layers
+      vulkan-extension-layer
+    ];
   };
 
   systemd.sleep.extraConfig = ''
@@ -64,7 +69,7 @@
   environment.systemPackages = [
     pkgs.linuxKernel.packages.linux_zen.nct6687d
     pkgs.awscli2
-    pkgs.blender-hip
+    pkgs.blender
     pkgs.discord
     pkgs.gcc
     pkgs.ghostty
@@ -77,6 +82,7 @@
     pkgs.pnpm_9
     pkgs.prismlauncher
     pkgs.rocmPackages.rocm-smi
+    pkgs.slack
     pkgs.spotify
     pkgs.uni-sync
     pkgs.yt-dlp
@@ -86,6 +92,8 @@
     pkgs.libGL
     pkgs.glib
   ];
+
+  programs.steam.enable = true;
 
   nixpkgs.config.rocmSupport = true;
   services.ollama.enable = true;
