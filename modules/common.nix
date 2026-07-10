@@ -3,6 +3,8 @@
 let
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
   homeDir = if isDarwin then "/Users/tarunbod" else "/home/tarunbod";
+  system = pkgs.stdenv.hostPlatform.system;
+  withoutTests = package: package.overrideAttrs (_: { doCheck = false; });
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -34,10 +36,10 @@ in
     pkgs.neovim
     pkgs.nodejs_24
 
-    nushell.packages.${pkgs.stdenv.hostPlatform.system}.nushell
-    nushell.legacyPackages.${pkgs.stdenv.hostPlatform.system}.nushellPlugins.polars
-    nushell.legacyPackages.${pkgs.stdenv.hostPlatform.system}.nushellPlugins.query
-    nushell.legacyPackages.${pkgs.stdenv.hostPlatform.system}.nushellPlugins.formats
+    (withoutTests nushell.packages.${system}.nushell)
+    (withoutTests nushell.legacyPackages.${system}.nushellPlugins.polars)
+    (withoutTests nushell.legacyPackages.${system}.nushellPlugins.query)
+    (withoutTests nushell.legacyPackages.${system}.nushellPlugins.formats)
 
     pkgs.ripgrep
     pkgs.starship
