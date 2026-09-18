@@ -14,6 +14,9 @@ vim.opt.scrolloff = 8
 vim.opt.colorcolumn = "80"
 vim.opt.background = "dark"
 
+vim.o.exrc = true
+vim.o.secure = true
+
 vim.cmd("autocmd Filetype go setlocal noexpandtab")
 
 local my_group = vim.api.nvim_create_augroup("tarunbod", {})
@@ -39,7 +42,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 vim.call("plug#begin")
 
-vim.call("plug#", "nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate", ["branch"] = "master" })
+vim.call("plug#", "nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate", ["branch"] = "main" })
 vim.call("plug#", "nvim-lua/plenary.nvim")
 vim.call("plug#", "nvim-telescope/telescope.nvim")
 vim.call("plug#", "nvim-tree/nvim-web-devicons")
@@ -150,7 +153,7 @@ vim.diagnostic.config({
   },
 })
 
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter.config").setup({
   highlight = {
     enable = true
   }
@@ -217,7 +220,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
     vim.keymap.set("n", "gr", ts_builtin.lsp_references, bufopts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set("n", "gh", vim.lsp.buf.hover, bufopts)
+    vim.keymap.set("n", "gh", function()
+      vim.lsp.buf.hover({ border = "rounded" })
+    end, bufopts)
     vim.keymap.set("n", "ge", vim.lsp.buf.rename, bufopts)
     -- vim.keymap.set("i", "<C-o>", vim.lsp.omnifunc, bufopts)
     vim.keymap.set("n", "<leader>d", vim.lsp.buf.type_definition, bufopts)

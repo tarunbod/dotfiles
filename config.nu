@@ -18,8 +18,9 @@ alias gc = git commit -m
 alias gp = git push
 
 def --env mkcd [ $dir_name: string ] {
-  mkdir $dir_name
-  cd $dir_name
+  let path = $dir_name | path expand
+  mkdir $path
+  cd $path
 }
 
 if ('~/.secrets.json' | path exists) {
