@@ -64,7 +64,7 @@ vim.call("plug#", "stevearc/dressing.nvim")
 vim.call("plug#", "MunifTanjim/nui.nvim")
 vim.call("plug#", "folke/snacks.nvim")
 vim.call("plug#", "NickvanDyke/opencode.nvim")
-vim.call("plug#", "dmtrKovalenko/fff.nvim", { ["do"] = "nix run .#release" })
+vim.call("plug#", "dmtrKovalenko/fff.nvim", { ["do"] = "cargo build -r" })
 
 vim.call("plug#end")
 
