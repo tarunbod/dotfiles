@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, nushell, ... }:
 
 {
   imports = [
@@ -20,12 +20,12 @@
     ];
   };
 
-  systemd.sleep.extraConfig = ''
-    AllowSuspend=no
-    AllowHibernation=no
-    AllowHybridSleep=no
-    AllowSuspendThenHibernate=no
-  '';
+  systemd.sleep.settings.Sleep = {
+    AllowSuspend = "no";
+    AllowHibernation = "no";
+    AllowHybridSleep = "no";
+    AllowSuspendThenHibernate = "no";
+  };
 
   networking.hostName = "monkey";
 
@@ -64,7 +64,13 @@
     description = "Tarun";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
-  users.defaultUserShell = pkgs.nushell;
+  users.defaultUserShell = nushell.packages.${pkgs.stdenv.hostPlatform.system}.nushell.overrideAttrs (oldAttrs: {
+    passthru = (oldAttrs.passthru or {}) // {
+      shellPath = "/bin/nu";
+    };
+    doCheck = false;
+    doInstallCheck = false;
+  });
 
   environment.systemPackages = [
     pkgs.linuxKernel.packages.linux_zen.nct6687d
@@ -76,6 +82,7 @@
     pkgs.git
     pkgs.glib
     pkgs.google-chrome
+    pkgs.just
     pkgs.lm_sensors
     pkgs.nodejs_24
     pkgs.opencode

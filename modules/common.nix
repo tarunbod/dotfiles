@@ -1,10 +1,22 @@
-{ pkgs, agenix, nushell, ... }:
+{
+  pkgs,
+  agenix,
+  nushell,
+  ...
+}:
 
 let
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
   homeDir = if isDarwin then "/Users/tarunbod" else "/home/tarunbod";
-  system = pkgs.stdenv.hostPlatform.system;
-  withoutTests = package: package.overrideAttrs (_: { doCheck = false; });
+  # system = pkgs.stdenv.hostPlatform.system;
+  # withoutTests = package: package.overrideAttrs (_: { doCheck = false; });
+  nushellPkg = nushell.packages.${pkgs.stdenv.hostPlatform.system}.nushell.overrideAttrs (oldAttrs: {
+    passthru = (oldAttrs.passthru or { }) // {
+      shellPath = "/bin/nu";
+    };
+    doCheck = false;
+    doInstallCheck = false;
+  });
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -14,7 +26,10 @@ in
     "flakes"
   ];
 
-  nix.settings.trusted-users = [ "root" "tarunbod" ];
+  nix.settings.trusted-users = [
+    "root"
+    "tarunbod"
+  ];
 
   environment.systemPackages = [
     pkgs.age
@@ -37,10 +52,15 @@ in
     pkgs.neovim
     pkgs.nodejs_24
 
-    (withoutTests nushell.packages.${system}.nushell)
-    (withoutTests nushell.legacyPackages.${system}.nushellPlugins.polars)
-    (withoutTests nushell.legacyPackages.${system}.nushellPlugins.query)
-    (withoutTests nushell.legacyPackages.${system}.nushellPlugins.formats)
+    # (withoutTests nushell.packages.${system}.nushell)
+    # (withoutTests nushell.legacyPackages.${system}.nushellPlugins.polars)
+    # (withoutTests nushell.legacyPackages.${system}.nushellPlugins.query)
+    # (withoutTests nushell.legacyPackages.${system}.nushellPlugins.formats)
+
+    nushellPkg
+    # nushell.legacyPackages.${pkgs.stdenv.hostPlatform.system}.nushellPlugins.polars
+    # nushell.legacyPackages.${pkgs.stdenv.hostPlatform.system}.nushellPlugins.query
+    # nushell.legacyPackages.${pkgs.stdenv.hostPlatform.system}.nushellPlugins.formats
 
     pkgs.ripgrep
     pkgs.starship

@@ -24,6 +24,9 @@
     nushell.url = "github:nushell/nushell?dir=scripts/nix";
     nushell.inputs.nixpkgs.follows = "nixpkgs";
     nushell.inputs.rust-overlay.follows = "rust-overlay";
+
+    opencode.url = "github:anomalyco/opencode";
+    opencode.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -34,6 +37,7 @@
       home-manager,
       uni-sync-curve,
       nushell,
+      opencode,
       ...
     }@inputs:
     let
@@ -41,7 +45,7 @@
         builder: system: extraModules:
         builder {
           inherit system;
-          specialArgs = { inherit agenix nushell inputs; };
+          specialArgs = { inherit agenix nushell opencode inputs; };
           modules = [ ./modules/common.nix ] ++ extraModules;
         };
       nixosSystem =
