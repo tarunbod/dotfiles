@@ -10,6 +10,9 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # NESDR SMArt: install RTL-SDR tools/udev rules and blacklist DVB drivers.
+  hardware.rtl-sdr.enable = true;
+
   hardware.graphics = {
     enable = true;
     package = pkgs.mesa;
@@ -62,7 +65,7 @@
   users.users.tarunbod = {
     isNormalUser = true;
     description = "Tarun";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "plugdev" ];
   };
   users.defaultUserShell = nushell.packages.${pkgs.stdenv.hostPlatform.system}.nushell.overrideAttrs (oldAttrs: {
     passthru = (oldAttrs.passthru or {}) // {
@@ -82,16 +85,18 @@
     pkgs.git
     pkgs.glib
     pkgs.google-chrome
+    pkgs.gqrx
     pkgs.just
     pkgs.lm_sensors
     pkgs.nodejs_24
     pkgs.opencode
-    pkgs.pnpm_9
+    pkgs.pnpm
     pkgs.prismlauncher
     pkgs.rocmPackages.rocm-smi
     pkgs.slack
     pkgs.spotify
     pkgs.uni-sync
+    pkgs.usbutils
     pkgs.yt-dlp
   ];
 
