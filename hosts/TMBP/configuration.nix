@@ -17,6 +17,7 @@
     pkgs.ipatool
     pkgs.yt-dlp
     pkgs.postgresql
+    pkgs.sdrpp
   ];
 
   system.defaults.dock.persistent-apps = [
