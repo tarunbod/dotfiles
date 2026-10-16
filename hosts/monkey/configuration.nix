@@ -89,7 +89,7 @@
     pkgs.just
     pkgs.lm_sensors
     pkgs.nodejs_24
-    pkgs.opencode
+    # pkgs.opencode
     pkgs.pnpm
     pkgs.prismlauncher
     pkgs.rocmPackages.rocm-smi
