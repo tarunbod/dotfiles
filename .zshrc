@@ -12,9 +12,10 @@ if [[ -f ~/.extra ]]; then
     source ~/.extra
 fi
 
-if command -v tmux >/dev/null 2>&1 && [[ ! -n $TMUX ]] && [[ ! -n $no_tmux ]]; then
-  tmux new -d -s 0 2>/dev/null
-  tmux attach -t 0
-elif command -v nu >/dev/null 2>&1; then
+if [ -n "$REX_BIN_DIR" ]; then
+  export PATH="$REX_BIN_DIR:$PATH"
+fi
+
+if [[ $- == *i* ]] && command -v nu >/dev/null 2>&1; then
   exec -l nu
 fi
