@@ -27,6 +27,9 @@
     opencode.url = "github:anomalyco/opencode";
     opencode.inputs.nixpkgs.follows = "nixpkgs";
 
+    rex.url = "https://pkgs.superlogical.com/rex/nix/snapshot.tar.gz";
+    rex.inputs.nixpkgs.follows = "nixpkgs";
+
     datadog.url = "git+ssh://git@github.com/ddoghq/datadog-nix";
     datadog.inputs.nixpkgs.follows = "nixpkgs";
     datadog.inputs.home-manager.follows = "home-manager";
@@ -41,6 +44,7 @@
       uni-sync-curve,
       nushell,
       opencode,
+      rex,
       ...
     }@inputs:
     let
@@ -78,6 +82,7 @@
           ./modules/languages.nix
           uni-sync-curve.nixosModules.default
           ./hosts/monkey/configuration.nix
+          rex.nixosModules.default
         ];
 
         chimp = nixosSystem "aarch64-linux" [
