@@ -1,5 +1,3 @@
-source $HOME/dotfiles/.os
-
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$PATH
 export EDITOR="nvim";
 export XDG_CONFIG_HOME="$HOME/.config";

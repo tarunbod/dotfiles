@@ -5,6 +5,14 @@
 
   homebrew.enable = true;
   homebrew.brews = [
+    "tmux"
+    "fortune"
+    "uv"
+    "node"
+    "tree"
+    "ffmpeg"
+    "wget"
+    "cloc"
     {
       name = "anomalyco/tap/opencode-v2";
       trusted = true;
@@ -18,6 +26,7 @@
     "rectangle"
     "ghostty"
     "obsidian"
+    "font-fira-code"
   ];
 
   # Dock
