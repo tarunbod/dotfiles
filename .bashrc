@@ -1,14 +1,24 @@
-[[ $- == *i* ]] || return
+if [[ -f /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
-source $HOME/dotfiles/.os
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/games:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+if [[ -f "$HOME/.cargo/env" ]]; then
+  source "$HOME/.cargo/env"
+fi
+if command -v rbenv >/dev/null 2>&1; then
+  eval "$(rbenv init -)"
+fi
 
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$PATH
 export EDITOR="nvim";
 export XDG_CONFIG_HOME="$HOME/.config";
 
-for file in ~/dotfiles/.{alias,functions,bash_prompt}; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file";
-done
+if [ -n "$REX_BIN_DIR" ]; then
+  export PATH="$REX_BIN_DIR:$PATH"
+fi
 
 if [[ -f ~/.extra ]]; then
     source ~/.extra
