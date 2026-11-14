@@ -10,7 +10,8 @@ fi
 ln -s ~/dotfiles/.{bashrc,inputrc,gitconfig,tmux.conf} ~/
 
 # neovim
-ln -s ~/dotfiles/nvim ~/.config/nvim
+mkdir -p ~/.config/nvim
+ln -s ~/dotfiles/nvim/init.lua ~/.config/nvim/init.lua
 
 # nushell
 mkdir -p ~/.config/nushell
