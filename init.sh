@@ -19,5 +19,5 @@ fi
 mkdir ~/bin
 
 # Install programs/packages
-source "~/.${SHELL##*/}rc"
+source "${HOME}/.${SHELL##*/}rc"
 source ~/dotfiles/install.sh
