@@ -90,20 +90,19 @@ in
           stateVersion = "25.05";
 
           file = {
-            zshrc = {
-              source = ../.zshrc;
-              target = ".zshrc";
+            gitconfig = {
+              source = ../.gitconfig;
+              target = ".gitconfig";
             };
 
-            ghostty = {
-              target = ".config/ghostty/config";
-              text = ''
-                font-family = "FiraCode Nerd Font Mono"
-                link-url
+            tmuxconf = {
+              source = ../.tmux.conf;
+              target = ".tmux.conf";
+            };
 
-                theme = "Rose Pine"
-                font-size = ${if isDarwin then "12" else "11"}
-              '';
+            nvim = {
+              source = ../.config/nvim/init.lua;
+              target = ".config/nvim/init.lua";
             };
 
             nushell = {

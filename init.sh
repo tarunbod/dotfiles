@@ -1,6 +1,3 @@
-# Ask for sudo permission upfront
-sudo -v
-
 # Symlink shell init files into home directory
 if [[ -f ~/.bashrc ]]; then
   mv ~/.bashrc ~/.bashrc.old
@@ -10,24 +7,17 @@ if [[ -f ~/.zshrc ]]; then
   mv ~/.zshrc ~/.zshrc.old
 fi
 
-ln -s ~/dotfiles/.{bashrc,zshrc,gitconfig,tmux.conf} ~/
+if [[ ! -f ~/.bashrc ]]; then
+  ln -s ~/dotfiles/.bashrc ~/.bashrc
+fi
 
-# neovim
-mkdir -p ~/.config/nvim
-ln -s ~/dotfiles/nvim/init.lua ~/.config/nvim/init.lua
-
-# nushell
-mkdir -p ~/.config/nushell
-ln -s ~/dotfiles/config.nu ~/.config/nushell/config.nu
-
-# starship
-ln -s ~/dotfiles/starship.toml ~/.config/starship.toml
+if [[ ! -f ~/.zshrc ]]; then
+  ln -s ~/dotfiles/.zshrc ~/.zshrc
+fi
 
 # create home bin dir
 mkdir ~/bin
 
 # Install programs/packages
+source "~/.${SHELL##*/}rc"
 source ~/dotfiles/install.sh
-
-# Reload the shell to have changes take effect
-exec $SHELL -l
