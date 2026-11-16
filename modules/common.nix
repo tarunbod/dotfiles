@@ -101,7 +101,7 @@ in
             };
 
             nvim = {
-              source = ../.config/nvim/init.lua;
+              source = ../nvim/init.lua;
               target = ".config/nvim/init.lua";
             };
 
