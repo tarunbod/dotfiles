@@ -18,6 +18,12 @@ fi
 # create home bin dir
 mkdir ~/bin
 
-# Install programs/packages
-source "${HOME}/.${SHELL##*/}rc"
-source ~/dotfiles/install.sh
+# generate ssh key
+if [[ ! -f ~/.ssh/id_ed25519 ]]; then
+    read -p "ssh key not found. Do you want to generate it? [y/n]: "
+    [[ $REPLY = y* ]] && ssh-keygen -t ed25519 -N "" -f ~/.ssh/id_ed25519 -C "$(whoami)@$(hostname)"
+fi
+
+# Ask for confirmation and install programs/packages
+read -p "Do you want to install programs and packages? [y/n]: "
+[[ $REPLY = y* ]] && exec -l $SHELL ~/dotfiles/install.sh
