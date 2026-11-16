@@ -9,13 +9,5 @@
     pkgs.kind
     pkgs.k9s
   ];
-
-  homebrew.brews = [
-    "duckdb"
-  ];
-
-  homebrew.casks = [
-    "orbstack"
-  ];
 }
 

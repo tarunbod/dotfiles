@@ -87,7 +87,7 @@
           ./hosts/TMBP/configuration.nix
         ];
 
-        QRLPDYDF2P = darwinSystem [
+        work = darwinSystem [
           ./modules/languages.nix
           ./hosts/QRLPDYDF2P/configuration.nix
         ];

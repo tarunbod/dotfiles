@@ -5,14 +5,14 @@
 
   homebrew.enable = true;
   homebrew.brews = [
-    "tmux"
-    "fortune"
-    "uv"
-    "node"
-    "tree"
-    "ffmpeg"
-    "wget"
     "cloc"
+    "ffmpeg"
+    "fortune"
+    "node"
+    "tmux"
+    "tree"
+    "uv"
+    "wget"
     {
       name = "anomalyco/tap/opencode-v2";
       trusted = true;
@@ -20,13 +20,14 @@
   ];
 
   homebrew.casks = [
-    "google-chrome"
     "bitwarden"
+    "font-fira-code"
+    "ghostty"
+    "google-chrome"
+    "obsidian"
+    "orbstack"
     "raycast"
     "rectangle"
-    "ghostty"
-    "obsidian"
-    "font-fira-code"
   ];
 
   # Dock
