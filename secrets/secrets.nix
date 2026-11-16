@@ -5,5 +5,8 @@ let
   allKeys = [ monkey TMBP chimp ];
 in
 {
-  "secrets.age".publicKeys = allKeys;
+  "secrets.age" = {
+    publicKeys = allKeys;
+    armor = true;
+  };
 }
