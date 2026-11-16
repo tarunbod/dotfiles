@@ -1,3 +1,5 @@
+set -ex
+
 # Symlink shell init files into home directory
 if [[ -f ~/.bashrc ]]; then
   mv ~/.bashrc ~/.bashrc.old

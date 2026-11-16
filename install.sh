@@ -8,17 +8,9 @@ esac
 export OS
 
 if [[ $OS == "macos" ]]; then
-    function install_brew() {
-        if [[ $1 = "-f" ]]; then
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-            brew tap caskroom/cask
-            brew tap homebrew/dupes
-        fi
-    }
-
     if ! command -v brew > /dev/null 2>&1; then
         read "REPLY?homebrew not found. Do you want to install it? [y/n]: "
-        [[ $REPLY = y* ]] && install_brew -f
+        [[ $REPLY = y* ]] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
 
     if ! command -v nix > /dev/null 2>&1; then
