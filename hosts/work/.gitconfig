@@ -1,0 +1,25 @@
+[user]
+	email = tarun.boddupalli@datadoghq.com
+	name = Tarun Boddupalli
+[push]
+	default = simple
+	autoSetupRemote = true
+[credentials]
+	username = tarun-boddupalli_ddog
+[commit]
+	gpgsign = false
+[github]
+	user = tarun-boddupalli_ddog
+[alias]
+	pushu = push -u origin HEAD
+[diff]
+  external = difft
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[merge]
+    conflictstyle = diff3
+[diff]
+    colorMoved = default

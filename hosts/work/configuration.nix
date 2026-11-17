@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  username,
+  lib,
+  ...
+}:
 
 {
   system.stateVersion = 6;
@@ -10,5 +15,9 @@
     pkgs.kind
     pkgs.k9s
   ];
-}
 
+  home-manager.users."${username}".home.file.gitconfig = lib.mkForce {
+    source = ./.gitconfig;
+    target = ".gitconfig";
+  };
+}
