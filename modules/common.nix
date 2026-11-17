@@ -1,22 +1,14 @@
 {
   pkgs,
   agenix,
-  nushell,
+  username,
   ...
 }:
 
 let
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
-  homeDir = if isDarwin then "/Users/tarunbod" else "/home/tarunbod";
-  # system = pkgs.stdenv.hostPlatform.system;
-  # withoutTests = package: package.overrideAttrs (_: { doCheck = false; });
-  nushellPkg = nushell.packages.${pkgs.stdenv.hostPlatform.system}.nushell.overrideAttrs (oldAttrs: {
-    passthru = (oldAttrs.passthru or { }) // {
-      shellPath = "/bin/nu";
-    };
-    doCheck = false;
-    doInstallCheck = false;
-  });
+  homeDir = if isDarwin then "/Users/${username}" else "/home/${username}";
+  nuPath = if isDarwin then "/opt/homebrew/bin/nu" else "/run/current-system/sw/bin/nu";
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -28,7 +20,7 @@ in
 
   nix.settings.trusted-users = [
     "root"
-    "tarunbod"
+    "${username}"
   ];
 
   environment.systemPackages = [
@@ -52,16 +44,6 @@ in
     pkgs.neovim
     pkgs.nodejs_24
 
-    # (withoutTests nushell.packages.${system}.nushell)
-    # (withoutTests nushell.legacyPackages.${system}.nushellPlugins.polars)
-    # (withoutTests nushell.legacyPackages.${system}.nushellPlugins.query)
-    # (withoutTests nushell.legacyPackages.${system}.nushellPlugins.formats)
-
-    nushellPkg
-    # nushell.legacyPackages.${pkgs.stdenv.hostPlatform.system}.nushellPlugins.polars
-    # nushell.legacyPackages.${pkgs.stdenv.hostPlatform.system}.nushellPlugins.query
-    # nushell.legacyPackages.${pkgs.stdenv.hostPlatform.system}.nushellPlugins.formats
-
     pkgs.ripgrep
     pkgs.starship
     pkgs.tmux
@@ -70,7 +52,7 @@ in
     agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
-  users.users.tarunbod.home = homeDir;
+  users.users."${username}".home = homeDir;
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -81,11 +63,11 @@ in
       agenix.homeManagerModules.default
     ];
 
-    users.tarunbod =
+    users."${username}" =
       { lib, ... }:
       {
         home = {
-          username = "tarunbod";
+          username = "${username}";
           homeDirectory = homeDir;
           stateVersion = "25.05";
 
@@ -118,7 +100,7 @@ in
 
           activation = {
             shell-autoload = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-              run /run/current-system/sw/bin/nu -c "
+              run ${nuPath} -c "
                 let autoload_dir = (\$nu.data-dir | path join 'vendor/autoload');
                 mkdir \$autoload_dir;
                 /run/current-system/sw/bin/starship init nu | save -f (\$autoload_dir | path join 'starship.nu');

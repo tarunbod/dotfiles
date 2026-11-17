@@ -1,4 +1,4 @@
-{ pkgs, nushell, ... }:
+{ pkgs, username, nushell, ... }:
 
 {
   imports = [
@@ -62,7 +62,7 @@
     pulse.enable = true;
   };
 
-  users.users.tarunbod = {
+  users.users."${username}" = {
     isNormalUser = true;
     description = "Tarun";
     extraGroups = [ "networkmanager" "wheel" "docker" "plugdev" ];

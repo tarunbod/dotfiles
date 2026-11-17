@@ -1,4 +1,4 @@
-{ pkgs, system, agenix, ... }:
+{ pkgs, system, agenix, username, ... }:
 
 {
   imports = [
@@ -33,7 +33,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  users.users.tarunbod = {
+  users.users."${username}" = {
     isNormalUser = true;
     description = "Tarun";
     extraGroups = [ "networkmanager" "wheel" ];

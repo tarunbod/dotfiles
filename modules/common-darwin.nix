@@ -1,7 +1,7 @@
-{ ... }:
+{ username, ... }:
 
 {
-  system.primaryUser = "tarunbod";
+  system.primaryUser = username;
 
   homebrew.enable = true;
   homebrew.brews = [
@@ -9,6 +9,7 @@
     "ffmpeg"
     "fortune"
     "node"
+    "nushell"
     "tmux"
     "tree"
     "uv"

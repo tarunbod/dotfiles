@@ -41,15 +41,15 @@
     }@inputs:
     let
       buildSystem =
-        builder: system: extraModules:
+        username: builder: system: extraModules:
         builder {
           inherit system;
-          specialArgs = { inherit agenix nushell opencode inputs; };
+          specialArgs = { inherit username agenix nushell opencode inputs; };
           modules = [ ./modules/common.nix ] ++ extraModules;
         };
       nixosSystem =
         system: extraModules:
-        buildSystem (nixpkgs.lib.nixosSystem) system (
+        buildSystem "tarunbod" (nixpkgs.lib.nixosSystem) system (
           [
             ./modules/common-linux.nix
             home-manager.nixosModules.home-manager
@@ -58,8 +58,8 @@
           ++ extraModules
         );
       darwinSystem =
-        extraModules:
-        buildSystem (nix-darwin.lib.darwinSystem) "aarch64-darwin" (
+        username: extraModules:
+        buildSystem username (nix-darwin.lib.darwinSystem) "aarch64-darwin" (
           [
             ./modules/common-darwin.nix
             home-manager.darwinModules.home-manager
@@ -82,14 +82,14 @@
       };
 
       darwinConfigurations = {
-        TMBP = darwinSystem [
+        TMBP = darwinSystem "tarunbod" [
           ./modules/languages.nix
           ./hosts/TMBP/configuration.nix
         ];
 
-        work = darwinSystem [
+        work = darwinSystem "tarun.boddupalli" [
           ./modules/languages.nix
-          ./hosts/QRLPDYDF2P/configuration.nix
+          ./hosts/work/configuration.nix
         ];
       };
     };

@@ -17,6 +17,6 @@ if [[ $OS == "macos" ]]; then
         read "REPLY?nix not found. Do you want to install it? [y/n]: "
         [[ $REPLY = y* ]] && \
           curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh && \
-          exec -l $SHELL ~/dotfiles/install-nix-darwin.sh
+          echo "Reload shell and install nix-darwin with ~/dotfiles/install-nix-darwin.sh"
     fi
 fi
