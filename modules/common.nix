@@ -36,7 +36,6 @@ in
     pkgs.ffmpeg
     pkgs.go
     pkgs.gh
-    pkgs.github-mcp-server
     pkgs.git-lfs
     pkgs.jq
     pkgs.jujutsu
