@@ -76,6 +76,12 @@
     IsAnalog = false;
   };
 
+  # Keyboard: Caps Lock -> Control
+  system.keyboard = {
+    enableKeyMapping = true;
+    remapCapsLockToControl = true;
+  };
+
   # Trackpad
   system.defaults.trackpad = {
     # tap to click off
