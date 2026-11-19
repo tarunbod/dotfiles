@@ -70,32 +70,36 @@ in
           homeDirectory = homeDir;
           stateVersion = "25.05";
 
-          file = {
-            gitconfig = {
-              source = ../.gitconfig;
-              target = ".gitconfig";
-            };
+          file = lib.mkMerge [
+            {
+              tmuxconf = {
+                source = ../.tmux.conf;
+                target = ".tmux.conf";
+              };
 
-            tmuxconf = {
-              source = ../.tmux.conf;
-              target = ".tmux.conf";
-            };
+              nvim = {
+                source = ../nvim/init.lua;
+                target = ".config/nvim/init.lua";
+              };
 
-            nvim = {
-              source = ../nvim/init.lua;
-              target = ".config/nvim/init.lua";
-            };
+              nushell = {
+                source = ../config.nu;
+                target = ".config/nushell/config.nu";
+              };
 
-            nushell = {
-              source = ../config.nu;
-              target = ".config/nushell/config.nu";
-            };
+              starship = {
+                source = ../starship.toml;
+                target = ".config/starship.toml";
+              };
+            }
 
-            starship = {
-              source = ../starship.toml;
-              target = ".config/starship.toml";
-            };
-          };
+            (lib.mkIf (username == "tarunbod") {
+              gitconfig = {
+                source = ../.gitconfig;
+                target = ".gitconfig";
+              };
+            })
+          ];
 
           activation = {
             shell-autoload = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

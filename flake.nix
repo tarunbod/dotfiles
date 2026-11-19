@@ -2,7 +2,7 @@
   description = "NixOS config";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -26,6 +26,10 @@
 
     opencode.url = "github:anomalyco/opencode";
     opencode.inputs.nixpkgs.follows = "nixpkgs";
+
+    datadog.url = "git+ssh://git@github.com/ddoghq/datadog-nix";
+    datadog.inputs.nixpkgs.follows = "nixpkgs";
+    datadog.inputs.home-manager.follows = "home-manager";
   };
 
   outputs =
