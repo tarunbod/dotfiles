@@ -13,6 +13,7 @@ in
     pkgs.file
     pkgs.gcc
     pkgs.unzip
+    pkgs.claude-code
     nushellPkg
     inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];

@@ -122,9 +122,6 @@
 
   services.rex.loginServer = {
     enable = true;
-    accounts.tarunbod.principals = [ "anonymous" ];
-    extraListen = [ "100.67.177.104:49375" ];
-    allowAnonymous = true;
   };
 
   # This value determines the NixOS release from which the default
