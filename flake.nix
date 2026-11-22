@@ -50,7 +50,7 @@
         username: builder: system: extraModules:
         builder {
           inherit system;
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit username inputs; };
           modules = [ ./modules/common.nix ] ++ extraModules;
         };
       nixosSystem =
