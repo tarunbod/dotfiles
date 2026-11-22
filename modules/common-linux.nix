@@ -1,6 +1,6 @@
-{ pkgs, nushell, opencode, ... }:
+{ pkgs, inputs, ... }:
 let
-  nushellPkg = nushell.packages.${pkgs.stdenv.hostPlatform.system}.nushell.overrideAttrs (oldAttrs: {
+  nushellPkg = inputs.nushell.packages.${pkgs.stdenv.hostPlatform.system}.nushell.overrideAttrs (oldAttrs: {
     passthru = (oldAttrs.passthru or { }) // {
       shellPath = "/bin/nu";
     };
@@ -14,7 +14,7 @@ in
     pkgs.gcc
     pkgs.unzip
     nushellPkg
-    opencode.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   programs.nix-ld.enable = true;

@@ -1,4 +1,4 @@
-{ pkgs, system, agenix, username, ... }:
+{ pkgs, username, inputs, ... }:
 
 {
   imports = [
@@ -62,7 +62,7 @@
     pkgs.tmux
     pkgs.wget
 
-    agenix.packages.${system}.default
+    inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   services.caddy = {

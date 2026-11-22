@@ -1,7 +1,7 @@
 {
   pkgs,
-  agenix,
   username,
+  inputs,
   ...
 }:
 
@@ -9,6 +9,13 @@ let
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
   homeDir = if isDarwin then "/Users/${username}" else "/home/${username}";
   nuPath = if isDarwin then "/opt/homebrew/bin/nu" else "/run/current-system/sw/bin/nu";
+  nushellPkg = inputs.nushell.packages.${pkgs.stdenv.hostPlatform.system}.nushell.overrideAttrs (oldAttrs: {
+    passthru = (oldAttrs.passthru or { }) // {
+      shellPath = "/bin/nu";
+    };
+    doCheck = false;
+    doInstallCheck = false;
+  });
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -42,13 +49,14 @@ in
     pkgs.kubectl
     pkgs.neovim
     pkgs.nodejs_24
-
     pkgs.ripgrep
     pkgs.starship
     pkgs.tmux
     pkgs.wget
 
-    agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
+    nushellPkg
+
+    inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   users.users."${username}".home = homeDir;
@@ -59,7 +67,7 @@ in
     backupFileExtension = "backup";
 
     sharedModules = [
-      agenix.homeManagerModules.default
+      inputs.agenix.homeManagerModules.default
     ];
 
     users."${username}" =

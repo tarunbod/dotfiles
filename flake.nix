@@ -42,8 +42,6 @@
       agenix,
       home-manager,
       uni-sync-curve,
-      nushell,
-      opencode,
       rex,
       ...
     }@inputs:
@@ -52,7 +50,7 @@
         username: builder: system: extraModules:
         builder {
           inherit system;
-          specialArgs = { inherit username agenix nushell opencode inputs; };
+          specialArgs = { inherit inputs; };
           modules = [ ./modules/common.nix ] ++ extraModules;
         };
       nixosSystem =

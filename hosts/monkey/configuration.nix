@@ -1,4 +1,4 @@
-{ pkgs, username, nushell, ... }:
+{ pkgs, username, inputs, ... }:
 
 {
   imports = [
@@ -67,7 +67,7 @@
     description = "Tarun";
     extraGroups = [ "networkmanager" "wheel" "docker" "plugdev" ];
   };
-  users.defaultUserShell = nushell.packages.${pkgs.stdenv.hostPlatform.system}.nushell.overrideAttrs (oldAttrs: {
+  users.defaultUserShell = inputs.nushell.packages.${pkgs.stdenv.hostPlatform.system}.nushell.overrideAttrs (oldAttrs: {
     passthru = (oldAttrs.passthru or {}) // {
       shellPath = "/bin/nu";
     };
@@ -89,7 +89,6 @@
     pkgs.just
     pkgs.lm_sensors
     pkgs.nodejs_24
-    # pkgs.opencode
     pkgs.pnpm
     pkgs.prismlauncher
     pkgs.rocmPackages.rocm-smi
