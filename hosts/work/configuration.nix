@@ -1,9 +1,12 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }:
-
+let
+ ddpkgs = inputs.datadog.packages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   system.stateVersion = 6;
   system.primaryUser = lib.mkForce "tarun.boddupalli";
@@ -21,7 +24,15 @@
   };
 
   environment.systemPackages = [
-    pkgs.kind
-    pkgs.k9s
+    pkgs.d2
+
+    ddpkgs.bzl
+    ddpkgs.canary
+    ddpkgs.datadog-ci
+    ddpkgs.dd-auth
+    ddpkgs.ddtool
+    (ddpkgs.gopls.overrideAttrs { doCheck = false; })
+    ddpkgs.workspaces
+    ddpkgs.workspaces-tool-helper
   ];
 }
