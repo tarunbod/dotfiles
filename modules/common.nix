@@ -9,13 +9,6 @@ let
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
   homeDir = if isDarwin then "/Users/${username}" else "/home/${username}";
   nuPath = if isDarwin then "/opt/homebrew/bin/nu" else "/run/current-system/sw/bin/nu";
-  nushellPkg = inputs.nushell.packages.${pkgs.stdenv.hostPlatform.system}.nushell.overrideAttrs (oldAttrs: {
-    passthru = (oldAttrs.passthru or { }) // {
-      shellPath = "/bin/nu";
-    };
-    doCheck = false;
-    doInstallCheck = false;
-  });
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -53,8 +46,6 @@ in
     pkgs.starship
     pkgs.tmux
     pkgs.wget
-
-    nushellPkg
 
     inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];

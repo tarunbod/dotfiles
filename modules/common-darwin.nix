@@ -22,6 +22,7 @@
 
   homebrew.casks = [
     "bitwarden"
+    "claude-code@latest"
     "font-fira-code"
     "ghostty"
     "google-chrome"
