@@ -23,6 +23,15 @@ def --env mkcd [ $dir_name: string ] {
   cd $path
 }
 
+def os-rebuild [config?: string] {
+  let flake_config = $config | default (hostname | split row '.' | first);
+  if (uname | get operating-system | str lowercase) == 'darwin' {
+    sudo darwin-rebuild switch --flake $"/Users/(whoami)/dotfiles/.#($flake_config)"
+  } else {
+    sudo nixos-rebuild switch --flake $"/home/(whoami)/dotfiles/.#($flake_config)"
+  }
+}
+
 if ('~/.secrets.json' | path exists) {
   load-env (open ~/.secrets.json)
 }
