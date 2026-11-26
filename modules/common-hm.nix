@@ -16,22 +16,9 @@
     ];
   };
 
-  home.packages = [
-    pkgs.age
-    pkgs.carapace
-    pkgs.difftastic
-    pkgs.fortune
-    pkgs.go
+  home.packages = (import ./cli-packages.nix { inherit pkgs inputs; }) ++ [
     pkgs.git
-    pkgs.jq
-    pkgs.neovim
     pkgs.nushell
-    pkgs.ripgrep
-    pkgs.starship
-    pkgs.tmux
-    pkgs.wget
-
-    inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   home.activation.shell-autoload = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

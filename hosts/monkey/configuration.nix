@@ -57,7 +57,6 @@
     pkgs.awscli2
     pkgs.blender
     pkgs.discord
-    pkgs.gcc
     pkgs.ghostty
     pkgs.git
     pkgs.glib
@@ -65,7 +64,6 @@
     pkgs.gqrx
     pkgs.just
     pkgs.lm_sensors
-    pkgs.nodejs_24
     pkgs.pnpm
     pkgs.prismlauncher
     pkgs.rocmPackages.rocm-smi

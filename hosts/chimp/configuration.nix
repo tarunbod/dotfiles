@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -25,13 +25,6 @@
     pkgs.nushellPlugins.polars
     pkgs.nushellPlugins.query
     pkgs.nushellPlugins.formats
-
-    pkgs.ripgrep
-    pkgs.starship
-    pkgs.tmux
-    pkgs.wget
-
-    inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   services.caddy = {
