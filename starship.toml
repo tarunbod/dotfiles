@@ -7,7 +7,7 @@ $git_branch\
 $git_status\
 $fill\
 $time\n\
-[󱞪](fg:accent) \
+[󱞪](fg:white) \
 """
 
 palette = "charcoal-atelier"
@@ -17,6 +17,7 @@ palette = "charcoal-atelier"
 background = '#161616'
 surface = '#262626'
 text = '#d6d2cc'
+white = '#efece7'
 accent = '#e05d3a'
 red = '#d96a4d'
 sage = '#9aab84'

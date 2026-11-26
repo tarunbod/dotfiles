@@ -18,8 +18,9 @@
         };
 
         nvim = {
-          source = ../nvim/init.lua;
-          target = ".config/nvim/init.lua";
+          source = ../nvim;
+          target = ".config/nvim";
+          recursive = true;
         };
 
         rex = {
