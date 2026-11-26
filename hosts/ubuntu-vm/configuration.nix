@@ -1,0 +1,20 @@
+{
+  pkgs,
+  ...
+}:
+{
+  home.packages = [
+    pkgs.bat
+    pkgs.btop
+    pkgs.bun
+    pkgs.cachix
+    pkgs.fastfetch
+    pkgs.ffmpeg
+    pkgs.gh
+    pkgs.git-lfs
+    pkgs.jujutsu
+    pkgs.kubectl
+    pkgs.nodejs_24
+    pkgs.rustup
+  ];
+}

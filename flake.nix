@@ -52,7 +52,7 @@
         system: extraModules:
         buildSystem "tarunbod" (nixpkgs.lib.nixosSystem) system (
           [
-            ./modules/common-linux.nix
+            ./modules/common-nixos.nix
             home-manager.nixosModules.home-manager
             agenix.nixosModules.default
           ]
@@ -68,6 +68,22 @@
           ]
           ++ extraModules
         );
+      homeManagerSystem =
+        username: system: extraModules:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
+          extraSpecialArgs = {
+            inherit inputs username;
+            homeDir = "/home/${username}";
+          };
+          modules = [
+            agenix.homeManagerModules.default
+            rex.homeManagerModules.default
+            ./modules/home.nix
+            ./modules/common-hm.nix
+          ]
+          ++ extraModules;
+        };
     in
     {
       nixosConfigurations = {
@@ -95,13 +111,9 @@
         ];
       };
 
-      homeConfigurations.tarunbod = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-linux;
-        extraSpecialArgs = { inherit inputs; username = "tarunbod"; homeDir = "/home/tarunbod"; };
-        modules = [
-          agenix.homeManagerModules.default
-          ./modules/home.nix
-          ./modules/home-standalone.nix
+      homeConfigurations = {
+        ubuntu-vm = homeManagerSystem "tarunbod" "aarch64-linux" [
+          ./hosts/ubuntu-vm/configuration.nix
         ];
       };
     };
