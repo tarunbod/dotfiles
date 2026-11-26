@@ -8,8 +8,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
   # NESDR SMArt: install RTL-SDR tools/udev rules and blacklist DVB drivers.
   hardware.rtl-sdr.enable = true;
 
@@ -32,23 +30,6 @@
 
   networking.hostName = "monkey";
 
-  networking.networkmanager.enable = true;
-
-  time.timeZone = "America/New_York";
-
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
   services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
@@ -62,11 +43,7 @@
     pulse.enable = true;
   };
 
-  users.users."${username}" = {
-    isNormalUser = true;
-    description = "Tarun";
-    extraGroups = [ "networkmanager" "wheel" "docker" "plugdev" ];
-  };
+  users.users."${username}".extraGroups = [ "docker" "plugdev" ];
   users.defaultUserShell = inputs.nushell.packages.${pkgs.stdenv.hostPlatform.system}.nushell.overrideAttrs (oldAttrs: {
     passthru = (oldAttrs.passthru or {}) // {
       shellPath = "/bin/nu";
@@ -109,16 +86,9 @@
   nixpkgs.config.rocmSupport = true;
   services.ollama.enable = true;
 
-  services.tailscale.enable = true;
-
   virtualisation.docker.enable = true;
 
-  services.openssh.enable = true;
-  programs.ssh.startAgent = true;
-
   services.uni-sync-curve.enable = true;
-
-  networking.firewall.enable = false;
 
   services.rex.loginServer = {
     enable = true;
