@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
 
 # Symlink shell init files into home directory
 if [[ -f ~/.bashrc ]]; then
@@ -27,8 +27,7 @@ if [[ ! -f ~/.ssh/id_ed25519 ]]; then
     read -p "ssh key not found. Do you want to generate it? [y/n]: "
     [[ $REPLY = y* ]] && \
       ssh-keygen -t ed25519 -N "" -f ~/.ssh/id_ed25519 -C "$(whoami)@$(hostname)" && \
-      echo "Add the public key to your github account: $(cat ~/.ssh/id_ed25519.pub)" && \
-      git -C ~/dotfiles remote set-url origin git@github.com:tarunbod/dotfiles.git
+      echo -e "\n=====\n\nAdd the public key to your github account from another machine:\n\necho \"$(cat ~/.ssh/id_ed25519.pub)\" | gh ssh-key add -t $(hostname) -\n\n=====\n"
 fi
 
 # Ask for confirmation and install programs/packages
