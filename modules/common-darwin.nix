@@ -1,19 +1,13 @@
-{ username, ... }:
+{ pkgs, username, ... }:
 
 {
   system.primaryUser = username;
 
   homebrew.enable = true;
   homebrew.brews = [
-    "cloc"
-    "ffmpeg"
-    "fortune"
     "node"
     "nushell"
-    "tmux"
-    "tree"
-    "uv"
-    "wget"
+    "reattach-to-user-namespace"
     {
       name = "anomalyco/tap/opencode-v2";
       trusted = true;
@@ -29,6 +23,10 @@
     "orbstack"
     "raycast"
     "rectangle"
+  ];
+
+  environment.systemPackages = [
+    pkgs.cloc
   ];
 
   # Dock

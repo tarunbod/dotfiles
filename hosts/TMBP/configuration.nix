@@ -6,16 +6,66 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   homebrew.casks = [
+    "audacity"
+    "balenaetcher"
+    "blender"
+    "codex"
     "discord"
+    "localsend"
+    "mitmproxy"
     "signal"
+    "slack"
     "spotify"
-    "inkscape"
+    "t3-code"
+    "terminal-browser"
+    "utm"
+    "wireshark-app"
+  ];
+
+  homebrew.brews = [
+    "awscli"
+    "azure-cli"
+    "bazel"
+    "caddy"
+    "cmake"
+    "duckdb"
+    "eigen"
+    "exiftool"
+    "fx"
+    "fzf"
+    "helm"
+    "hf"
+    "imagemagick"
+    "ipatool"
+    "john"
+    "k9s"
+    "netcat"
+    "nmap"
+    "ntfy"
+    "openjdk"
+    "openvpn"
+    "picotool"
+    "postgresql"
+    "pwncat"
+    "radare2"
+    "railway"
+    "rbenv"
+    "redis"
+    "shellcheck"
+    "socat"
+    "sqlmap"
+    "sshpass"
+    "tesseract"
+    "usbutils"
+    "watch"
+    "websocat"
+    "xq"
+    "yq"
+    "yt-dlp"
+    "zig"
   ];
 
   environment.systemPackages = [
-    pkgs.ipatool
-    pkgs.yt-dlp
-    pkgs.postgresql
     pkgs.sdrpp
   ];
 
@@ -30,6 +80,7 @@
     { app = "/Applications/Spotify.app"; }
     { spacer = {}; }
     { app = "/Applications/Rex.app"; }
+    { app = "/Applications/T3 Code (Beta).app"; }
     { app = "/System/Applications/System Settings.app"; }
   ];
 

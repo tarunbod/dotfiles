@@ -18,11 +18,11 @@
   pkgs.jujutsu
   pkgs.kubectl
   pkgs.neovim
-  pkgs.nodejs_24
   pkgs.ripgrep
   pkgs.starship
   pkgs.tmux
   pkgs.wget
+  pkgs.zoxide
 
   inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
 ]
