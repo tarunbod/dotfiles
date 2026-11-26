@@ -112,7 +112,7 @@
       };
 
       homeConfigurations = {
-        tarunbod-ubuntu-vm = homeManagerSystem "tarunbod" "aarch64-linux" [
+        ubuntu = homeManagerSystem "tarunbod" "aarch64-linux" [
           ./hosts/ubuntu-vm/configuration.nix
         ];
       };
