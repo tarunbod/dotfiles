@@ -5,3 +5,5 @@ mkdir $autoload_dir;
 starship init nu | save -f ($autoload_dir | path join 'starship.nu');
 carapace _carapace nushell | save -f ($autoload_dir | path join 'carapace.nu');
 jj util completion nushell | save -f ($autoload_dir | path join 'jj.nu');
+
+git -C ~/dotfiles remote set-url origin git@github.com:tarunbod/dotfiles.git
