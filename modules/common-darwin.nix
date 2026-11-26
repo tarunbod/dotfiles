@@ -23,6 +23,7 @@
     "orbstack"
     "raycast"
     "rectangle"
+    "tailscale-app"
   ];
 
   environment.systemPackages = [
