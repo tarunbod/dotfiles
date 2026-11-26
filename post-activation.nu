@@ -8,7 +8,7 @@ if (which jj | is-not-empty) {
   ^jj util completion nushell | save -f ($autoload_dir | path join 'jj.nu');
 }
 
-let vim_plugged_path = ($env.HOME | path join "/.local/share/nvim/site/autoload/plug.vim");
+let vim_plugged_path = ($env.HOME | path join ".local/share/nvim/site/autoload/plug.vim");
 if not ($vim_plugged_path | path exists) {
   mkdir ($vim_plugged_path | path dirname)
   try {
@@ -18,6 +18,6 @@ if not ($vim_plugged_path | path exists) {
   }
 }
 
-if (^cat ~/.ssh/*.pub | lines | each { split row ' ' | drop 1 | str join ' ' } | intersect (http get https://github.com/tarunbod.keys | lines)) {
+if (^cat ~/.ssh/*.pub | lines | each { split row ' ' | drop 1 | str join ' ' } | intersect (http get https://github.com/tarunbod.keys | lines) | is-not-empty) {
   git -C ~/dotfiles remote set-url origin git@github.com:tarunbod/dotfiles.git
 }
