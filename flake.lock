@@ -158,9 +158,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "rust-overlay": [
-          "rust-overlay"
-        ]
+        "rust-overlay": "rust-overlay"
       },
       "locked": {
         "dir": "scripts/nix",
@@ -225,22 +223,43 @@
         "nushell": "nushell",
         "opencode": "opencode",
         "rex": "rex",
-        "rust-overlay": "rust-overlay",
         "uni-sync-curve": "uni-sync-curve"
       }
     },
     "rust-overlay": {
       "inputs": {
         "nixpkgs": [
+          "nushell",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1794820811,
-        "narHash": "sha256-z43rmhOmnCG4gN2EcSm4tzHUSRg7DG5SaGscYreafzg=",
+        "lastModified": 1795604585,
+        "narHash": "sha256-rsB/BPQf+Q9p7O7WhqtmG64b3F175ly7swafxWS1etM=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "2ff7d39b901d79ee26d26f9fa32f90511eecaa0e",
+        "rev": "67021b279bfffe654a0201ede805748a255ae5a7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "nixpkgs": [
+          "uni-sync-curve",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1795604585,
+        "narHash": "sha256-rsB/BPQf+Q9p7O7WhqtmG64b3F175ly7swafxWS1etM=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "67021b279bfffe654a0201ede805748a255ae5a7",
         "type": "github"
       },
       "original": {
@@ -288,9 +307,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "rust-overlay": [
-          "rust-overlay"
-        ]
+        "rust-overlay": "rust-overlay_2"
       },
       "locked": {
         "lastModified": 1791860561,

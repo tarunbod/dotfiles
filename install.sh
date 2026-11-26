@@ -19,4 +19,11 @@ if [[ $OS == "macos" ]]; then
           curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh && \
           echo "Reload shell and install nix-darwin with ~/dotfiles/install-nix-darwin.sh"
     fi
+else
+    if ! command -v nix > /dev/null 2>&1; then
+        read -p "nix not found. Do you want to install it? [y/n]: "
+        [[ $REPLY = y* ]] && \
+          curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --daemon && \
+          echo "Reload shell and install home-manager with ~/dotfiles/install-home-manager.sh"
+    fi
 fi

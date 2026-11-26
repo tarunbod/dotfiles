@@ -13,16 +13,11 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    rust-overlay.url = "github:oxalica/rust-overlay";
-    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
-
     uni-sync-curve.url = "github:tarunbod/uni-sync-curve";
     uni-sync-curve.inputs.nixpkgs.follows = "nixpkgs";
-    uni-sync-curve.inputs.rust-overlay.follows = "rust-overlay";
 
     nushell.url = "github:nushell/nushell?dir=scripts/nix";
     nushell.inputs.nixpkgs.follows = "nixpkgs";
-    nushell.inputs.rust-overlay.follows = "rust-overlay";
 
     opencode.url = "github:anomalyco/opencode";
     opencode.inputs.nixpkgs.follows = "nixpkgs";
@@ -97,6 +92,16 @@
         work = darwinSystem "tarun.boddupalli" [
           ./modules/languages.nix
           ./hosts/work/configuration.nix
+        ];
+      };
+
+      homeConfigurations.tarunbod = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.aarch64-linux;
+        extraSpecialArgs = { inherit inputs; username = "tarunbod"; homeDir = "/home/tarunbod"; };
+        modules = [
+          agenix.homeManagerModules.default
+          ./modules/home.nix
+          ./modules/home-standalone.nix
         ];
       };
     };
