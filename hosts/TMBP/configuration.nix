@@ -7,6 +7,7 @@
 
   homebrew.casks = [
     "audacity"
+    "azure-cli"
     "balenaetcher"
     "blender"
     "codex"
@@ -24,7 +25,6 @@
 
   homebrew.brews = [
     "awscli"
-    "azure-cli"
     "bazel"
     "caddy"
     "cmake"

@@ -63,7 +63,6 @@ vim.call("plug#", "rose-pine/neovim")
 vim.call("plug#", "stevearc/dressing.nvim")
 vim.call("plug#", "MunifTanjim/nui.nvim")
 vim.call("plug#", "folke/snacks.nvim")
-vim.call("plug#", "NickvanDyke/opencode.nvim")
 vim.call("plug#", "dmtrKovalenko/fff.nvim", { ["do"] = "cargo build -r" })
 
 vim.call("plug#end")
@@ -267,13 +266,3 @@ local open_in_github_safe = function()
   end
 end
 vim.keymap.set("n", "<leader>og", open_in_github_safe)
-
-local opencode = require("opencode")
-
---  keys = {
---    { '<leader>aa', function() opencode.ask('@file ') end, desc = 'Ask opencode about current file', mode = { 'n', 'v' } },
---    { '<leader>ae', function() opencode.ask('@selection ') end, desc = 'Ask opencode about current selection', mode = { 'n', 'v' } },
---    { '<leader>ar', function() opencode.prompt('Who are you') end, desc = 'Ask opencode about current selection', mode = { 'n', 'v' } },
---  }
-vim.keymap.set("n", "<leader>aa", function() opencode.ask('@file ') end, { desc = 'Ask opencode about current file' })
-vim.keymap.set("v", "<leader>ae", function() opencode.ask('@selection ') end, { desc = 'Ask opencode about current selection' })

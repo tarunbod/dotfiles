@@ -17,7 +17,6 @@
   };
 
   home.packages = (import ./cli-packages.nix { inherit pkgs inputs; }) ++ [
-    pkgs.git
     pkgs.nushell
   ];
 

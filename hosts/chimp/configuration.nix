@@ -15,8 +15,6 @@
   system.stateVersion = "25.11";
 
   environment.systemPackages = [
-    pkgs.git
-
     pkgs.nushell
     pkgs.nushellPlugins.polars
     pkgs.nushellPlugins.query

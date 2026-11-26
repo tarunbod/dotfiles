@@ -58,7 +58,6 @@
     pkgs.blender
     pkgs.discord
     pkgs.ghostty
-    pkgs.git
     pkgs.glib
     pkgs.google-chrome
     pkgs.gqrx

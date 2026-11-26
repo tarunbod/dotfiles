@@ -13,6 +13,7 @@
   pkgs.ffmpeg
   pkgs.go
   pkgs.gh
+  pkgs.git
   pkgs.git-lfs
   pkgs.jq
   pkgs.jujutsu
