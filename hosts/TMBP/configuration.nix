@@ -30,7 +30,7 @@
     { app = "/Applications/Obsidian.app"; }
     { app = "/Applications/Spotify.app"; }
     { spacer = {}; }
-    { app = "/Applications/Ghostty.app"; }
+    { app = "/Applications/Rex.app"; }
     { app = "/System/Applications/System Settings.app"; }
   ];
 

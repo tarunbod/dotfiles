@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   username,
   inputs,
@@ -62,6 +63,21 @@ in
 
     users."${username}" =
       { lib, ... }:
-      (import ./home.nix) { inherit pkgs username homeDir };
+      {
+        imports = [
+          (import ./home.nix {
+            inherit
+              pkgs
+              lib
+              username
+              homeDir
+              ;
+          })
+        ];
+
+        home.activation.shell-autoload = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          run env "PATH=${config.system.path}/bin:/opt/homebrew/bin:$PATH" ~/dotfiles/post-activation.nu;
+        '';
+      };
   };
 }

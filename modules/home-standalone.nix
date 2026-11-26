@@ -1,6 +1,8 @@
 {
-  inputs,
+  config,
   pkgs,
+  lib,
+  inputs,
   ...
 }:
 {
@@ -44,4 +46,8 @@
 
     inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
+
+  home.activation.shell-autoload = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    run env "PATH=${config.home.path}/bin:$PATH" ~/dotfiles/post-activation.nu;
+  '';
 }

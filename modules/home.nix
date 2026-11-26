@@ -1,6 +1,4 @@
 {
-  config,
-  pkgs,
   lib,
   username,
   homeDir,
@@ -42,12 +40,6 @@
         };
       })
     ];
-
-    activation = {
-      shell-autoload = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        run env "PATH=${config.home.path}/bin:$PATH" "${homeDir}/dotfiles/post-activation.nu";
-      '';
-    };
   };
 
   age = {

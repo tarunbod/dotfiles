@@ -24,7 +24,6 @@
     "bitwarden"
     "claude-code@latest"
     "font-fira-code"
-    "ghostty"
     "google-chrome"
     "obsidian"
     "orbstack"
