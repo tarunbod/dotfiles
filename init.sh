@@ -50,7 +50,7 @@ install_packages() {
       [[ $REPLY = y* ]] && \
         curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh && \
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && \
-        sudo nix --extra-experimental-features 'nix-command flakes' run 'nix-darwin/master#darwin-rebuild' -- --flake "~/dotfiles/.#${NIX_CONFIG_PROFILE:-TMBP}" switch
+        sudo nix --extra-experimental-features 'nix-command flakes' run 'nix-darwin/master#darwin-rebuild' -- --flake ~/dotfiles/.#${NIX_CONFIG_PROFILE:-TMBP} switch
     fi
   elif [[ -f /etc/NIXOS ]]; then
     sudo nixos-rebuild switch --flake '/home/tarunbod/dotfiles'
