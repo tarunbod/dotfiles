@@ -78,6 +78,13 @@ in
         home.activation.shell-autoload = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           run env "PATH=${config.system.path}/bin:/opt/homebrew/bin:$PATH" ~/dotfiles/post-activation.nu;
         '';
+
+        age = {
+          secrets.secrets_json = {
+            file = ../secrets/secrets.age;
+            path = "${homeDir}/.secrets.json";
+          };
+        };
       };
   };
 }

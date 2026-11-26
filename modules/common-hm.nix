@@ -40,8 +40,7 @@
 
   programs.home-manager.enable = true;
 
-  programs.ssh.enable = true;
-
   programs.rex.enable = true;
+  programs.rex.sshGuard = false;
   services.rex.enable = true;
 }

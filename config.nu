@@ -27,6 +27,8 @@ def os-rebuild [config?: string] {
   let flake_config = $config | default (hostname | split row '.' | first);
   if (uname | get operating-system | str lowercase) == 'darwin' {
     sudo darwin-rebuild switch --flake $"/Users/(whoami)/dotfiles/.#($flake_config)"
+  } else if (which home-manager | length) != 0 {
+    home-manager switch --flake $"/home/(whoami)/dotfiles/.#($flake_config)"
   } else {
     sudo nixos-rebuild switch --flake $"/home/(whoami)/dotfiles/.#($flake_config)"
   }

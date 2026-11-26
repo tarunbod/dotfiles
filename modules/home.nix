@@ -41,11 +41,4 @@
       })
     ];
   };
-
-  age = {
-    secrets.secrets_json = {
-      file = ../secrets/secrets.age;
-      path = "${homeDir}/.secrets.json";
-    };
-  };
 }
