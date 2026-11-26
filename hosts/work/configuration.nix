@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   inputs,
   ...
 }:
@@ -9,7 +8,6 @@ let
 in
 {
   system.stateVersion = 6;
-  system.primaryUser = lib.mkForce "tarun.boddupalli";
 
   nixpkgs.hostPlatform = "aarch64-darwin";
 

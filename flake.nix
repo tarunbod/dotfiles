@@ -65,6 +65,7 @@
             ./modules/common-darwin.nix
             home-manager.darwinModules.home-manager
             agenix.darwinModules.default
+            ./modules/languages.nix
           ]
           ++ extraModules
         );
@@ -101,12 +102,10 @@
 
       darwinConfigurations = {
         TMBP = darwinSystem "tarunbod" [
-          ./modules/languages.nix
           ./hosts/TMBP/configuration.nix
         ];
 
         work = darwinSystem "tarun.boddupalli" [
-          ./modules/languages.nix
           ./hosts/work/configuration.nix
         ];
       };

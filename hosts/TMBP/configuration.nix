@@ -6,7 +6,6 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   homebrew.casks = [
-    "google-chrome"
     "discord"
     "signal"
     "spotify"
