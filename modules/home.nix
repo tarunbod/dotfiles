@@ -22,6 +22,11 @@
           target = ".config/nvim/init.lua";
         };
 
+        rex = {
+          source = ../rex/init.lua;
+          target = ".config/rex/init.lua";
+        };
+
         nushell = {
           source = ../config.nu;
           target = ".config/nushell/config.nu";

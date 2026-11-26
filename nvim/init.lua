@@ -13,6 +13,7 @@ vim.opt.errorbells = false
 vim.opt.scrolloff = 8
 vim.opt.colorcolumn = "80"
 vim.opt.background = "dark"
+vim.opt.termguicolors = true
 
 vim.o.exrc = true
 vim.o.secure = true
@@ -67,13 +68,62 @@ vim.call("plug#", "dmtrKovalenko/fff.nvim", { ["do"] = "cargo build -r" })
 
 vim.call("plug#end")
 
+-- Charcoal Atelier colors from charcoal-atelier.json.
+local charcoal_ansi = {
+  "#222222", "#d96a4d", "#9aab84", "#cfae7a",
+  "#8aa0b4", "#b193a8", "#8fafa8", "#b5b1ab",
+  "#5f5c58", "#e8886e", "#b3c39d", "#e0c493",
+  "#a4b9cc", "#c8adc0", "#a8c7c0", "#efece7",
+}
+local charcoal_background = "#161616"
+local charcoal_selection = "#3a3835"
+
 require("rose-pine").setup({
   variant = "main",
+  palette = {
+    main = {
+      _nc = "#1a1a1a",
+      base = charcoal_background,
+      surface = "#1d1d1d",
+      overlay = "#262626",
+      muted = "#716f6c",
+      subtle = "#8f8c88",
+      text = "#d6d2cc",
+      love = charcoal_ansi[2],
+      gold = charcoal_ansi[4],
+      rose = charcoal_ansi[10],
+      pine = charcoal_ansi[5],
+      foam = charcoal_ansi[7],
+      iris = charcoal_ansi[6],
+      leaf = charcoal_ansi[3],
+      highlight_low = charcoal_ansi[1],
+      highlight_med = charcoal_selection,
+      highlight_high = "#4b4a48",
+    },
+  },
+  groups = {
+    git_add = "leaf",
+    git_change = "gold",
+    git_dirty = "gold",
+    git_text = "gold",
+  },
+  highlight_groups = {
+    Cursor = { fg = charcoal_background, bg = "#e05d3a" },
+    Visual = { fg = charcoal_ansi[16], bg = charcoal_selection, inherit = false },
+  },
+  enable = {
+    terminal = false,
+  },
   styles = {
     italic = false,
   }
 })
 vim.cmd("colorscheme rose-pine")
+vim.opt.guicursor:append("a:Cursor")
+
+for index, color in ipairs(charcoal_ansi) do
+  vim.g["terminal_color_" .. (index - 1)] = color
+end
 
 require("lualine").setup({
   options = {

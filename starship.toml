@@ -7,66 +7,69 @@ $git_branch\
 $git_status\
 $fill\
 $time\n\
-[󱞪](fg:iris) \
+[󱞪](fg:accent) \
 """
 
-palette = "rose-pine"
+palette = "charcoal-atelier"
 
-[palettes.rose-pine]
-overlay = '#26233a'
-love = '#eb6f92'
-gold = '#f6c177'
-rose = '#ebbcba'
-pine = '#31748f'
-foam = '#9ccfd8'
-iris = '#c4a7e7'
-text = '#e0def4'
+# Colors from charcoal-atelier.json.
+[palettes.charcoal-atelier]
+background = '#161616'
+surface = '#262626'
+text = '#d6d2cc'
+accent = '#e05d3a'
+red = '#d96a4d'
+sage = '#9aab84'
+sand = '#cfae7a'
+blue = '#8aa0b4'
+mauve = '#b193a8'
+teal = '#8fafa8'
 
 [hostname]
 disabled = false
-format = "[](fg:love)[ $hostname ]($style)[](fg:love) "
-style = "bg:love fg:text"
+format = "[](fg:accent)[ $hostname ]($style)[](fg:accent) "
+style = "bg:accent fg:background"
 
 [directory]
-format = "[](fg:overlay)[ $path ]($style)[](fg:overlay) "
-style = "bg:overlay fg:pine"
+format = "[](fg:surface)[ $path ]($style)[](fg:surface) "
+style = "bg:surface fg:blue"
 truncation_length = 3
 truncation_symbol = "…/"
 truncate_to_repo = false
 
 [fill]
-style = "fg:overlay"
+style = "fg:surface"
 symbol = " "
 
 [git_branch]
-format = "[](fg:overlay)[ $symbol $branch ]($style)[](fg:overlay) "
-style = "bg:overlay fg:foam"
+format = "[](fg:surface)[ $symbol $branch ]($style)[](fg:surface) "
+style = "bg:surface fg:teal"
 symbol = ""
 
 [git_status]
 disabled = false
-style = "bg:overlay fg:love"
-format = '[](fg:overlay)([$all_status$ahead_behind]($style))[](fg:overlay) '
-up_to_date = '[ ✓ ](bg:overlay fg:iris)'
-untracked = '[?\($count\)](bg:overlay fg:gold)'
-stashed = '[\$](bg:overlay fg:iris)'
-modified = '[!\($count\)](bg:overlay fg:gold)'
-renamed = '[»\($count\)](bg:overlay fg:iris)'
-deleted = '[✘\($count\)](style)'
-staged = '[++\($count\)](bg:overlay fg:gold)'
-ahead = '[⇡\(${count}\)](bg:overlay fg:foam)'
-diverged = '⇕[\[](bg:overlay fg:iris)[⇡\(${ahead_count}\)](bg:overlay fg:foam)[⇣\(${behind_count}\)](bg:overlay fg:rose)[\]](bg:overlay fg:iris)'
-behind = '[⇣\(${count}\)](bg:overlay fg:rose)'
+style = "bg:surface fg:red"
+format = '[](fg:surface)([$all_status$ahead_behind]($style))[](fg:surface) '
+up_to_date = '[ ✓ ](bg:surface fg:sage)'
+untracked = '[?\($count\)](bg:surface fg:sand)'
+stashed = '[\$](bg:surface fg:mauve)'
+modified = '[!\($count\)](bg:surface fg:sand)'
+renamed = '[»\($count\)](bg:surface fg:mauve)'
+deleted = '[✘\($count\)](bg:surface fg:red)'
+staged = '[++\($count\)](bg:surface fg:sage)'
+ahead = '[⇡\(${count}\)](bg:surface fg:teal)'
+diverged = '⇕[\[](bg:surface fg:mauve)[⇡\(${ahead_count}\)](bg:surface fg:teal)[⇣\(${behind_count}\)](bg:surface fg:blue)[\]](bg:surface fg:mauve)'
+behind = '[⇣\(${count}\)](bg:surface fg:blue)'
 
 [time]
 disabled = false
-format = " [](fg:overlay)[ $time 󰥔 ]($style)[](fg:overlay)"
-style = "bg:overlay fg:rose"
+format = " [](fg:surface)[ $time 󰥔 ]($style)[](fg:surface)"
+style = "bg:surface fg:text"
 time_format = "%T"
 
 [username]
 disabled = false
-format = "[](fg:overlay)[ 󰧱 $user ]($style)[](fg:overlay) "
+format = "[](fg:surface)[ 󰧱 $user ]($style)[](fg:surface) "
 show_always = true
-style_root = "bg:overlay fg:iris"
-style_user = "bg:overlay fg:iris"
+style_root = "bg:surface fg:mauve"
+style_user = "bg:surface fg:mauve"
