@@ -45,6 +45,7 @@
             ./modules/common-nixos.nix
             home-manager.nixosModules.home-manager
             agenix.nixosModules.default
+            rex.nixosModules.default
           ]
           ++ extraModules
         );
@@ -82,7 +83,6 @@
           ./modules/languages.nix
           uni-sync-curve.nixosModules.default
           ./hosts/monkey/configuration.nix
-          rex.nixosModules.default
         ];
 
         chimp = nixosSystem "aarch64-linux" [

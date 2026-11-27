@@ -29,6 +29,8 @@
   services.openssh.enable = true;
   programs.ssh.startAgent = true;
 
+  services.rex.enable = true;
+
   environment.systemPackages = [
     pkgs.file
     pkgs.gcc
