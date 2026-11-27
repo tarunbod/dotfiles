@@ -14,7 +14,14 @@
 
   system.stateVersion = "25.11";
 
+  services.openssh.settings = {
+    PasswordAuthentication = false;
+    KbdInteractiveAuthentication = false;
+  };
+
   environment.systemPackages = [
+    pkgs.motion
+
     pkgs.nushell
     pkgs.nushellPlugins.polars
     pkgs.nushellPlugins.query
@@ -24,7 +31,7 @@
   services.caddy = {
     enable = true;
     configFile = pkgs.writeText "Caddyfile" ''
-      ntfy.burritogaming.com {
+      ntfy.tarunbod.com {
           reverse_proxy 127.0.0.1:2586
 
           # Redirect HTTP to HTTPS, but only for GET topic addresses, since we want
@@ -43,11 +50,16 @@
     enable = true;
 
     settings = {
-      base-url = "https://ntfy.burritogaming.com";
+      base-url = "https://ntfy.tarunbod.com";
       listen-http = ":2586";
       auth-default-access = "deny-all";
       behind-proxy = true;
       upstream-base-url = "https://ntfy.sh";
+      log-level = "info";
+      log-format = "json";
+      log-file = "/var/log/ntfy-sh/ntfy.log";
     };
   };
+
+  systemd.services.ntfy-sh.serviceConfig.LogsDirectory = "ntfy-sh";
 }
