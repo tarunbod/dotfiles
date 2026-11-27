@@ -23,5 +23,9 @@ for i = 1, 9 do
   rex.bind("ctrl+b>" .. i, "client.tab.goto", { index = i })
 end
 
+-- Sessions
+rex.bind("ctrl+b>q", "session.previous")
+rex.bind("ctrl+b>e", "session.next")
+
 -- Press ctrl+b twice to send ctrl+b to the terminal
 rex.bind("ctrl+b>ctrl+b", "pane.send_key", { key = "ctrl+b" })
