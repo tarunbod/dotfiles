@@ -17,7 +17,9 @@
   };
 
   home.packages = (import ./cli-packages.nix { inherit pkgs inputs; }) ++ [
+    pkgs.gcc
     pkgs.nushell
+    pkgs.opencode
   ];
 
   home.activation.shell-autoload = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

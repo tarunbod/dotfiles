@@ -96,49 +96,6 @@
         "type": "github"
       }
     },
-    "nushell": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "rust-overlay": "rust-overlay"
-      },
-      "locked": {
-        "dir": "scripts/nix",
-        "lastModified": 1795703528,
-        "narHash": "sha256-AudO5JgIZX8jyW6weJ9sMYqFw+/Hr39BFJn+uI2YLpM=",
-        "owner": "nushell",
-        "repo": "nushell",
-        "rev": "86b9c8db4b293177f52c78618acea19f476e6502",
-        "type": "github"
-      },
-      "original": {
-        "dir": "scripts/nix",
-        "owner": "nushell",
-        "repo": "nushell",
-        "type": "github"
-      }
-    },
-    "opencode": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1795713847,
-        "narHash": "sha256-6A2CQA9jgSS8VNEN8lLoRi5oYpv9mD3h4ru4C0N0SsI=",
-        "owner": "anomalyco",
-        "repo": "opencode",
-        "rev": "2ae0ff000855e995b2a25642706d9cd0ca57a6f7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "anomalyco",
-        "repo": "opencode",
-        "type": "github"
-      }
-    },
     "rex": {
       "inputs": {
         "nixpkgs": [
@@ -146,10 +103,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1795648654,
-        "narHash": "sha256-Clxtr96+1TcILjAQ+WJrRz8YiDvYDWS0GK7c+YOBTWU=",
+        "lastModified": 1795729284,
+        "narHash": "sha256-Lefc0QUvN69JPWwTNP5VOIdvJj9N0s6/f5psRdA0wAE=",
         "type": "tarball",
-        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.1.0-snapshot.2671.tar.gz"
+        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.1.0-snapshot.2678.tar.gz"
       },
       "original": {
         "type": "tarball",
@@ -162,34 +119,11 @@
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
-        "nushell": "nushell",
-        "opencode": "opencode",
         "rex": "rex",
         "uni-sync-curve": "uni-sync-curve"
       }
     },
     "rust-overlay": {
-      "inputs": {
-        "nixpkgs": [
-          "nushell",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1791276535,
-        "narHash": "sha256-iwqAmHTX1IgzTumJR3JayNAQAo5xEmmOuGzB6b2pT/Q=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "b962e5d0c8cd97196c6a882d659fe451b52ad989",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "type": "github"
-      }
-    },
-    "rust-overlay_2": {
       "inputs": {
         "nixpkgs": [
           "uni-sync-curve",
@@ -231,7 +165,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "rust-overlay": "rust-overlay_2"
+        "rust-overlay": "rust-overlay"
       },
       "locked": {
         "lastModified": 1791860561,

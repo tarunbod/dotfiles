@@ -21,11 +21,6 @@
 
   environment.systemPackages = [
     pkgs.motion
-
-    pkgs.nushell
-    pkgs.nushellPlugins.polars
-    pkgs.nushellPlugins.query
-    pkgs.nushellPlugins.formats
   ];
 
   services.caddy = {

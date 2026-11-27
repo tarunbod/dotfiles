@@ -16,12 +16,6 @@
     uni-sync-curve.url = "github:tarunbod/uni-sync-curve";
     uni-sync-curve.inputs.nixpkgs.follows = "nixpkgs";
 
-    nushell.url = "github:nushell/nushell?dir=scripts/nix";
-    nushell.inputs.nixpkgs.follows = "nixpkgs";
-
-    opencode.url = "github:anomalyco/opencode";
-    opencode.inputs.nixpkgs.follows = "nixpkgs";
-
     rex.url = "https://pkgs.superlogical.com/rex/nix/snapshot.tar.gz";
     rex.inputs.nixpkgs.follows = "nixpkgs";
   };

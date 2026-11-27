@@ -44,13 +44,7 @@
   };
 
   users.users."${username}".extraGroups = [ "docker" "plugdev" ];
-  users.defaultUserShell = inputs.nushell.packages.${pkgs.stdenv.hostPlatform.system}.nushell.overrideAttrs (oldAttrs: {
-    passthru = (oldAttrs.passthru or {}) // {
-      shellPath = "/bin/nu";
-    };
-    doCheck = false;
-    doInstallCheck = false;
-  });
+  users.defaultUserShell = pkgs.nushell;
 
   environment.systemPackages = [
     pkgs.linuxKernel.packages.linux_zen.nct6687d
